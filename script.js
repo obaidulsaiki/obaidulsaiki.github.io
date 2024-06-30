@@ -29,3 +29,17 @@ link4.addEventListener("click", function() {
 link5.addEventListener("click", function() {
     scrollToElement(".footer-container");
 });
+//--------------for the menubar icon---------
+const navBarLinks = document.querySelector(".nav-links");
+const menuBar = document.getElementById("menuBar");
+console.log("navBarLinks:", navBarLinks);
+console.log("menuBar:", menuBar);
+
+if (menuBar && navBarLinks) {
+    menuBar.addEventListener("click", function () {
+      navBarLinks.classList.toggle('show');
+      console.log("Menu toggled. Nav links visibility:", navBarLinks.classList.contains('show') ? "visible" : "hidden");
+    });
+  } else {
+    console.error("Menu or navigation links not found");
+  }
