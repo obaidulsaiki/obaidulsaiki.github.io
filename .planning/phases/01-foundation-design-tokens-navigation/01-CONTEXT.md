@@ -14,3 +14,4 @@
   - Text Muted: `#6B5B5B`
 - **Hosting Constraint**: Static site export (`output: 'export'`, `trailingSlash: true`, `images: { unoptimized: true }`) for GitHub Pages hosting on `obaidulsaiki.github.io` / `obaidulhaque.me`.
 - **Animations**: Framer Motion client wrapper with clean page entrance choreography.
+

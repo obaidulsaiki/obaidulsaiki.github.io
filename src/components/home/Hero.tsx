@@ -45,7 +45,7 @@ export default function Hero() {
                 {profileData.title}
               </p>
               <p className="text-sm sm:text-base font-semibold text-accent-primary tracking-wide">
-                Specializing in Computer Vision · NLP · Signal Processing
+                Medical Imaging & Computer Vision · Natural Language Processing · Biomedical Signals
               </p>
             </div>
           </div>

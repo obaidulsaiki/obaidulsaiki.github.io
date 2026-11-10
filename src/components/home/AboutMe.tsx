@@ -10,21 +10,21 @@ export default function AboutMe() {
   const pillars = [
     {
       icon: Eye,
-      title: 'Computer Vision & Signal Processing',
-      desc: 'Developing deep convolutional networks, spatial-temporal attention mechanisms, and biomedical signal processing algorithms (e.g. EEG seizure prediction).',
-      badge: 'Core Focus',
+      title: 'Medical Imaging & Computer Vision',
+      desc: 'Pioneering architectures like OBAIS-Mamba for dose-robust low-dose CT reconstruction, brain MRI Alzheimer disease staging, and fine-grained cellular classification.',
+      badge: 'CT Dose & Vision',
     },
     {
       icon: MessageSquareCode,
       title: 'Natural Language Processing (NLP)',
-      desc: 'Investigating transformer architectures, text tokenization, embeddings, and linguistic feature extraction for contextual intelligence.',
-      badge: 'Core Focus',
+      desc: 'Investigating transformer architectures, BanglaBERT representations, aspect-based sentiment and abusive text detection, and semantic sentence-pair modeling.',
+      badge: 'Transformers & LLMs',
     },
     {
-      icon: Coffee,
-      title: 'Enterprise Roots: Java & Spring Boot',
-      desc: 'Proven background in building robust backend services with Java, Spring Boot, and SQL, seamlessly integrated with modern JavaScript frontends.',
-      badge: 'Engineering',
+      icon: Activity,
+      title: 'Biomedical Signal Processing',
+      desc: 'Formulating interpretable dual-lead CNN-Transformer hybrids for ECG arrhythmia classification with Grad-CAM explainability, stroke risk prediction, and EEG neural dynamics.',
+      badge: 'ECG & Bio-Signals',
     },
   ];
 
@@ -38,10 +38,10 @@ export default function AboutMe() {
             <span>About Me</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-ink-primary tracking-tight">
-            Career Journey & Research Focus
+            Current Focus & Research Pillars
           </h2>
           <p className="text-xs sm:text-sm text-ink-muted">
-            From enterprise Java/Spring Boot development to dedicated AI research in Computer Vision, NLP, and Signal Processing at IUBAT.
+            Conducting peer-reviewed deep learning research and contributing to AI-related projects across Medical Imaging &amp; Computer Vision, Natural Language Processing, and Biomedical Signals.
           </p>
         </div>
 
@@ -62,16 +62,21 @@ export default function AboutMe() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="lg:col-span-6 space-y-4 text-sm sm:text-base text-ink-muted leading-relaxed"
+          className="lg:col-span-6 space-y-4"
         >
-          {profileData.bioParagraphs.map((paragraph, idx) => (
-            <p key={idx} className="bg-surface/30 p-4 rounded-2xl border border-surface-border/60">
-              {paragraph}
-            </p>
-          ))}
+          <div className="p-6 sm:p-7 rounded-3xl bg-surface/50 border border-surface-border shadow-soft-sm space-y-4">
+            {profileData.bioParagraphs.map((paragraph, idx) => (
+              <p
+                key={idx}
+                className="text-sm sm:text-base text-ink-muted leading-relaxed text-justify [text-justify:inter-word]"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           {/* Academic Affiliation Card */}
-          <div className="p-4 rounded-2xl bg-canvas border border-surface-border flex items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-canvas border border-surface-border flex items-center justify-between gap-4 shadow-soft-sm">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-accent-soft/30 border border-accent-soft/50 text-accent-primary flex items-center justify-center shrink-0">
                 <GraduationCap className="w-5 h-5" />
@@ -116,7 +121,7 @@ export default function AboutMe() {
                         {pillar.badge}
                       </span>
                     </div>
-                    <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    <p className="text-xs sm:text-sm text-ink-muted leading-relaxed text-justify [text-justify:inter-word]">
                       {pillar.desc}
                     </p>
                   </div>

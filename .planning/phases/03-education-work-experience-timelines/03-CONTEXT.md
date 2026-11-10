@@ -16,3 +16,4 @@
    - Attached technology pills for each position.
    - Key impact highlights (latency, architecture, research outcomes).
 3. **Palette Tokens**: `#FFFBF1` (Canvas), `#FFF2D0` (Surface), `#FFB2B2` (Soft Peach), `#E36A6A` (Primary Accent).
+

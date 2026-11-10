@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Wrench, Layers, Sparkles, Filter } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Wrench, Sparkles, Filter } from 'lucide-react';
 import { skillsData, skillCategories } from '@/data/skills';
 import SkillCard from '@/components/home/SkillCard';
 
 export default function SkillsShowcase() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  // Default to AI, Models and Frameworks on Home to anchor primary identity
+  const [selectedCategory, setSelectedCategory] = useState<string>('ai-models-tools');
 
   const filteredSkills =
     selectedCategory === 'all'
@@ -15,26 +16,26 @@ export default function SkillsShowcase() {
       : skillsData.filter((skill) => skill.category === selectedCategory);
 
   return (
-    <section className="space-y-8 py-4">
+    <section className="space-y-6 py-4">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-surface-border/80 pb-5">
-        <div className="space-y-2">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-surface-border/80 pb-4">
+        <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-soft/30 border border-accent-soft/50 text-xs font-semibold text-accent-primary">
             <Wrench className="w-3.5 h-3.5" />
             <span>Technical Mastery</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-ink-primary tracking-tight">
-            Skills Collected Throughout the Years
+            Tools, Models and Technologies
           </h2>
           <p className="text-xs sm:text-sm text-ink-muted">
-            Interactive breakdown of programming languages, frontend frameworks, backend engines, and AI/ML libraries.
+            The deep learning frameworks, transformer architectures, programming languages, and backend engines I work with.
           </p>
         </div>
 
         {/* Counter Pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-surface-border text-xs font-mono text-ink-primary shrink-0 self-start sm:self-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-surface-border text-xs font-mono text-ink-primary shrink-0 self-start sm:self-auto shadow-soft-sm">
           <Sparkles className="w-3.5 h-3.5 text-accent-primary" />
-          <span>Showing {filteredSkills.length} of {skillsData.length} Skills</span>
+          <span>{filteredSkills.length} of {skillsData.length} Tools</span>
         </div>
       </div>
 
@@ -50,37 +51,30 @@ export default function SkillsShowcase() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+              className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
                 active
-                  ? 'text-canvas font-semibold shadow-soft-sm'
-                  : 'text-ink-muted hover:text-ink-primary bg-surface/60 hover:bg-surface border border-surface-border'
+                  ? 'text-canvas bg-accent-primary shadow-soft-sm'
+                  : 'text-ink-muted hover:text-ink-primary bg-surface/60 hover:bg-surface border border-surface-border hover:border-accent-primary/40'
               }`}
             >
-              {active && (
-                <motion.div
-                  layoutId="activeSkillCategoryPill"
-                  className="absolute inset-0 rounded-full bg-accent-primary"
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
               <span className="relative z-10">{cat.label}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Animated Skills Grid */}
+      {/* Robust Animated Skills Grid */}
       <motion.div
-        layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+        key={selectedCategory}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5"
       >
-        <AnimatePresence mode="popLayout">
-          {filteredSkills.map((skill) => (
-            <SkillCard key={skill.id} skill={skill} />
-          ))}
-        </AnimatePresence>
+        {filteredSkills.map((skill) => (
+          <SkillCard key={skill.id} skill={skill} />
+        ))}
       </motion.div>
     </section>
   );
 }
-

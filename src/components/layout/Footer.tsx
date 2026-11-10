@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { profileData } from '@/data/profile';
 
 const footerNav = [
   { name: 'Home', href: '/' },
@@ -28,11 +29,11 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-ink-muted max-w-sm leading-relaxed">
-              AI Engineer & Researcher specializing in Computer Vision, Natural Language Processing, and Signal Processing, backed by strong foundations in enterprise Java/Spring Boot and modern JavaScript.
+              {profileData.tagline}
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://github.com/obaidulsaiki"
+                href={profileData.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -41,7 +42,7 @@ export default function Footer() {
                 <Github className="h-4 w-4" />
               </a>
               <a
-                href="https://linkedin.com/in/obaidulsaiki"
+                href={profileData.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -50,7 +51,7 @@ export default function Footer() {
                 <Linkedin className="h-4 w-4" />
               </a>
               <a
-                href="mailto:contact@obaidulhaque.me"
+                href={`mailto:${profileData.socials.email}`}
                 aria-label="Email"
                 className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-soft transition-all duration-200"
               >

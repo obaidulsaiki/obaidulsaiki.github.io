@@ -8,6 +8,7 @@ export interface ProfileData {
   status: string;
   university: string;
   universityShort: string;
+  cgpa: string;
   bioParagraphs: string[];
   stats: {
     label: string;
@@ -18,6 +19,8 @@ export interface ProfileData {
     github: string;
     linkedin: string;
     email: string;
+    phone: string;
+    phoneFormatted: string;
     website: string;
   };
 }
@@ -25,28 +28,32 @@ export interface ProfileData {
 export const profileData: ProfileData = {
   name: 'Obaidul Haque',
   fullName: 'Obaidul Haque',
-  title: 'AI Engineer & Researcher',
-  specialization: 'Computer Vision · NLP · Signal Processing',
-  tagline: 'Specializing in Computer Vision, Natural Language Processing, and Signal Processing—grounded in robust Java/Spring Boot backend systems and modern JavaScript frontends.',
+  title: 'AI Engineer and Researcher',
+  specialization: 'Medical Imaging & Computer Vision · NLP · Biomedical Signal Processing',
+  tagline:
+    'Dedicated to conducting research and contributing to AI-related projects across Medical Imaging & Computer Vision, Natural Language Processing, and Biomedical Signal Processing.',
   location: 'Dhaka, Bangladesh',
-  status: 'Open to AI Engineering & Research Roles',
+  status: 'Conducting Research & Open to AI Projects',
   university: 'International University of Business Agriculture and Technology (IUBAT)',
   universityShort: 'IUBAT',
+  cgpa: '3.89 / 4.00',
   bioParagraphs: [
-    "I am an AI Engineer and Researcher specializing in Computer Vision (CV), Natural Language Processing (NLP), and Signal Processing. My academic and research foundation is anchored at the International University of Business Agriculture and Technology (IUBAT).",
-    "My software engineering roots were built on enterprise backend development with Java and Spring Boot, coupled with responsive JavaScript frontends. In October 2025, I transitioned my full focus into deep learning research and applied AI engineering, channeling my systems background into high-accuracy visual computing, linguistic modeling, and biomedical/acoustic signal analysis.",
-    "Today, I build intelligent systems that bridge theoretical mathematics with scalable deployment: training custom neural networks in PyTorch, processing multi-channel time-series signals, deploying transformer-based NLP pipelines, and wrapping them in reliable production architectures.",
+    'I am an early-career AI Engineer and Researcher focused on conducting deep learning research and contributing to impactful AI-related projects. I completed my B.Sc. in Computer Science & Engineering from IUBAT with a CGPA of 3.89/4.00 across 144 credit hours.',
+    'My primary research focus spans Medical Imaging and Computer Vision—specifically dose-robust Low-Dose CT reconstruction using state-space Mamba models, brain MRI Alzheimer\'s staging, and cellular classification—alongside Biomedical Signal Processing featuring dual-lead CNN-Transformer ECG arrhythmia detection with gradient-based explainability.',
+    'In Natural Language Processing (NLP), I explore transformer representations, BanglaBERT linguistic modeling, and semantic sentence-pair analysis. Alongside research, I actively build full-stack systems with Java Spring Boot and React, and maintain sharp problem-solving habits with 550+ problems solved across Codeforces, LeetCode, and ICPC preliminaries.',
   ],
   stats: [
-    { label: 'Primary Focus', value: 'CV · NLP · Signal', detail: 'Deep Learning & Applied AI' },
-    { label: 'Backend Roots', value: 'Java & Spring Boot', detail: 'Enterprise Systems & APIs' },
-    { label: 'Research Pivot', value: 'Oct 2025 – Present', detail: 'Dedicated AI & ML Research' },
-    { label: 'Institution', value: 'IUBAT', detail: 'Computer Science & Engineering' },
+    { label: 'Research Papers', value: '40+ Papers', detail: 'ACM | IEEE | Elsevier | Springer' },
+    { label: 'Graduated IUBAT', value: '3.89 / 4.00 CGPA', detail: 'B.Sc. in Computer Science & Engineering' },
+    { label: 'Problem Solving', value: '550+ Solved', detail: 'Codeforces, LeetCode, ICPC' },
+    { label: 'Highlighted Best', value: 'Top 5 Papers', detail: '1st Author Breakthroughs' },
   ],
   socials: {
     github: 'https://github.com/obaidulsaiki',
-    linkedin: 'https://linkedin.com/in/obaidulsaiki',
-    email: 'contact@obaidulhaque.me',
+    linkedin: 'https://www.linkedin.com/in/obaidul-haque47/',
+    email: 'saki.obidul@gmail.com',
+    phone: '01883440377',
+    phoneFormatted: '+880 1883-440377',
     website: 'https://obaidulhaque.me',
   },
 };

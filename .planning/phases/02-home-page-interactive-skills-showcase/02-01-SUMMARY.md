@@ -26,3 +26,4 @@
 - Built cleanly without errors.
 - Image assets resolve properly.
 - All links route properly within App Router.
+

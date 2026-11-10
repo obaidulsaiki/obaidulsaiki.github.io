@@ -51,7 +51,7 @@ export default function Navbar() {
               Obaidul Haque
             </span>
             <span className="text-[11px] font-medium text-ink-muted -mt-1 hidden sm:inline-block">
-              AI Engineer & Researcher
+              AI Engineer and Researcher
             </span>
           </div>
         </Link>

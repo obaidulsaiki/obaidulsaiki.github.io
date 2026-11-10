@@ -3,43 +3,45 @@ import Link from 'next/link';
 import { ArrowRight, GraduationCap, Briefcase, Microscope, Users, Compass, Mail } from 'lucide-react';
 import Hero from '@/components/home/Hero';
 import AboutMe from '@/components/home/AboutMe';
+import FeaturedResearch from '@/components/home/FeaturedResearch';
+import FeaturedProjects from '@/components/home/FeaturedProjects';
 import SkillsShowcase from '@/components/home/SkillsShowcase';
 
 export default function HomePage() {
   const otherPages = [
     {
-      title: 'Education',
-      desc: 'Academic degrees, university credentials, coursework, and honors.',
+      title: 'Education & Curriculum',
+      desc: 'IUBAT B.Sc. in CSE with CGPA 3.89 / 4.00, 144 credit hours completed, and verified transcript grades.',
       href: '/education/',
       icon: GraduationCap,
     },
     {
       title: 'Work Experience',
-      desc: 'Professional career timeline, engineering roles, and quantifiable contributions.',
+      desc: 'Full Stack AI Developer at Saask Task (Canada Remote) and Frontend Intern at AKS Global IT Services.',
       href: '/experience/',
       icon: Briefcase,
     },
     {
       title: 'Research & Publications',
-      desc: 'Scientific papers, EEG seizure detection models, and datasets.',
+      desc: '40+ scientific papers across ACM, IEEE, and Springer Nature in Medical Imaging, NLP, and Bio-Signals.',
       href: '/research/',
       icon: Microscope,
     },
     {
-      title: 'Extracurricular Activities',
-      desc: 'Club leadership, mentorship workshops, hackathons, and community work.',
+      title: 'Competitive Programming & Leadership',
+      desc: '550+ problems solved across Codeforces and LeetCode, ICPC Preliminary, and BASIS IUBAT Executive Member.',
       href: '/extracurricular/',
       icon: Users,
     },
     {
       title: 'Hobbies & Interests',
-      desc: 'Personal passions, photography, acoustic soundscapes, and creativity.',
+      desc: 'Lo-Fi acoustic soundscapes, street geometry photography, chess tactics, and reading AI research preprints.',
       href: '/hobby/',
       icon: Compass,
     },
     {
-      title: 'Contact Hub',
-      desc: 'Direct email dispatch, one-click copy, and social network connections.',
+      title: 'Contact & Collaboration',
+      desc: 'Direct email dispatch, one-click copy, verified WhatsApp line, and professional social networks.',
       href: '/contact/',
       icon: Mail,
     },
@@ -50,13 +52,19 @@ export default function HomePage() {
       {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. Section: About Me (Career Summary) */}
+      {/* 2. Section: About Me (Focus & Pillars) */}
       <AboutMe />
 
-      {/* 3. Section: Skills Collected Throughout the Years */}
+      {/* 3. Section: Featured Research Spotlight */}
+      <FeaturedResearch />
+
+      {/* 4. Section: Featured Projects (Engineering Systems) */}
+      <FeaturedProjects />
+
+      {/* 5. Section: Skills Collected Throughout the Years */}
       <SkillsShowcase />
 
-      {/* 4. Interactive Jump Links to Other Sections */}
+      {/* 6. Interactive Jump Links to Other Sections */}
       <section className="space-y-6 pt-4 border-t border-surface-border/80">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
           <div>

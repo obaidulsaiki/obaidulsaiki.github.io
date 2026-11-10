@@ -1,0 +1,234 @@
+\documentclass{resume} % Use the custom resume.cls style
+
+\name{Obaidul Haque}
+
+\address{
+    \href{tel:+8801883440377}{+880 1883-440377}
+    \addressSep
+    \href{mailto:saki.obidul@gmail.com}{saki.obidul@gmail.com}
+    \addressSep
+    \href{https://github.com/obaidulsaiki}{GitHub}
+    \addressSep
+    \href{https://www.linkedin.com/in/obaidul-haque47/}{LinkedIn}
+    \addressSep
+    \href{https://obaidulhaque.me}{Obaidul Haque}
+}
+
+\begin{document}
+
+
+\begin{rSection}{Education}
+{\bf Bachelor of Science in Computer Science and Engineering}, IUBAT \hfill {Jan 2022 -- Jan 2026}\\
+Sector-10, Uttara, Dhaka, Bangladesh \hfill \textbf{CGPA: 3.89/4.00} 
+
+{\bf HSC, Science}, Mohammadpur Govt. College \hfill {June 2018 - January 2020}\\
+Dhaka, Bangladesh \hfill \textbf{GPA: 5.00/5.00}
+\end{rSection}
+
+\begin{rSection}{TECHNICAL SKILLS}
+
+\begin{tabular}{@{} >{\bfseries}p{0.25\textwidth} @{\hspace{1.5ex}} p{0.71\textwidth}}
+
+Programming:
+& Python, Java, C++ \\
+
+Machine Learning:
+& Scikit-learn, Ensemble Learning, Feature Engineering, Explainable AI \\
+
+Deep Learning:
+& PyTorch, TensorFlow, Keras, CNNs, Transformers, Attention Mechanisms \\
+
+Computer Vision:
+& Image Classification, Object Detection, Segmentation, Medical Image Analysis \\
+
+NLP \& Biomedical AI:
+& Hugging Face Transformers, BanglaBERT, EEG/ECG Signal Processing \\
+
+AI Development Tools:
+& OpenAI Codex, Claude Code, Google Antigravity \\
+
+Tools \& Technologies:
+& Git, Docker, Linux, Spring Boot, PostgreSQL, MySQL \\
+
+\end{tabular}
+
+\end{rSection}
+
+\begin{rSection}{EXPERIENCE}
+
+\noindent
+\textbf{Full Stack AI Developer, Saask Task}
+\textbar\ Remote, Canada
+\hfill
+\textit{March 2026 -- August 2026}
+
+\begin{itemize}
+    \setlength{\itemsep}{-3pt}
+    \setlength{\topsep}{2pt}
+
+    \item Developed full-stack SaaS applications using TypeScript, React, Next.js, and Node.js.
+
+    \item Integrated existing AI/LLM services into application workflows to enable intelligent automation and AI-assisted functionality.
+
+    \item Designed and implemented RESTful APIs, contributing to backend functionality and performance improvements.
+
+    \item Collaborated with cross-functional teams in Agile development cycles, contributing to Git-based version control and code reviews.
+
+\end{itemize}
+
+\noindent
+\textbf{Frontend Developer Intern, AKS Global IT Services}
+\textbar\ Dhaka, Bangladesh
+\hfill
+\textit{October 2025 -- January 2026}
+
+\begin{itemize}
+    \setlength{\itemsep}{-3pt}
+    \setlength{\topsep}{2pt}
+
+    \item Developed responsive and reusable frontend components using React.js, JavaScript, HTML5, and CSS3.
+
+    \item Integrated REST APIs to connect frontend interfaces with backend services and application functionality.
+
+    \item Collaborated with backend developers and designers to implement user-focused features and improve application usability.
+
+    \item Participated in code reviews and followed Git-based collaboration and Agile development practices.
+
+\end{itemize}
+
+\end{rSection}
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{PROJECTS}
+
+\vspace{-0.5em}
+
+\noindent
+\textbf{EduMaster} (AI-Assisted Learning Management System)
+\hfill
+\href{https://github.com/obaidulsaiki/EduMaster-LearningManagementSystem/}{Source Code}
+
+\textbf{Tech:} Spring Boot, React, PostgreSQL, LangChain4j, Ollama
+
+Developed a full-stack Learning Management System using Spring Boot, React, and PostgreSQL, featuring 104 REST API endpoints. Integrated existing LLM services through LangChain4j and Ollama to support context-aware learning assistance, conversational course queries, and personalized career guidance. Implemented JWT authentication, role-based access control, OTP verification, WebSocket communication, interactive learning modules, payment workflows, and automated PDF certificate and invoice generation.
+
+\vspace{5pt}
+
+\noindent
+\textbf{Research Tracker} (Academic Research Management Platform)
+\hfill
+\href{https://github.com/obaidulsaiki/research-tracker/}{Source Code}
+
+\textbf{Tech:} Java, Spring Boot, Angular, TypeScript, PostgreSQL, Electron
+
+Developed a cross-platform academic research management platform using Java, Spring Boot, Angular, TypeScript, PostgreSQL, and Electron, featuring 32 REST API endpoints. Implemented DOI-based metadata retrieval, OpenAlex integration, automated duplicate detection, and diff-based version tracking with comprehensive audit logging. Built research analytics dashboards, co-author intelligence, conference deadline tracking, automated database backups, and CSV, Excel, and PDF export capabilities.
+
+\end{rSection}
+
+\begin{rSection}{Competitive Programming}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l}
+
+% ---------- LEFT COLUMN ----------
+\begin{minipage}[t]{0.48\textwidth}
+\begin{itemize}
+  \item Ranked \textbf{13th} IUBAT Intra University Programming Contest (2024)
+  \item Ranked \textbf{418th} ICPC Asia Regional Preliminary Contest (2023)
+  \item Secured \textbf{1st} and \textbf{2nd} place University Monthly Contests (2023)
+  \item Ranked \textbf{726th} ICPC Preliminary Round (2022)
+\end{itemize}
+\end{minipage}
+
+&
+
+% ---------- RIGHT COLUMN ----------
+\begin{minipage}[t]{0.48\textwidth}
+\begin{itemize}
+  \item Codeforces: \href{https://codeforces.com/profile/obaidulsaiki}{obaidulsaiki} (\textbf{267})
+  \item LeetCode: \href{https://leetcode.com/u/obaidulsaiki/}{obaidulsaiki} (\textbf{22})
+  \item HackerRank: \href{https://www.hackerrank.com/profile/Obaidulsaiki}{obaidulsaiki} (\textbf{79})
+  \item VJudge: \href{https://vjudge.net/user/obaidulsaiki}{obaidulsaiki} (\textbf{56})
+  \item Solved \textbf{550}+ problems in total
+\end{itemize}
+\end{minipage}
+
+\end{tabular*}
+
+\end{rSection}
+%----------------------------------------------------------------------------------------
+\begin{rSection}{EXTRACURRICULAR ACTIVITIES}
+
+\begin{itemize}
+
+    \item \textbf{Executive Member, BASIS IUBAT Student Branch:}
+    Served in student activities, set questions for freshman IQ and IT competitions, and helped organize a drone technology seminar featuring Mr. Zubayer Al Billal Khan.
+    \hfill
+    \href{https://drive.google.com/open?id=1M7QMrkbTAr4JVCjDauHC7ajNptljaxZR&usp=drive_fs}{Certificate}
+
+    \item \textbf{Competitive Programming Mentor (Level 0):}
+    Mentored junior students in programming fundamentals and problem-solving through the IUBAT CSE Competitive Programming community.
+
+    \item \textbf{Academic Mentor:}
+    Supported students in English and programming language fundamentals.
+
+    \item \textbf{Technical Training:}
+    Completed an 80-hour Java Spring Framework training program conducted by Jagannath University in collaboration with the ICT Division, Bangladesh (2024).
+    \hfill
+    \href{https://drive.google.com/open?id=151tQlgcAC39JYaq95CZn7O6w16r81WKC&usp=drive_fs}{Certificate}
+
+    \item \textbf{Additional Technical Activities:}
+    Participated in a GitHub Bootcamp organized by the CSE Department, a Canva Pro session, and a Machine Learning Data Preprocessing workshop.
+    \hfill
+    \href{https://drive.google.com/open?id=19WcIyGLMOH1x1YueGIAARpVApSKllrhT&usp=drive_fs}{Workshop Certificate}
+
+    \item \textbf{Volunteer Activities:}
+    Participated in departmental volunteering activities and served as a former general member of DFI and IMS.
+
+\end{itemize}
+
+\end{rSection}
+
+\begin{rSection}{RESEARCH PUBLICATIONS}
+
+\begin{itemize}
+
+    \item \textbf{OBAIS-Mamba: Kernel-Invariant Anatomical State Learning for Dose-Robust Low-Dose CT Reconstruction}
+    \hfill
+    \href{https://doi.org/}{\textbf{}}\\
+    \textit{ACM International Conference on Computing Advancements (ICCA), 2026}\\
+    \textbf{Status:} Accepted
+    \hfill
+    \textbf{Author Position:} 1st Author
+
+    \item \textbf{Automated Classification of Alzheimer’s Disease Stages from Brain MRI}\\
+    \textit{Discover Neuroscience, Springer Nature, 2026}\\
+    \textbf{Status:} Minor Revision
+    \hfill
+    \textbf{Author Position:} 1st Author
+
+    \item \textbf{An Interpretable Dual-Lead CNN-Transformer Hybrid Framework for ECG Arrhythmia Classification with Gradient-Based Explainability}\\
+    \textit{IEEE SPICSCON, 2026}\\
+    \textbf{Status:} Accepted
+    \hfill
+    \textbf{Author Position:} 1st Author
+
+    \item \textbf{Stroke Prediction Using Ensemble Machine and Deep Learning Models}
+    \hfill
+    \href{https://doi.org/10.1007/s44174-025-00521-z}{\textbf{View Paper}}\\
+    \textit{Biomedical Materials \& Devices, Springer Nature, 2025}\\
+    \textbf{Status:} Published
+    \hfill
+    \textbf{Author Position:} 3rd Author
+
+    \item \textbf{EfficientMSwin: A YOLO-Guided Multi-Scale Swin Transformer for Fine-Grained Malaria Cell Stage Classification}\\
+    \textit{International Conference on Electronics, Communications and Information Technology (ICONNECT), 2026}\\
+    \textbf{Status:} Presented
+    \hfill
+    \textbf{Author Position:} 1st Author
+
+\end{itemize}
+\end{rSection}
+Five Best research papers are highlighted above. The remaining publications include 11 published, 14 presented, and 17 Under Review papers. The complete publication list is available upon request.
+\end{document}

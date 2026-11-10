@@ -1,75 +1,49 @@
 import React from 'react';
-import { GraduationCap, Award, Calendar, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import { GraduationCap, ArrowRight, Sparkles } from 'lucide-react';
+import EducationTimeline from '@/components/timeline/EducationTimeline';
 
 export default function EducationPage() {
   return (
-    <div className="space-y-10 py-4 max-w-4xl mx-auto">
-      <div className="space-y-2 border-b border-surface-border/70 pb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft/30 border border-accent-soft/50 text-xs font-semibold text-accent-primary">
+    <div className="space-y-12 py-4 max-w-4xl mx-auto">
+      {/* Page Header */}
+      <div className="space-y-3 border-b border-surface-border/80 pb-6 text-center sm:text-left">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-soft/30 border border-accent-soft/50 text-xs font-semibold text-accent-primary">
           <GraduationCap className="w-3.5 h-3.5" />
-          <span>Academic Background</span>
+          <span>Academic Qualifications</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-ink-primary tracking-tight">
-          Education & Degrees
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-ink-primary tracking-tight">
+          Education & Curriculum
         </h1>
-        <p className="text-sm sm:text-base text-ink-muted">
-          Formal academic training in computer science, software engineering, and scientific research.
+        <p className="text-sm sm:text-base text-ink-muted max-w-2xl">
+          Academic foundation in Computer Science & Engineering from the International University of Business Agriculture and Technology (IUBAT), complemented by foundational science honors and biomedical AI capstone research.
         </p>
       </div>
 
-      {/* Education Cards */}
-      <div className="space-y-6">
-        <div className="p-6 sm:p-8 rounded-3xl bg-surface/50 border border-surface-border shadow-soft-sm space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-border/60 pb-4">
-            <div>
-              <h2 className="text-xl font-bold text-ink-primary">
-                Bachelor of Science in Computer Science & Engineering
-              </h2>
-              <p className="text-sm font-medium text-accent-primary flex items-center gap-1.5 mt-0.5">
-                <span>Brac University</span>
-                <span className="text-ink-subtle">·</span>
-                <span className="text-ink-muted flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" /> Dhaka, Bangladesh
-                </span>
-              </p>
-            </div>
-            <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface border border-surface-border text-xs font-mono text-ink-muted shrink-0 self-start sm:self-auto">
-              <Calendar className="w-3.5 h-3.5" />
-              <span>2020 – 2024</span>
-            </div>
-          </div>
+      {/* Main Timeline Component */}
+      <EducationTimeline />
 
-          <p className="text-sm text-ink-muted leading-relaxed">
-            Focused on Machine Learning, Algorithms & Data Structures, Distributed Systems, and Human-Computer Interaction. Graduated with high honors and active research engagement in biomedical signal processing.
+      {/* Navigation Footer Card */}
+      <div className="pt-8 border-t border-surface-border/80 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-surface/40 border border-surface-border shadow-soft-sm">
+        <div className="space-y-1 text-center sm:text-left">
+          <span className="text-xs font-semibold text-accent-primary uppercase tracking-wider">
+            Next Section
+          </span>
+          <h4 className="text-base font-bold text-ink-primary">
+            Explore Career Experience
+          </h4>
+          <p className="text-xs text-ink-muted">
+            See professional roles, Java/Spring Boot enterprise backends, and AI engineering deliverables.
           </p>
-
-          <div className="pt-2">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-primary mb-2 flex items-center gap-1.5">
-              <Award className="w-3.5 h-3.5 text-accent-primary" />
-              <span>Key Coursework</span>
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {[
-                'Design & Analysis of Algorithms',
-                'Artificial Intelligence',
-                'Machine Learning',
-                'Database Management Systems',
-                'Operating Systems',
-                'Computer Networks',
-                'Software Engineering',
-              ].map((course) => (
-                <span
-                  key={course}
-                  className="px-3 py-1 rounded-lg bg-canvas border border-surface-border text-xs font-medium text-ink-muted"
-                >
-                  {course}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
+        <Link
+          href="/experience/"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-primary hover:bg-accent-primaryDark text-canvas font-medium text-sm transition-all duration-200 shadow-soft-sm hover:scale-105 active:scale-95 shrink-0"
+        >
+          <span>View Experience</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   );
 }
-

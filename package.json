@@ -1,8 +1,9 @@
 {
-  "name": "obaidulsaiki-portfolio",
+  "name": "obaidulhaque-portfolio",
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clean": "node -e \"const fs=require('fs'); if(fs.existsSync('.next')) fs.rmSync('.next', {recursive:true, force:true}); if(fs.existsSync('out')) fs.rmSync('out', {recursive:true, force:true}); console.log('Cleaned .next and out');\"",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

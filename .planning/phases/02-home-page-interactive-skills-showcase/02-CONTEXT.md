@@ -17,3 +17,4 @@
    - Interactive category filter tabs (All, Languages, Frontend, Backend, AI/ML).
    - Hover animations: subtle floating physics, glow border in `#E36A6A`, level badges.
 - **Palette**: `#FFFBF1` (Canvas), `#FFF2D0` (Surface), `#FFB2B2` (Peach), `#E36A6A` (Primary accent).
+

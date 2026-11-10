@@ -7,11 +7,11 @@ import PageTransition from '@/components/animations/PageTransition';
 export const metadata: Metadata = {
   metadataBase: new URL('https://obaidulhaque.me'),
   title: {
-    default: 'Obaidul Haque | AI Engineer & Researcher',
+    default: 'Obaidul Haque | AI Engineer and Researcher',
     template: '%s | Obaidul Haque',
   },
   description:
-    'Personal portfolio and research website of Obaidul Haque — AI Engineer & Researcher specializing in Computer Vision, Natural Language Processing, and Signal Processing.',
+    'Personal portfolio and research website of Obaidul Haque — AI Engineer and Researcher working on Computer Vision, Medical Imaging, and Signal Processing with hands-on development experience in Next.js, Java Spring Boot, and PyTorch.',
   keywords: [
     'Obaidul Haque',
     'AI Engineer',
