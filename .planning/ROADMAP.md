@@ -7,7 +7,7 @@ Build and deploy a modern, animated, multi-page personal portfolio for Obaidul S
 ## Phases
 
 - [x] **Phase 1: Foundation, Design Tokens & Navigation** - Next.js App Router scaffold, Tailwind palette tokens, static export config, responsive glassmorphism navbar, and 7 route stubs with motion transitions.
-- [ ] **Phase 2: Home Page & Interactive Skills Showcase** - Hero introduction, profile portrait integration, career narrative, and categorized interactive skills matrix with icons.
+- [x] **Phase 2: Home Page & Interactive Skills Showcase** - Hero introduction, profile portrait integration, career narrative, and categorized interactive skills matrix with icons.
 - [ ] **Phase 3: Education & Work Experience Timelines** - Animated chronological timelines for academic degrees and professional career history.
 - [ ] **Phase 4: Research Showcase & Extracurricular Leadership** - Academic publication cards with BibTeX copy support and extracurricular initiatives showcase.
 - [ ] **Phase 5: Hobbies & Contact Hub** - Curated visual hobby cards, interactive contact options, and one-click email copying.
@@ -40,8 +40,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Hero presentation, profile photo integration, and About Me career narrative.
-- [ ] 02-02: Interactive categorized skills matrix with hover elevation, tooltips, and SVG icons.
+- [x] 02-01: Hero presentation, profile photo integration, and About Me career narrative.
+- [x] 02-02: Interactive categorized skills matrix with hover elevation, tooltips, and SVG icons.
 
 ### Phase 3: Education & Work Experience Timelines
 **Goal**: Create dedicated animated chronological timelines for educational background and career history.
@@ -104,7 +104,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation, Design Tokens & Navigation | 2/2 | Complete | 2026-11-10 |
-| 2. Home Page & Skills Showcase | 0/2 | Not started | - |
+| 2. Home Page & Skills Showcase | 2/2 | Complete | 2026-11-10 |
 | 3. Education & Work Experience | 0/2 | Not started | - |
 | 4. Research & Extracurricular | 0/2 | Not started | - |
 | 5. Hobbies & Contact Hub | 0/2 | Not started | - |

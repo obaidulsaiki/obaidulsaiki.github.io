@@ -20,10 +20,10 @@
 
 ### Home & Skills Showcase
 
-- [ ] **HOME-01**: Hero presentation featuring profile picture, candidate name, headline, and quick action buttons.
-- [ ] **HOME-02**: "About Me" section delivering an engaging career summary and academic trajectory.
-- [ ] **HOME-03**: Categorized skills matrix (Frontend, Backend, AI/ML, Cloud/DevOps, Programming Languages).
-- [ ] **HOME-04**: Interactive skill cards/pills featuring official technology icons, proficiency tags, and hover elevation.
+- [x] **HOME-01**: Hero presentation featuring profile picture, candidate name, headline, and quick action buttons.
+- [x] **HOME-02**: "About Me" section delivering an engaging career summary and academic trajectory.
+- [x] **HOME-03**: Categorized skills matrix (Frontend, Backend, AI/ML, Cloud/DevOps, Programming Languages).
+- [x] **HOME-04**: Interactive skill cards/pills featuring official technology icons, proficiency tags, and hover elevation.
 
 ### Education & Experience
 
@@ -79,10 +79,10 @@
 | NAV-01 | Phase 1 | Complete |
 | NAV-02 | Phase 1 | Complete |
 | NAV-03 | Phase 1 | Complete |
-| HOME-01 | Phase 2 | Pending |
-| HOME-02 | Phase 2 | Pending |
-| HOME-03 | Phase 2 | Pending |
-| HOME-04 | Phase 2 | Pending |
+| HOME-01 | Phase 2 | Complete |
+| HOME-02 | Phase 2 | Complete |
+| HOME-03 | Phase 2 | Complete |
+| HOME-04 | Phase 2 | Complete |
 | CRED-01 | Phase 3 | Pending |
 | CRED-02 | Phase 3 | Pending |
 | CRED-03 | Phase 3 | Pending |
