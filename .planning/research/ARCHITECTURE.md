@@ -76,3 +76,4 @@ The portfolio enforces the user's bespoke 4-color palette as CSS custom properti
 ---
 *Architecture research for: Modern Next.js Portfolio Website*
 *Researched: 2026-11-10*
+

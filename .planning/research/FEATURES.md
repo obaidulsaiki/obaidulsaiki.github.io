@@ -53,3 +53,4 @@ Every top-tier engineering and academic portfolio includes:
 ---
 *Feature research for: Modern Next.js Portfolio Website*
 *Researched: 2026-11-10*
+

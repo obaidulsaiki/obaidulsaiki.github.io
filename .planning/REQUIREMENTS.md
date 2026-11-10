@@ -7,16 +7,16 @@
 
 ### Foundation & Design System
 
-- [ ] **FOUND-01**: Initialize Next.js 14+ with App Router, TypeScript, and Tailwind CSS.
-- [ ] **FOUND-02**: Enforce 4-color design tokens: `#FFFBF1` (Canvas), `#FFF2D0` (Surface), `#FFB2B2` (Soft Accent), `#E36A6A` (Primary Accent).
-- [ ] **FOUND-03**: Configure `output: 'export'` and `images: { unoptimized: true }` for pure static GitHub Pages deployment.
-- [ ] **FOUND-04**: Implement Framer Motion page entrance choreography and smooth view transitions.
+- [x] **FOUND-01**: Initialize Next.js 14+ with App Router, TypeScript, and Tailwind CSS.
+- [x] **FOUND-02**: Enforce 4-color design tokens: `#FFFBF1` (Canvas), `#FFF2D0` (Surface), `#FFB2B2` (Soft Accent), `#E36A6A` (Primary Accent).
+- [x] **FOUND-03**: Configure `output: 'export'` and `images: { unoptimized: true }` for pure static GitHub Pages deployment.
+- [x] **FOUND-04**: Implement Framer Motion page entrance choreography and smooth view transitions.
 
 ### Navigation & Layout
 
-- [ ] **NAV-01**: Sticky responsive glassmorphic navbar displaying all 7 routes: Home, Education, Experience, Research, Extracurricular, Hobby, Contact.
-- [ ] **NAV-02**: Active link indicators with `#E36A6A` accent highlights and subtle hover physics.
-- [ ] **NAV-03**: Mobile-responsive hamburger navigation drawer with animated drawer reveal.
+- [x] **NAV-01**: Sticky responsive glassmorphic navbar displaying all 7 routes: Home, Education, Experience, Research, Extracurricular, Hobby, Contact.
+- [x] **NAV-02**: Active link indicators with `#E36A6A` accent highlights and subtle hover physics.
+- [x] **NAV-03**: Mobile-responsive hamburger navigation drawer with animated drawer reveal.
 
 ### Home & Skills Showcase
 
@@ -72,13 +72,13 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| NAV-01 | Phase 1 | Pending |
-| NAV-02 | Phase 1 | Pending |
-| NAV-03 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 1 | Complete |
+| NAV-01 | Phase 1 | Complete |
+| NAV-02 | Phase 1 | Complete |
+| NAV-03 | Phase 1 | Complete |
 | HOME-01 | Phase 2 | Pending |
 | HOME-02 | Phase 2 | Pending |
 | HOME-03 | Phase 2 | Pending |
@@ -107,3 +107,4 @@
 ---
 *Requirements defined: 2026-11-10*
 *Last updated: 2026-11-10 after initial definition*
+

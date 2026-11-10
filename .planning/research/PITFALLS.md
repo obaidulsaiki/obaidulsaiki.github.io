@@ -33,3 +33,4 @@
 ---
 *Pitfalls research for: Modern Next.js Portfolio Website*
 *Researched: 2026-11-10*
+
