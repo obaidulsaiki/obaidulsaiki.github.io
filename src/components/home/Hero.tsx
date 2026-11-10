@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Microscope, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, Microscope, Github, Linkedin, Mail, MapPin, Sparkles } from 'lucide-react';
 import { profileData } from '@/data/profile';
 
 export default function Hero() {
@@ -40,9 +40,14 @@ export default function Hero() {
                 <span className="absolute left-0 -bottom-1 w-full h-1.5 bg-accent-soft/60 rounded-full" />
               </span>
             </h1>
-            <p className="text-lg sm:text-xl font-semibold text-accent-primaryDark pt-1">
-              {profileData.title}
-            </p>
+            <div className="space-y-1">
+              <p className="text-xl sm:text-2xl font-bold text-accent-primaryDark">
+                {profileData.title}
+              </p>
+              <p className="text-sm sm:text-base font-semibold text-accent-primary tracking-wide">
+                Specializing in Computer Vision · NLP · Signal Processing
+              </p>
+            </div>
           </div>
 
           <p className="text-sm sm:text-base text-ink-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -113,17 +118,19 @@ export default function Hero() {
             <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden border-4 border-surface shadow-soft-lg bg-surface-hover group-hover:border-accent-soft transition-all duration-300">
               <Image
                 src="/images/MyPicture.png"
-                alt="Obaidul Saiki - Profile Portrait"
+                alt="Obaidul Haque - Profile Portrait"
                 fill
                 priority
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Location Pill */}
+            {/* Location & University Pill */}
             <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:-right-3 rounded-full bg-canvas/95 backdrop-blur-md border border-surface-border px-3.5 py-1.5 text-xs font-medium text-ink-primary shadow-soft-sm flex items-center gap-1.5 whitespace-nowrap">
               <MapPin className="w-3.5 h-3.5 text-accent-primary" />
               <span>{profileData.location}</span>
+              <span className="text-ink-subtle">·</span>
+              <span className="text-accent-primary font-semibold">{profileData.universityShort}</span>
             </div>
           </div>
         </motion.div>
@@ -136,7 +143,7 @@ export default function Hero() {
             key={idx}
             className="p-3.5 rounded-2xl bg-canvas/70 border border-surface-border/80 text-center sm:text-left transition-all hover:bg-canvas"
           >
-            <div className="text-xl sm:text-2xl font-extrabold text-accent-primary tracking-tight">
+            <div className="text-lg sm:text-xl font-extrabold text-accent-primary tracking-tight">
               {stat.value}
             </div>
             <div className="text-xs font-semibold text-ink-primary mt-0.5">

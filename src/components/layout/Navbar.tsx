@@ -41,17 +41,17 @@ export default function Navbar() {
         {/* Brand / Logo */}
         <Link
           href="/"
-          className="group flex items-center gap-2 text-ink-primary transition-colors"
+          className="group flex items-center gap-2.5 text-ink-primary transition-colors"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface border border-surface-border text-accent-primary font-bold shadow-soft-sm group-hover:scale-105 group-hover:border-accent-primary transition-all duration-200">
-            OS
+            OH
           </span>
           <div className="flex flex-col">
             <span className="font-semibold tracking-tight text-ink-primary group-hover:text-accent-primary transition-colors text-base">
-              Obaidul Saiki
+              Obaidul Haque
             </span>
             <span className="text-[11px] font-medium text-ink-muted -mt-1 hidden sm:inline-block">
-              Portfolio & Research
+              AI Engineer & Researcher
             </span>
           </div>
         </Link>

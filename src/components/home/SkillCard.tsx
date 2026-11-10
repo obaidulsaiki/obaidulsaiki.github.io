@@ -24,6 +24,9 @@ import {
   GitBranch,
   Container,
   Terminal,
+  Coffee,
+  Eye,
+  MessageSquareCode,
   type LucideIcon,
 } from 'lucide-react';
 import { SkillItem } from '@/data/skills';
@@ -50,6 +53,9 @@ const iconMap: Record<string, LucideIcon> = {
   GitBranch,
   Container,
   Terminal,
+  Coffee,
+  Eye,
+  MessageSquareCode,
 };
 
 interface SkillCardProps {
@@ -67,12 +73,22 @@ export default function SkillCard({ skill }: SkillCardProps) {
       exit={{ opacity: 0, scale: 0.9 }}
       whileHover={{ y: -4, scale: 1.02 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-surface/50 border border-surface-border hover:border-accent-primary hover:bg-surface/80 transition-all duration-300 shadow-soft-sm"
+      className={`group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl transition-all duration-300 shadow-soft-sm ${
+        skill.highlight
+          ? 'bg-surface/70 border-2 border-accent-primary/60 hover:border-accent-primary hover:bg-surface/90'
+          : 'bg-surface/50 border border-surface-border hover:border-accent-primary hover:bg-surface/80'
+      }`}
     >
       <div className="space-y-3">
         {/* Top Header */}
         <div className="flex items-center justify-between gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-canvas border border-surface-border text-accent-primary shadow-soft-sm group-hover:scale-110 group-hover:bg-accent-soft/30 transition-all duration-300">
+          <div
+            className={`flex h-10 w-10 items-center justify-center rounded-xl border shadow-soft-sm group-hover:scale-110 transition-all duration-300 ${
+              skill.highlight
+                ? 'bg-accent-soft/30 border-accent-soft text-accent-primary'
+                : 'bg-canvas border-surface-border text-accent-primary group-hover:bg-accent-soft/30'
+            }`}
+          >
             <IconComponent className="h-5 w-5" />
           </div>
           <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-canvas border border-surface-border text-ink-muted">
@@ -91,7 +107,7 @@ export default function SkillCard({ skill }: SkillCardProps) {
         </div>
 
         {/* Description */}
-        <p className="text-xs text-ink-muted leading-relaxed line-clamp-2">
+        <p className="text-xs text-ink-muted leading-relaxed line-clamp-3">
           {skill.description}
         </p>
       </div>
@@ -101,8 +117,10 @@ export default function SkillCard({ skill }: SkillCardProps) {
         <span className="text-ink-subtle">Proficiency</span>
         <span
           className={`font-semibold px-2 py-0.5 rounded-md ${
-            skill.proficiency === 'Advanced'
-              ? 'bg-accent-soft/40 text-accent-primary'
+            skill.proficiency === 'Specialist'
+              ? 'bg-accent-primary text-canvas shadow-soft-sm'
+              : skill.proficiency === 'Advanced'
+              ? 'bg-accent-soft/40 text-accent-primary border border-accent-soft/60'
               : 'bg-canvas text-ink-primary border border-surface-border'
           }`}
         >

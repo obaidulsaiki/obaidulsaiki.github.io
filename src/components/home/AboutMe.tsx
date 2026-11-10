@@ -2,29 +2,29 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Cpu, Code2, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { User, Eye, MessageSquareCode, Activity, Coffee, ArrowRight, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import { profileData } from '@/data/profile';
 
 export default function AboutMe() {
   const pillars = [
     {
-      icon: Code2,
-      title: 'Full-Stack Engineering',
-      desc: 'Crafting responsive, accessible, and fast web applications using Next.js, React, TypeScript, and modern CSS architectures.',
-      badge: 'Architecture',
+      icon: Eye,
+      title: 'Computer Vision & Signal Processing',
+      desc: 'Developing deep convolutional networks, spatial-temporal attention mechanisms, and biomedical signal processing algorithms (e.g. EEG seizure prediction).',
+      badge: 'Core Focus',
     },
     {
-      icon: Cpu,
-      title: 'Biomedical Signal & ML',
-      desc: 'Developing deep learning algorithms, convolutional attention networks, and time-series feature extraction for automated seizure detection.',
-      badge: 'Research',
+      icon: MessageSquareCode,
+      title: 'Natural Language Processing (NLP)',
+      desc: 'Investigating transformer architectures, text tokenization, embeddings, and linguistic feature extraction for contextual intelligence.',
+      badge: 'Core Focus',
     },
     {
-      icon: Sparkles,
-      title: 'Artisanal Craft & Reliability',
-      desc: 'Focusing on micro-animations, type safety, test verification, and intuitive human-centric software design.',
-      badge: 'Philosophy',
+      icon: Coffee,
+      title: 'Enterprise Roots: Java & Spring Boot',
+      desc: 'Proven background in building robust backend services with Java, Spring Boot, and SQL, seamlessly integrated with modern JavaScript frontends.',
+      badge: 'Engineering',
     },
   ];
 
@@ -38,8 +38,11 @@ export default function AboutMe() {
             <span>About Me</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-ink-primary tracking-tight">
-            Career Summary & Philosophy
+            Career Journey & Research Focus
           </h2>
+          <p className="text-xs sm:text-sm text-ink-muted">
+            From enterprise Java/Spring Boot development to dedicated AI research in Computer Vision, NLP, and Signal Processing at IUBAT.
+          </p>
         </div>
 
         <Link
@@ -67,16 +70,22 @@ export default function AboutMe() {
             </p>
           ))}
 
+          {/* Academic Affiliation Card */}
           <div className="p-4 rounded-2xl bg-canvas border border-surface-border flex items-center justify-between gap-4">
-            <div className="space-y-0.5">
-              <span className="text-xs font-semibold text-ink-primary">Looking for collaboration?</span>
-              <p className="text-xs text-ink-muted">Available for software engineering roles and research projects.</p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-accent-soft/30 border border-accent-soft/50 text-accent-primary flex items-center justify-center shrink-0">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <div className="space-y-0.5">
+                <span className="text-xs font-semibold text-ink-primary">{profileData.university}</span>
+                <p className="text-[11px] text-ink-muted">Department of Computer Science & Engineering</p>
+              </div>
             </div>
             <Link
-              href="/contact/"
-              className="px-4 py-2 rounded-xl bg-accent-primary text-canvas text-xs font-medium hover:bg-accent-primaryDark transition-all shrink-0 shadow-soft-sm"
+              href="/education/"
+              className="px-3.5 py-1.5 rounded-xl bg-surface border border-surface-border hover:border-accent-primary text-ink-primary text-xs font-medium transition-all shrink-0"
             >
-              Contact Me
+              Details →
             </Link>
           </div>
         </motion.div>

@@ -7,21 +7,24 @@ import PageTransition from '@/components/animations/PageTransition';
 export const metadata: Metadata = {
   metadataBase: new URL('https://obaidulhaque.me'),
   title: {
-    default: 'Obaidul Saiki | Software Engineer & Researcher',
-    template: '%s | Obaidul Saiki',
+    default: 'Obaidul Haque | AI Engineer & Researcher',
+    template: '%s | Obaidul Haque',
   },
   description:
-    'Personal portfolio, research publications, education, and career experience of Obaidul Saiki.',
+    'Personal portfolio and research website of Obaidul Haque — AI Engineer & Researcher specializing in Computer Vision, Natural Language Processing, and Signal Processing.',
   keywords: [
-    'Obaidul Saiki',
-    'Software Engineer',
+    'Obaidul Haque',
+    'AI Engineer',
     'Researcher',
-    'Machine Learning',
-    'Portfolio',
+    'Computer Vision',
+    'Natural Language Processing',
+    'Signal Processing',
+    'EEG Analysis',
+    'Java Spring Boot',
     'Next.js',
-    'Computer Science',
+    'IUBAT',
   ],
-  authors: [{ name: 'Obaidul Saiki', url: 'https://obaidulhaque.me' }],
+  authors: [{ name: 'Obaidul Haque', url: 'https://obaidulhaque.me' }],
   icons: {
     icon: '/images/MyPicture.png',
   },

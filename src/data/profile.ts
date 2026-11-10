@@ -2,9 +2,12 @@ export interface ProfileData {
   name: string;
   fullName: string;
   title: string;
+  specialization: string;
   tagline: string;
   location: string;
   status: string;
+  university: string;
+  universityShort: string;
   bioParagraphs: string[];
   stats: {
     label: string;
@@ -20,22 +23,25 @@ export interface ProfileData {
 }
 
 export const profileData: ProfileData = {
-  name: 'Obaidul Saiki',
-  fullName: 'Obaidul Haque Saiki',
-  title: 'Software Engineer & Machine Learning Researcher',
-  tagline: 'Designing high-performance web applications and robust deep learning architectures for biomedical computing.',
+  name: 'Obaidul Haque',
+  fullName: 'Obaidul Haque',
+  title: 'AI Engineer & Researcher',
+  specialization: 'Computer Vision · NLP · Signal Processing',
+  tagline: 'Specializing in Computer Vision, Natural Language Processing, and Signal Processing—grounded in robust Java/Spring Boot backend systems and modern JavaScript frontends.',
   location: 'Dhaka, Bangladesh',
-  status: 'Open to Research & Engineering Opportunities',
+  status: 'Open to AI Engineering & Research Roles',
+  university: 'International University of Business Agriculture and Technology (IUBAT)',
+  universityShort: 'IUBAT',
   bioParagraphs: [
-    "I am a software engineer and computational researcher passionate about bridging algorithmic rigor with intuitive, artisanal user experiences. My engineering focus centers on modern full-stack systems—architecting reactive frontends in Next.js/React and high-throughput backends that scale effortlessly.",
-    "On the scientific frontier, my research investigates deep convolutional neural networks and attention-based feature extraction for multi-channel biomedical signal analysis, specifically pediatric and adult EEG seizure detection. I thrive at the intersection where complex mathematics meets practical software architecture.",
-    "Beyond day-to-day code, I believe in continuous curiosity: learning new paradigms, contributing to open-source developer tooling, and crafting software that is as delightful to use as it is reliable under the hood.",
+    "I am an AI Engineer and Researcher specializing in Computer Vision (CV), Natural Language Processing (NLP), and Signal Processing. My academic and research foundation is anchored at the International University of Business Agriculture and Technology (IUBAT).",
+    "My software engineering roots were built on enterprise backend development with Java and Spring Boot, coupled with responsive JavaScript frontends. In October 2025, I transitioned my full focus into deep learning research and applied AI engineering, channeling my systems background into high-accuracy visual computing, linguistic modeling, and biomedical/acoustic signal analysis.",
+    "Today, I build intelligent systems that bridge theoretical mathematics with scalable deployment: training custom neural networks in PyTorch, processing multi-channel time-series signals, deploying transformer-based NLP pipelines, and wrapping them in reliable production architectures.",
   ],
   stats: [
-    { label: 'Experience', value: '3+ Years', detail: 'Engineering & Research' },
-    { label: 'Technologies', value: '25+', detail: 'Across Web, Systems & ML' },
-    { label: 'Focus Areas', value: 'Full-Stack & ML', detail: 'Next.js, PyTorch, Signal Processing' },
-    { label: 'Academic Foundation', value: 'B.Sc. CSE', detail: 'Brac University' },
+    { label: 'Primary Focus', value: 'CV · NLP · Signal', detail: 'Deep Learning & Applied AI' },
+    { label: 'Backend Roots', value: 'Java & Spring Boot', detail: 'Enterprise Systems & APIs' },
+    { label: 'Research Pivot', value: 'Oct 2025 – Present', detail: 'Dedicated AI & ML Research' },
+    { label: 'Institution', value: 'IUBAT', detail: 'Computer Science & Engineering' },
   ],
   socials: {
     github: 'https://github.com/obaidulsaiki',

@@ -19,16 +19,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-3">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface border border-surface-border text-accent-primary font-bold shadow-soft-sm">
-                OS
+                OH
               </span>
               <span className="font-semibold text-ink-primary tracking-tight text-lg">
-                Obaidul Saiki
+                Obaidul Haque
               </span>
             </div>
             <p className="text-sm text-ink-muted max-w-sm leading-relaxed">
-              Software engineer & researcher building thoughtful web applications, machine learning architectures, and scalable systems.
+              AI Engineer & Researcher specializing in Computer Vision, Natural Language Processing, and Signal Processing, backed by strong foundations in enterprise Java/Spring Boot and modern JavaScript.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -108,7 +108,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-surface-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-muted">
           <p className="flex items-center gap-1">
-            © {new Date().getFullYear()} Obaidul Saiki. Crafted with{' '}
+            © {new Date().getFullYear()} Obaidul Haque. Crafted with{' '}
             <Heart className="w-3.5 h-3.5 text-accent-primary fill-accent-primary inline" /> in Next.js & Tailwind.
           </p>
           <div className="flex items-center gap-4">
