@@ -1,3 +1,19 @@
+import { publicationOverviewStats } from './research';
+
+export interface HeroStatBadge {
+  text: string;
+  tone?: 'default' | 'emerald' | 'amber' | 'accent';
+}
+
+export interface HeroStatItem {
+  id: 'papers' | 'experience' | 'cgpa';
+  label: string;
+  value: string;
+  href: string;
+  highlight?: boolean;
+  badges: HeroStatBadge[];
+}
+
 export interface ProfileData {
   name: string;
   fullName: string;
@@ -10,11 +26,7 @@ export interface ProfileData {
   universityShort: string;
   cgpa: string;
   bioParagraphs: string[];
-  stats: {
-    label: string;
-    value: string;
-    detail: string;
-  }[];
+  stats: HeroStatItem[];
   socials: {
     github: string;
     linkedin: string;
@@ -41,10 +53,38 @@ export const profileData: ProfileData = {
     'I am an AI Engineer and Researcher dedicated to advancing deep learning architectures and building scalable full-stack AI applications. Alongside 40+ research papers across ACM, IEEE, and Springer Nature, I develop production software combining TypeScript, React, Next.js, Java Spring Boot, and modern LLM workflows to turn experimental models into practical systems.',
   ],
   stats: [
-    { label: 'Research Papers', value: '40+ Papers', detail: 'ACM | IEEE | Elsevier | Springer' },
-    { label: 'Graduated IUBAT', value: '3.89 / 4.00 CGPA', detail: 'B.Sc. in Computer Science & Engineering' },
-    { label: 'Problem Solving', value: '550+ Solved', detail: 'Codeforces, LeetCode, ICPC' },
-    { label: 'Highlighted Best', value: 'Top 5 Papers', detail: '1st Author Breakthroughs' },
+    {
+      id: 'papers',
+      label: 'Conference & Journal Papers',
+      value: `${publicationOverviewStats.totalPapers} Papers`,
+      href: '/research/',
+      badges: [
+        { text: `${publicationOverviewStats.publishedCount} Published`, tone: 'emerald' },
+        { text: `${publicationOverviewStats.presentedCount} Presented`, tone: 'default' },
+        { text: `${publicationOverviewStats.underReviewCount} Running`, tone: 'amber' },
+      ],
+    },
+    {
+      id: 'experience',
+      label: 'Total Industry Experience',
+      value: '10 Months',
+      href: '/experience/',
+      badges: [
+        { text: 'Full Stack AI · 6 mo', tone: 'accent' },
+        { text: 'Frontend Dev · 4 mo', tone: 'default' },
+      ],
+    },
+    {
+      id: 'cgpa',
+      label: 'Academic CGPA · IUBAT',
+      value: '3.89 / 4.00',
+      href: '/education/',
+      highlight: true,
+      badges: [
+        { text: 'B.Sc. in CSE', tone: 'accent' },
+        { text: '144 Credits', tone: 'default' },
+      ],
+    },
   ],
   socials: {
     github: 'https://github.com/obaidulsaiki',

@@ -4,8 +4,31 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Microscope, Github, Linkedin, Mail, MapPin, Sparkles } from 'lucide-react';
-import { profileData } from '@/data/profile';
+import {
+  ArrowRight,
+  Microscope,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+} from 'lucide-react';
+import { HeroStatBadge, HeroStatItem, profileData } from '@/data/profile';
+
+const statIconMap: Record<HeroStatItem['id'], React.ComponentType<{ className?: string }>> = {
+  papers: BookOpen,
+  experience: Briefcase,
+  cgpa: GraduationCap,
+};
+
+const badgeToneClasses: Record<NonNullable<HeroStatBadge['tone']>, string> = {
+  default: 'bg-surface/60 text-ink-muted border-surface-border',
+  emerald: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/25',
+  amber: 'bg-amber-500/10 text-amber-700 border-amber-500/25',
+  accent: 'bg-accent-soft/35 text-accent-primaryDark border-accent-soft/60',
+};
 
 export default function Hero() {
   return (
@@ -40,14 +63,9 @@ export default function Hero() {
                 <span className="absolute left-0 -bottom-1 w-full h-1.5 bg-accent-soft/60 rounded-full" />
               </span>
             </h1>
-            <div className="space-y-1">
-              <p className="text-xl sm:text-2xl font-bold text-accent-primaryDark">
-                {profileData.title}
-              </p>
-              <p className="text-sm sm:text-base font-semibold text-accent-primary tracking-wide">
-                Medical Imaging & Computer Vision · Natural Language Processing · Biomedical Signals
-              </p>
-            </div>
+            <p className="text-xl sm:text-2xl font-bold text-accent-primaryDark">
+              {profileData.title}
+            </p>
           </div>
 
           <p className="text-sm sm:text-base text-ink-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -136,24 +154,65 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="mt-10 pt-8 border-t border-surface-border/70 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {profileData.stats.map((stat, idx) => (
-          <div
-            key={idx}
-            className="p-3.5 rounded-2xl bg-canvas/70 border border-surface-border/80 text-center sm:text-left transition-all hover:bg-canvas"
-          >
-            <div className="text-lg sm:text-xl font-extrabold text-accent-primary tracking-tight">
-              {stat.value}
-            </div>
-            <div className="text-xs font-semibold text-ink-primary mt-0.5">
-              {stat.label}
-            </div>
-            <div className="text-[11px] text-ink-muted hidden sm:block">
-              {stat.detail}
-            </div>
-          </div>
-        ))}
+      {/* Highlight Cards Row (Papers, Experience, CGPA) */}
+      <div className="mt-10 pt-8 border-t border-surface-border/70 grid grid-cols-1 md:grid-cols-3 gap-4">
+        {profileData.stats.map((stat) => {
+          const IconComponent = statIconMap[stat.id];
+          return (
+            <Link
+              key={stat.id}
+              href={stat.href}
+              className={`group p-4 sm:p-5 rounded-2xl border transition-all duration-200 shadow-soft-sm hover:-translate-y-0.5 flex flex-col justify-between gap-3.5 ${
+                stat.highlight
+                  ? 'bg-gradient-to-br from-canvas via-canvas to-accent-soft/25 border-accent-soft hover:border-accent-primary'
+                  : 'bg-canvas/80 border-surface-border/90 hover:border-accent-primary/60 hover:bg-canvas'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-accent-primary tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs font-semibold text-ink-primary mt-0.5 group-hover:text-accent-primaryDark transition-colors">
+                    {stat.label}
+                  </div>
+                </div>
+
+                <div
+                  className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform ${
+                    stat.highlight
+                      ? 'bg-accent-soft/40 border-accent-soft text-accent-primaryDark'
+                      : 'bg-surface/60 border-surface-border text-accent-primary'
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-1.5">
+                {stat.badges.map((badge) => {
+                  const tone = badge.tone ?? 'default';
+                  const showDot = tone === 'emerald' || tone === 'amber';
+                  return (
+                    <span
+                      key={badge.text}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${badgeToneClasses[tone]}`}
+                    >
+                      {showDot && (
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            tone === 'emerald' ? 'bg-emerald-500' : 'bg-amber-500'
+                          }`}
+                        />
+                      )}
+                      <span>{badge.text}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
