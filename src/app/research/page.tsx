@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Microscope, Sparkles, Filter, Award, BookOpen, Layers } from 'lucide-react';
 import { highlightedPapers, publicationOverviewStats } from '@/data/research';
 import PublicationCard from '@/components/research/PublicationCard';
+import { SlidingFilterTabs } from '@/components/animations/MotionPrimitives';
 
 export default function ResearchPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -86,25 +88,19 @@ export default function ResearchPage() {
       </div>
 
       {/* Category Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-surface-border/50 pb-4">
-        <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-muted mr-2">
-          <Filter className="w-3.5 h-3.5 text-accent-primary" />
-          <span>Filter Domain:</span>
-        </div>
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-              selectedCategory === cat
-                ? 'bg-accent-primary text-canvas shadow-soft-sm font-semibold'
-                : 'bg-surface hover:bg-surface-hover text-ink-muted hover:text-ink-primary border border-surface-border'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="border-b border-surface-border/50 pb-4">
+        <SlidingFilterTabs
+          items={categories.map((cat) => ({ id: cat, label: cat }))}
+          selectedId={selectedCategory}
+          onSelect={setSelectedCategory}
+          layoutPrefix="research-filter"
+          prefixNode={
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-muted mr-2">
+              <Filter className="w-3.5 h-3.5 text-accent-primary" />
+              <span>Filter Domain:</span>
+            </div>
+          }
+        />
       </div>
 
       {/* Top 5 Highlighted Papers List */}
@@ -118,11 +114,20 @@ export default function ResearchPage() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
-          {filteredPapers.map((paper, index) => (
-            <PublicationCard key={paper.id} paper={paper} index={index} />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 gap-6"
+          >
+            {filteredPapers.map((paper, index) => (
+              <PublicationCard key={paper.id} paper={paper} index={index} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Complete Archive Note */}

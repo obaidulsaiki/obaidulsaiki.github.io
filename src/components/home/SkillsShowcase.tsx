@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Wrench, Sparkles, Filter } from 'lucide-react';
 import { skillsData, skillCategories } from '@/data/skills';
 import SkillCard from '@/components/home/SkillCard';
+import { SlidingFilterTabs } from '@/components/animations/MotionPrimitives';
 
 export default function SkillsShowcase() {
   // Default to AI, Models and Frameworks on Home to anchor primary identity
@@ -40,41 +41,33 @@ export default function SkillsShowcase() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-ink-subtle flex items-center gap-1 mr-1">
-          <Filter className="w-3 h-3" /> Filter:
-        </span>
-        {skillCategories.map((cat) => {
-          const active = selectedCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                active
-                  ? 'text-canvas bg-accent-primary shadow-soft-sm'
-                  : 'text-ink-muted hover:text-ink-primary bg-surface/60 hover:bg-surface border border-surface-border hover:border-accent-primary/40'
-              }`}
-            >
-              <span className="relative z-10">{cat.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      <SlidingFilterTabs
+        items={skillCategories}
+        selectedId={selectedCategory}
+        onSelect={setSelectedCategory}
+        layoutPrefix="skills-filter"
+        prefixNode={
+          <span className="text-xs font-semibold text-ink-subtle flex items-center gap-1 mr-1">
+            <Filter className="w-3 h-3" /> Filter:
+          </span>
+        }
+      />
 
       {/* Robust Animated Skills Grid */}
-      <motion.div
-        key={selectedCategory}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5"
-      >
-        {filteredSkills.map((skill) => (
-          <SkillCard key={skill.id} skill={skill} />
-        ))}
-      </motion.div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={selectedCategory}
+          initial={{ opacity: 0, y: 8, scale: 0.99 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.99 }}
+          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5"
+        >
+          {filteredSkills.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

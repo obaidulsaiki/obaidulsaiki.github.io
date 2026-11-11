@@ -15,6 +15,7 @@ import {
   School,
 } from 'lucide-react';
 import { educationMilestones, courseCategories } from '@/data/education';
+import { SlidingFilterTabs } from '@/components/animations/MotionPrimitives';
 
 export default function EducationTimeline() {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
@@ -180,41 +181,26 @@ export default function EducationTimeline() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2">
-          {courseCategories.map((cat, idx) => {
-            const active = selectedCategory === idx;
-            return (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setSelectedCategory(idx)}
-                className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
-                  active
-                    ? 'text-canvas font-semibold shadow-soft-sm'
-                    : 'text-ink-muted hover:text-ink-primary bg-surface/60 hover:bg-surface border border-surface-border'
-                }`}
-              >
-                {active && (
-                  <motion.div
-                    layoutId="activeCourseCategoryPill"
-                    className="absolute inset-0 rounded-xl bg-accent-primary"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{cat.category}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SlidingFilterTabs
+          items={courseCategories.map((cat, idx) => ({
+            id: String(idx),
+            label: cat.category,
+          }))}
+          selectedId={String(selectedCategory)}
+          onSelect={(id) => setSelectedCategory(Number(id))}
+          layoutPrefix="edu-course-filter"
+          roundedClass="rounded-xl"
+          buttonPaddingClass="px-4 py-2 text-xs sm:text-sm"
+        />
 
         {/* Selected Category Course Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedCategory}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {courseCategories[selectedCategory].courses.map((course, cIdx) => (

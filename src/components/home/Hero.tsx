@@ -16,6 +16,7 @@ import {
   GraduationCap,
 } from 'lucide-react';
 import { HeroStatBadge, HeroStatItem, profileData } from '@/data/profile';
+import { MagneticPull } from '@/components/animations/MotionPrimitives';
 
 const statIconMap: Record<HeroStatItem['id'], React.ComponentType<{ className?: string }>> = {
   papers: BookOpen,
@@ -74,49 +75,59 @@ export default function Hero() {
 
           {/* Action CTAs */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
-            <Link
-              href="/contact/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-primary hover:bg-accent-primaryDark text-canvas font-medium text-sm shadow-soft-md transition-all duration-200 hover:scale-105 active:scale-95"
-            >
-              <span>Get in Touch</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <MagneticPull strength={0.2}>
+              <Link
+                href="/contact/"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-primary hover:bg-accent-primaryDark text-canvas font-medium text-sm shadow-soft-md transition-colors duration-200"
+              >
+                <span>Get in Touch</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </MagneticPull>
 
-            <Link
-              href="/research/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas border border-surface-border text-ink-primary font-medium text-sm hover:border-accent-primary hover:bg-surface-hover transition-all duration-200 hover:scale-105 active:scale-95"
-            >
-              <Microscope className="w-4 h-4 text-accent-primary" />
-              <span>Explore Research</span>
-            </Link>
+            <MagneticPull strength={0.2}>
+              <Link
+                href="/research/"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas border border-surface-border text-ink-primary font-medium text-sm hover:border-accent-primary hover:bg-surface-hover transition-colors duration-200"
+              >
+                <Microscope className="w-4 h-4 text-accent-primary" />
+                <span>Explore Research</span>
+              </Link>
+            </MagneticPull>
 
             {/* Social Icons */}
             <div className="flex items-center gap-2 pl-2">
-              <a
-                href={profileData.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-all duration-200 hover:scale-110"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href={profileData.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-all duration-200 hover:scale-110"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${profileData.socials.email}`}
-                aria-label="Email Me"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-all duration-200 hover:scale-110"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
+              <MagneticPull strength={0.3}>
+                <a
+                  href={profileData.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              </MagneticPull>
+              <MagneticPull strength={0.3}>
+                <a
+                  href={profileData.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </MagneticPull>
+              <MagneticPull strength={0.3}>
+                <a
+                  href={`mailto:${profileData.socials.email}`}
+                  aria-label="Email Me"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </MagneticPull>
             </div>
           </div>
         </motion.div>

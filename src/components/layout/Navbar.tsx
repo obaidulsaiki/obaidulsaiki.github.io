@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup, MotionConfig } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
+import { MagneticPull, SNAPPY_SPRING } from '@/components/animations/MotionPrimitives';
 
 interface NavItem {
   name: string;
@@ -24,6 +25,7 @@ const navItems: NavItem[] = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
 
   // Normalize pathname to handle trailing slash
   const isActive = (href: string) => {
@@ -36,62 +38,89 @@ export default function Navbar() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <header className="sticky top-0 z-50 w-full border-b border-surface-border/60 bg-canvas/85 backdrop-blur-md transition-all duration-300">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Brand / Logo */}
-        <Link
-          href="/"
-          className="group flex items-center gap-2.5 text-ink-primary transition-colors"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface border border-surface-border text-accent-primary font-bold shadow-soft-sm group-hover:scale-105 group-hover:border-accent-primary transition-all duration-200">
-            OH
-          </span>
-          <div className="flex flex-col">
-            <span className="font-semibold tracking-tight text-ink-primary group-hover:text-accent-primary transition-colors text-base">
-              Obaidul Haque
+        <MagneticPull strength={0.18}>
+          <Link
+            href="/"
+            className="group flex items-center gap-2.5 text-ink-primary transition-colors"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface border border-surface-border text-accent-primary font-bold shadow-soft-sm group-hover:border-accent-primary transition-colors duration-200">
+              OH
             </span>
-            <span className="text-[11px] font-medium text-ink-muted -mt-1 hidden sm:inline-block">
-              AI Engineer and Researcher
-            </span>
-          </div>
-        </Link>
+            <div className="flex flex-col">
+              <span className="font-semibold tracking-tight text-ink-primary group-hover:text-accent-primary transition-colors text-base">
+                Obaidul Haque
+              </span>
+              <span className="text-[11px] font-medium text-ink-muted -mt-1 hidden sm:inline-block">
+                AI Engineer and Researcher
+              </span>
+            </div>
+          </Link>
+        </MagneticPull>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-surface/40 p-1.5 rounded-full border border-surface-border/50">
-          {navItems.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-full transition-all duration-200 ${
-                  active
-                    ? 'text-accent-primary font-semibold'
-                    : 'text-ink-muted hover:text-ink-primary hover:bg-surface/80'
-                }`}
-              >
-                {active && (
-                  <motion.div
-                    layoutId="activeNavPill"
-                    className="absolute inset-0 rounded-full bg-accent-soft/30 border border-accent-soft/50 shadow-soft-sm"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{item.name}</span>
-              </Link>
-            );
-          })}
-        </nav>
+        <LayoutGroup id="desktop-navbar">
+          <nav
+            onMouseLeave={() => setHoveredHref(null)}
+            className="hidden md:flex items-center gap-1 bg-surface/40 p-1.5 rounded-full border border-surface-border/50"
+          >
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+              const hovered = !active && hoveredHref === item.href;
+              return (
+                <motion.div
+                  key={item.href}
+                  whileTap={{ scale: 0.95 }}
+                  transition={SNAPPY_SPRING}
+                  className="relative"
+                >
+                  <Link
+                    href={item.href}
+                    onMouseEnter={() => setHoveredHref(item.href)}
+                    onFocus={() => setHoveredHref(item.href)}
+                    onBlur={() => setHoveredHref(null)}
+                    className={`relative block px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-full transition-colors duration-150 ${
+                      active
+                        ? 'text-accent-primary font-semibold'
+                        : 'text-ink-muted hover:text-ink-primary'
+                    }`}
+                  >
+                    {hovered && (
+                      <motion.span
+                        layoutId="navHoverPill"
+                        className="absolute inset-0 z-0 rounded-full bg-surface-hover/90 border border-surface-border shadow-soft-sm"
+                        transition={SNAPPY_SPRING}
+                      />
+                    )}
+                    {active && (
+                      <motion.span
+                        layoutId="activeNavPill"
+                        className="absolute inset-0 z-[1] rounded-full bg-accent-soft/35 border border-accent-soft/60 shadow-soft-sm"
+                        transition={SNAPPY_SPRING}
+                      />
+                    )}
+                    <span className="relative z-10">{item.name}</span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </nav>
+        </LayoutGroup>
 
         {/* Action Button & Mobile Toggle */}
         <div className="flex items-center gap-2">
-          <Link
-            href="/contact/"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-canvas bg-accent-primary hover:bg-accent-primaryDark rounded-full shadow-soft-sm transition-all duration-200 hover:scale-105 active:scale-95"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Say Hello</span>
-          </Link>
+          <MagneticPull strength={0.24} className="hidden sm:inline-flex">
+            <Link
+              href="/contact/"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-canvas bg-accent-primary hover:bg-accent-primaryDark rounded-full shadow-soft-sm transition-colors duration-200"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Say Hello</span>
+            </Link>
+          </MagneticPull>
 
           <button
             type="button"
@@ -148,5 +177,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
+    </MotionConfig>
   );
 }
