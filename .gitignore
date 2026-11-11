@@ -32,7 +32,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Graphify Cache
-graphify-out/cache/
+# Graphify & AI tooling / non-portfolio workspace files
+graphify-out/
+.agents/
+.zoo/
+.planning/
+skills-lock.json
+about me.txt
+Research Paper list.xlsx
+
 
 
