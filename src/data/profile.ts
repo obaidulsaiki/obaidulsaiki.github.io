@@ -38,9 +38,7 @@ export const profileData: ProfileData = {
   universityShort: 'IUBAT',
   cgpa: '3.89 / 4.00',
   bioParagraphs: [
-    'I am an early-career AI Engineer and Researcher focused on conducting deep learning research and contributing to impactful AI-related projects. I completed my B.Sc. in Computer Science & Engineering from IUBAT with a CGPA of 3.89/4.00 across 144 credit hours.',
-    'My primary research focus spans Medical Imaging and Computer Vision—specifically dose-robust Low-Dose CT reconstruction using state-space Mamba models, brain MRI Alzheimer\'s staging, and cellular classification—alongside Biomedical Signal Processing featuring dual-lead CNN-Transformer ECG arrhythmia detection with gradient-based explainability.',
-    'In Natural Language Processing (NLP), I explore transformer representations, BanglaBERT linguistic modeling, and semantic sentence-pair analysis. Alongside research, I actively build full-stack systems with Java Spring Boot and React, and maintain sharp problem-solving habits with 550+ problems solved across Codeforces, LeetCode, and ICPC preliminaries.',
+    'I am an AI Engineer and Researcher dedicated to advancing deep learning architectures and building scalable full-stack AI applications. Alongside 40+ research papers across ACM, IEEE, and Springer Nature, I develop production software combining TypeScript, React, Next.js, Java Spring Boot, and modern LLM workflows to turn experimental models into practical systems.',
   ],
   stats: [
     { label: 'Research Papers', value: '40+ Papers', detail: 'ACM | IEEE | Elsevier | Springer' },
