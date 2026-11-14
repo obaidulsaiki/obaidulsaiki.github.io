@@ -10,20 +10,77 @@ Personal portfolio and academic research website of **Obaidul Haque**, AI Engine
 
 ## Technical Skills & Expertise
 
-The portfolio showcases skills across deep learning research, full-stack systems engineering, and problem solving:
+The portfolio documents 35 specialized skills, models, languages, and frameworks categorized across 5 core domains from [`src/data/skills.ts`](file:///d:/Projects/obaidulsaiki.github.io/src/data/skills.ts):
 
-| Domain | Skills, Tools & Models | Experience / Level | Research & Practical Applications |
-| :--- | :--- | :--- | :--- |
-| **Deep Learning & Models** | PyTorch, Mamba, State Space Models (SSM) | Advanced / Specialist | Low-Dose CT (LDCT) reconstruction, OBAIS-Mamba, brain MRI staging |
-| **Transformers & NLP** | Hugging Face Transformers, BanglaBERT | Advanced | Bengali language representations, subword tokenization, sentiment analysis |
-| **Computer Vision** | OpenCV, Torchvision, Scikit-Image, YOLO | Advanced | Medical scan preprocessing, red blood cell malaria localization, Swin |
-| **Biomedical Signals** | SciPy, Grad-CAM (Explainable AI) | Specialist | ECG arrhythmia classification, EEG dynamics, gradient attribution heatmaps |
-| **LLM Orchestration** | LangChain4j, Ollama | Advanced | Local/offline LLM integration, course mentors, automated Q&A pipelines |
-| **Classical ML & Math** | Scikit-Learn, NumPy, Pandas | Advanced | Stacking ensembles, gradient boosting, statistical medical data analysis |
-| **Languages** | Python, C++, Java, TypeScript, JavaScript, C, SQL | 2–3+ years | Research prototyping, high-performance algorithms, full-stack development |
-| **Backend & Databases** | Java Spring Boot, PostgreSQL, MySQL, REST APIs | 2+ years | Enterprise REST microservices, RBAC security, JWT, relational schema design |
-| **Frontend & UI** | React 18, Next.js 14, Tailwind CSS, Framer Motion | Advanced | Responsive accessible web apps, interactive timelines, magnetic spring physics |
-| **DevOps & Tooling** | Git, GitHub, Linux / Bash, Docker | Daily use | CI/CD automation, containerization, environment isolation, version control |
+### 1. AI, Models & Deep Learning Frameworks
+
+| Skill / Tool | Domain Focus | Experience | Proficiency | Technical Description & Practical Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **PyTorch** | Deep Learning | 2+ years | Advanced | Custom neural architectures, autograd computation graphs, and GPU-accelerated training pipelines. |
+| **Mamba** | Selective State Space | Specialized | Specialist | Kernel-invariant continuous state-space modeling for dose-robust low-dose CT reconstruction. |
+| **State Space Models (SSM)** | Sequence Modeling | Specialized | Specialist | Continuous-time discretization, structured state-space representations, and linear-time sequence learning. |
+| **Hugging Face** | Transformers Hub | 2+ years | Advanced | Pretrained transformer fine-tuning, tokenization, sequence classification, and model hub deployment. |
+| **BanglaBERT** | Bengali Linguistic AI | Specialized | Specialist | Bengali language representations, subword tokenizers, aspect-based sentiment, and semantic pairs. |
+| **OpenCV** | Computer Vision | 2+ years | Advanced | Medical scan preprocessing, morphological filtering, spatial augmentations, and visual feature extraction. |
+| **Torchvision** | Vision Datasets | 2+ years | Advanced | Deep learning image datasets, model backbones, transforms, and bounding-box augmentations. |
+| **SciPy** | Digital Signal DSP | Specialized | Specialist | ECG and EEG digital signal filtering, continuous wavelet transforms, and spectral density extraction. |
+| **Grad-CAM** | Model Explainability | Specialized | Specialist | Gradient-weighted class activation mapping, clinical feature attribution, and beat-level saliency heatmaps. |
+| **LangChain4j** | LLM Orchestration | Production | Advanced | Java LLM integration, prompt engineering, RAG pipelines, and conversational learning assistants. |
+| **Ollama** | Local LLM Serving | Production | Advanced | Self-hosted local model execution, GGUF quantization, and lightweight edge inference. |
+| **TensorFlow** | Deep Learning | 2+ years | Proficient | Convolutional neural networks, transfer learning, data pipelines, and evaluation metrics. |
+| **Keras** | Neural Networks API | 2+ years | Proficient | High-level neural network prototyping, sequential models, and custom callbacks. |
+| **Scikit-Learn** | Machine Learning | 2+ years | Advanced | Stacking ensembles, gradient boosting, statistical feature selection, and cross-validation pipelines. |
+| **NumPy** | Vectorized Math | 3+ years | Advanced | Vectorized tensor operations, multidimensional arrays, and numerical linear algebra. |
+| **Pandas** | Data Analysis | 3+ years | Advanced | Tabular dataset processing, feature engineering, missing-value imputation, and aggregation. |
+
+### 2. Programming Languages
+
+| Language | Category | Experience | Proficiency | Technical Description & Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **Python** | Language | 3+ years | Advanced | Primary language for deep learning research, numerical processing, and automated experimentation. |
+| **C++** | Language | 3+ years | Advanced | High-performance computing, STL algorithms, memory allocation, and algorithmic problem solving. |
+| **Java** | Language | 3+ years | Advanced | Enterprise backend development, multi-threaded systems, OOP patterns, and Spring Boot services. |
+| **TypeScript** | Language | 2+ years | Advanced | Type-safe contracts, compile-time validation, and scalable full-stack web application development. |
+| **JavaScript (ES6+)** | Language | 3+ years | Advanced | Asynchronous event loops, DOM manipulation, promises, and modern client-side architectures. |
+| **C Programming** | Language | 3+ years | Advanced | Low-level procedural programming, manual memory management (pointers/malloc), and systems fundamentals. |
+| **SQL** | Language | 3+ years | Advanced | Relational data modeling, query optimization, indexing strategies, normalization, and ACID safety. |
+
+### 3. Backend & Enterprise Engineering
+
+| Technology | Category | Experience | Proficiency | Technical Description & Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **Spring Boot** | Enterprise Framework | 3+ years | Advanced | Production backend architecture, Spring Security, JPA/Hibernate, stateless JWT, and REST microservices. |
+| **PostgreSQL** | Relational Database | 2+ years | Proficient | ACID-compliant relational database management, schema normalization, and complex querying. |
+| **MySQL** | Relational Database | 2+ years | Proficient | Relational data persistence, foreign key modeling, stored procedures, and service integration. |
+| **REST APIs** | Architecture | 3+ years | Advanced | Stateless HTTP endpoint design, JWT authorization filters, structured DTOs, and error handling. |
+
+### 4. Frontend & Web Technologies
+
+| Technology | Category | Experience | Proficiency | Technical Description & Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **React.js** | Frontend Library | 3+ years | Advanced | Component-driven user interfaces, custom React hooks, state management, and performance tuning. |
+| **Next.js** | React Framework | 2+ years | Advanced | App Router, Static Site Generation (SSG) for GitHub Pages, and client/server boundary segregation. |
+| **Tailwind CSS** | CSS Framework | 2+ years | Advanced | Artisanal color token systems, mobile-first responsive layouts, and modern utility typography. |
+| **Framer Motion** | Animation Library | 2+ years | Proficient | Spring physics micro-interactions, layout morphing, staggered reveals, and route transitions. |
+
+### 5. DevOps, Infrastructure & Tools
+
+| Tool / OS | Category | Experience | Proficiency | Technical Description & Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **Git** | Version Control | 4+ years | Advanced | Version control, atomic commits, branch management, pull requests, and collaborative workflows. |
+| **GitHub** | Code Hosting & CI/CD | 4+ years | Advanced | Repository hosting, GitHub Actions CI/CD automation, pull request code review, and project management. |
+| **Linux** | Operating System | 3+ years | Advanced | Unix environment, bash scripting, process management, and GPU driver setup for ML workflows. |
+| **Docker** | Containerization | 1+ years | Proficient | Containerized deployment for reproducible model inference and backend microservices. |
+
+---
+
+### Skills Component Architecture
+
+The portfolio's interactive skills showcase is implemented via:
+- **Data Source** ([`src/data/skills.ts`](file:///d:/Projects/obaidulsaiki.github.io/src/data/skills.ts)): Defines the `SkillItem` interface, color palettes, and full skill registry.
+- **Brand SVG Icons** ([`src/components/icons/TechIcons.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/icons/TechIcons.tsx)): Custom branded vector icons for each technology (PyTorch, Mamba, BanglaBERT, Spring, Docker, etc.).
+- **Interactive Filtering** ([`src/components/animations/MotionPrimitives.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/animations/MotionPrimitives.tsx)): `SlidingFilterTabs` with magnetic hover pills and animated active pills.
+- **Modular Cards** ([`src/components/home/SkillCard.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/home/SkillCard.tsx)): Displays individual skills with experience pills, proficiency badges, icon color coding, and hover elevation.
 
 ---
 
