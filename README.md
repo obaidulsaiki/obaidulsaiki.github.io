@@ -176,6 +176,190 @@ This compiles all routes (`/`, `/education/`, `/experience/`, `/research/`, `/ex
 
 ---
 
+## AI Agent Skills & Developer Tooling
+
+During development, 5 core **AI Agent Skills & Frameworks** are used by coding assistants (Google Antigravity, Zoo Code / Roo Code, Claude Code, CodeRabbit CLI) to orchestrate implementation, review code, enforce reliability, and navigate codebase architecture:
+
+1. **`gravitas`** — Engineering reliability runtime and invariant enforcement
+2. **`GSD (Get Shit Done)`** — Spec-Driven Development (SDD) milestone and phase planning
+3. **`CodeRabbit`** — Automated AI code review, PR auditing, and autofix pipelines
+4. **`Zoo Code`** — Mode-aligned multi-agent orchestration and skills resolution
+5. **`graphify`** — Codebase knowledge graph, community detection, and architectural queries
+
+> [!NOTE]
+> Tooling directories (`.agents/`, `.zoo/`, `.planning/`, `graphify-out/`, and `skills-lock.json`) are intentionally included in [`.gitignore`](file:///d:/Projects/obaidulsaiki.github.io/.gitignore) (and untracked from Git). This keeps the public portfolio repository lightweight and clean while preserving complete AI agent configurations locally on disk.
+
+---
+
+### Agent Skills & Frameworks Matrix
+
+| Tool / Skill | Location / Integration | Source / Type | Primary Capability in This Project |
+| :--- | :--- | :--- | :--- |
+| **`gravitas`** | `.agents/skills/gravitas/`<br>`.zoo/skills/gravitas/` | [`udaysharmadev/Gravitas`](https://github.com/udaysharmadev/Gravitas)<br>(via `skills-lock.json`) | Enforces the 6 reliability invariants: ground before mutating, stay in scope, evidence-backed completion, block exact retries, satisfy contract, declare uncertainties. |
+| **`GSD (Get Shit Done)`** | `.planning/`<br>Antigravity CLI / skills | Spec-Driven Dev (SDD) | Phase-based autonomous project orchestration: roadmap planning (`ROADMAP.md`), requirements (`REQUIREMENTS.md`), state tracking (`STATE.md`), and atomic phase execution. |
+| **`CodeRabbit`** | CodeRabbit CLI / plugin<br>`skills/code-review`, `autofix` | CodeRabbit AI | Autonomous code quality reviews, security auditing, GitHub PR thread reviews, and verified autofix proposals before commits. |
+| **`Zoo Code`** | `.zoo/skills/`<br>Zoo Code / Roo Code | Multi-Agent Mode System | Orchestrates role-based agent personas (Architect, Code, Ask, Debug), custom mode configurations, and local skill resolution from `.zoo/skills` and `.agents/skills`. |
+| **`graphify`** | `.agents/skills/graphify/`<br>`.zoo/skills/graphify/` | AST Knowledge Graph | Code property graph generation with community detection, interactive `graph.html`, GraphRAG `graph.json`, and instant incremental updates on code changes. |
+
+---
+
+### Detailed Breakdown of the 5 Agent Tools
+
+#### 1. `gravitas` — Engineering Reliability Runtime
+- **Role**: Model-agnostic engineering reliability runtime that prevents regressions, hallucinations, and unverified assumptions.
+- **Locked Reference** ([`skills-lock.json`](file:///d:/Projects/obaidulsaiki.github.io/skills-lock.json)):
+  - Source: `udaysharmadev/Gravitas` (GitHub)
+  - Hash: `5d80d2ba5e74b151cff1ce9b4d1409019b22939154d82a938ad280554c447695`
+- **The 6 Invariants Enforced**:
+  1. **Ground before mutating**: Inspect targets, types, and callers before editing.
+  2. **Stay in declared scope**: Only modify files in the active scope.
+  3. **Completion needs evidence**: Claims of completion require freshly observed tool/test output.
+  4. **Never exact-retry a failure**: Diagnose root cause or alter context before retrying.
+  5. **Satisfy the contract**: Acceptance criteria and validator scripts gate task completion.
+  6. **Say what you cannot verify**: Explicitly state if something was not directly measured.
+- **Key Modules & Verification Scripts**:
+  - `scripts/doctor.py`: System diagnostics and project health checks.
+  - `scripts/verify.py` & `scripts/run-checks.sh`: Automated post-mutation verification suite.
+  - `resources/anti-rationalization.md`: Rules against rationalizing away test failures or cutting corners.
+  - `agents/`: Specialist subagent templates (`coordinator`, `explore`, `plan`, `verify`).
+
+#### 2. `GSD (Get Shit Done)` — Spec-Driven Planning & Execution
+- **Role**: Structured planning and execution framework that breaks features into milestone-driven phases with goal-backward verification.
+- **Planning Directory Structure** (`.planning/`):
+  - `.planning/PROJECT.md`: Project vision, core value propositions, and tech stack boundaries.
+  - `.planning/ROADMAP.md`: Granular phase breakdown with dependencies and success criteria.
+  - `.planning/REQUIREMENTS.md`: Functional and non-functional requirement traceability matrix.
+  - `.planning/STATE.md`: Real-time phase progress, decisions log, and active blockers.
+  - `.planning/phases/`: Atomic phase plans (`*-PLAN.md`) and verified execution summaries (`*-SUMMARY.md`).
+- **Workflow Lifecycle**:
+  - `/gsd-discuss-phase` → `/gsd-plan-phase` → `/gsd-execute-phase` → `/gsd-verify-work`
+  - Enforces dependency-aware wave execution, Nyquist test generation, and rollback checkpoints.
+
+#### 3. `CodeRabbit` — AI Code Review & Autofix
+- **Role**: Automated high-signal code quality review, security auditing, and intelligent PR remediation.
+- **Capabilities in This Project**:
+  - **Pre-commit Reviews**: Scans uncommitted or staged changes for security vulnerabilities, memory leaks, performance bottlenecks, and style deviations.
+  - **Autofix Engine**: Reads review comments, analyzes surrounding context, drafts targeted diffs, and waits for user confirmation before applying.
+  - **Commands**:
+    ```bash
+    coderabbit review --diff           # Review local uncommitted changes
+    coderabbit review --commit HEAD    # Audit the most recent commit
+    ```
+
+#### 4. `Zoo Code` — Multi-Agent Role Alignment
+- **Role**: Autonomous coding agent platform enabling specialized persona delegation and shared skills discovery.
+- **Skills Mirroring**:
+  - Mirrors skills between `.agents/skills/` and `.zoo/skills/` so both Antigravity and Zoo/Roo Code modes have immediate access to `graphify` and `gravitas`.
+- **Modes Supported**:
+  - **Architect Mode**: System design, directory hierarchy, and dependency contracts.
+  - **Code Mode**: Implementation, atomic component refactoring, and CSS token alignment.
+  - **Ask Mode**: Read-only codebase exploration and architecture Q&A.
+  - **Debug Mode**: Scientific bug investigation, hypothesis testing, and regression analysis.
+
+#### 5. `graphify` — Codebase Architecture & Knowledge Graph
+- **Role**: Analyzes the AST of all source files to build a navigable, persistent knowledge graph in `graphify-out/`.
+- **Outputs**:
+  - `graphify-out/graph.json`: Machine-readable node and edge graph for GraphRAG queries.
+  - `graphify-out/graph.html`: Interactive, searchable visual graph of codebase communities.
+  - `graphify-out/GRAPH_REPORT.md`: Comprehensive markdown architecture summary.
+- **Automated Rule** ([`.agents/rules/graphify.md`](file:///d:/Projects/obaidulsaiki.github.io/.agents/rules/graphify.md)):
+  - Mandates consulting the graph first before broad file grep/searches.
+  - Automatically runs `graphify update .` after code edits (AST-only, zero LLM API cost).
+- **Key CLI Commands**:
+  ```bash
+  graphify .                         # Build initial code graph
+  graphify update .                  # Incremental update on modified files (fast & free)
+  graphify query "<question>"        # Query relationships between components
+  graphify path "<ModuleA>" "<ModuleB>" # Shortest dependency path between files
+  graphify explain "<concept>"       # Explain specific node and its neighbors
+  ```
+
+---
+
+### Step-by-Step Technical Setup to Restore All 5 Agent Tools
+
+To restore all 5 agent skills and planning systems on a fresh machine or clone:
+
+#### Step 1: Create Scaffolding Folders
+```bash
+mkdir -p .agents/skills .agents/rules .agents/workflows .zoo/skills .planning
+```
+
+#### Step 2: Restore Gravitas from Source
+```bash
+# Clone Gravitas into a temporary directory
+git clone https://github.com/udaysharmadev/Gravitas.git temp_gravitas
+
+# Copy the skill into both agent directories
+cp -r temp_gravitas/skills/gravitas .agents/skills/gravitas
+cp -r temp_gravitas/skills/gravitas .zoo/skills/gravitas
+
+# Remove temporary clone
+rm -rf temp_gravitas
+```
+
+#### Step 3: Recreate `skills-lock.json`
+Create `skills-lock.json` in the project root:
+```json
+{
+  "version": 1,
+  "skills": {
+    "gravitas": {
+      "source": "udaysharmadev/Gravitas",
+      "sourceType": "github",
+      "skillPath": "skills/gravitas/SKILL.md",
+      "computedHash": "5d80d2ba5e74b151cff1ce9b4d1409019b22939154d82a938ad280554c447695"
+    }
+  }
+}
+```
+
+#### Step 4: Configure Graphify Rule & Build Code Graph
+Create `.agents/rules/graphify.md`:
+```markdown
+---
+trigger: always_on
+description: Consult the graphify knowledge graph at graphify-out/ for codebase and architecture questions.
+---
+
+## graphify
+
+This project has a graphify knowledge graph at graphify-out/.
+
+Rules:
+- For codebase or architecture questions, when `graphify-out/graph.json` exists, first run `graphify query "<question>"` (CLI) or `query_graph` (MCP).
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review.
+- After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost).
+```
+
+Then generate the initial codebase knowledge graph:
+```bash
+graphify .
+```
+
+#### Step 5: Configure Zoo Code & Roo Code Discovery
+Point your Zoo Code / Roo Code workspace settings to resolve custom skills from `.zoo/skills` and `.agents/skills`.
+
+#### Step 6: Verify CodeRabbit CLI
+Ensure the CodeRabbit CLI is authenticated and configured:
+```bash
+coderabbit auth
+coderabbit review --diff
+```
+
+#### Step 7: Verify Git Exclusions
+Confirm that [`.gitignore`](file:///d:/Projects/obaidulsaiki.github.io/.gitignore) keeps all agent tooling local so it is never pushed to GitHub Pages:
+```gitignore
+# Graphify & AI tooling / non-portfolio workspace files
+graphify-out/
+.agents/
+.zoo/
+.planning/
+skills-lock.json
+```
+
+---
+
 ## Codebase Architecture & Directory Structure
 
 ```
