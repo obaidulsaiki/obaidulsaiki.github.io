@@ -33,21 +33,21 @@ const badgeToneClasses: Record<NonNullable<HeroStatBadge['tone']>, string> = {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-surface/50 border border-surface-border p-6 sm:p-10 lg:p-12 shadow-soft-sm transition-all duration-300">
+    <section className="relative overflow-hidden rounded-3xl bg-surface/50 border border-surface-border p-5 sm:p-7 lg:p-8 shadow-soft-sm transition-all duration-300">
       {/* Decorative ambient background accents */}
       <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 rounded-full bg-accent-soft/20 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-64 h-64 rounded-full bg-surface-hover/40 blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
         {/* Left Column: Headline & Action */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-7 space-y-5 text-center lg:text-left"
+          className="lg:col-span-7 space-y-3.5 text-center lg:text-left"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-canvas border border-surface-border text-xs font-medium text-ink-primary shadow-soft-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas border border-surface-border text-xs font-medium text-ink-primary shadow-soft-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -56,15 +56,15 @@ export default function Hero() {
           </div>
 
           {/* Title & Tagline */}
-          <div className="space-y-2">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-ink-primary tracking-tight leading-[1.15]">
+          <div className="space-y-1.5">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-primary tracking-tight leading-[1.15]">
               Hello, I&apos;m{' '}
               <span className="text-accent-primary relative inline-block">
                 {profileData.name}
                 <span className="absolute left-0 -bottom-1 w-full h-1.5 bg-accent-soft/60 rounded-full" />
               </span>
             </h1>
-            <p className="text-xl sm:text-2xl font-bold text-accent-primaryDark">
+            <p className="text-lg sm:text-xl font-bold text-accent-primaryDark">
               {profileData.title}
             </p>
           </div>
@@ -74,11 +74,11 @@ export default function Hero() {
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1.5">
             <MagneticPull strength={0.2}>
               <Link
                 href="/contact/"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-primary hover:bg-accent-primaryDark text-canvas font-medium text-sm shadow-soft-md transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-primary hover:bg-accent-primaryDark text-canvas font-medium text-sm shadow-soft-md transition-colors duration-200"
               >
                 <span>Get in Touch</span>
                 <ArrowRight className="w-4 h-4" />
@@ -88,7 +88,7 @@ export default function Hero() {
             <MagneticPull strength={0.2}>
               <Link
                 href="/research/"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas border border-surface-border text-ink-primary font-medium text-sm hover:border-accent-primary hover:bg-surface-hover transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-canvas border border-surface-border text-ink-primary font-medium text-sm hover:border-accent-primary hover:bg-surface-hover transition-colors duration-200"
               >
                 <Microscope className="w-4 h-4 text-accent-primary" />
                 <span>Explore Research</span>
@@ -103,7 +103,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
                 >
                   <Github className="w-4 h-4" />
                 </a>
@@ -114,7 +114,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
@@ -123,7 +123,7 @@ export default function Hero() {
                 <a
                   href={`mailto:${profileData.socials.email}`}
                   aria-label="Email Me"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
                 >
                   <Mail className="w-4 h-4" />
                 </a>
@@ -144,9 +144,9 @@ export default function Hero() {
             <div className="absolute inset-0 bg-accent-soft/40 rounded-3xl blur-xl group-hover:bg-accent-soft/60 transition-all duration-500 scale-95" />
 
             {/* Outer Frame */}
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden border-4 border-surface shadow-soft-lg bg-surface-hover group-hover:border-accent-soft transition-all duration-300">
+            <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-3xl overflow-hidden border-4 border-surface shadow-soft-lg bg-surface-hover group-hover:border-accent-soft transition-all duration-300">
               <Image
-                src="/images/MyPicture.png"
+                src="/images/MyPicture.webp"
                 alt="Obaidul Haque - Profile Portrait"
                 fill
                 priority
@@ -166,14 +166,14 @@ export default function Hero() {
       </div>
 
       {/* Highlight Cards Row (Papers, Experience, CGPA) */}
-      <div className="mt-10 pt-8 border-t border-surface-border/70 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="mt-6 pt-5 border-t border-surface-border/70 grid grid-cols-1 md:grid-cols-3 gap-3.5">
         {profileData.stats.map((stat) => {
           const IconComponent = statIconMap[stat.id];
           return (
             <Link
               key={stat.id}
               href={stat.href}
-              className={`group p-4 sm:p-5 rounded-2xl border transition-all duration-200 shadow-soft-sm hover:-translate-y-0.5 flex flex-col justify-between gap-3.5 ${
+              className={`group p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 shadow-soft-sm hover:-translate-y-0.5 flex flex-col justify-between gap-2.5 ${
                 stat.highlight
                   ? 'bg-gradient-to-br from-canvas via-canvas to-accent-soft/25 border-accent-soft hover:border-accent-primary'
                   : 'bg-canvas/80 border-surface-border/90 hover:border-accent-primary/60 hover:bg-canvas'

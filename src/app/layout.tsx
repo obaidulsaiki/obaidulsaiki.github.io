@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Obaidul Haque', url: 'https://obaidulhaque.me' }],
   icons: {
-    icon: '/images/MyPicture.png',
+    icon: '/favicon.png',
   },
 };
 
