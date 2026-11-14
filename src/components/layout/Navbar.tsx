@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, LayoutGroup, MotionConfig } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
-import { MagneticPull, SNAPPY_SPRING } from '@/components/animations/MotionPrimitives';
+import { MagneticPull } from '@/components/animations/MotionPrimitives';
 
 interface NavItem {
   name: string;
@@ -22,19 +22,36 @@ const navItems: NavItem[] = [
   { name: 'Contact', href: '/contact/' },
 ];
 
+/**
+ * Organic liquid spring for fluid capsule sliding between tabs.
+ */
+const LIQUID_SPRING = {
+  type: 'spring' as const,
+  stiffness: 380,
+  damping: 28,
+  mass: 0.55,
+};
+
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const [optimisticHref, setOptimisticHref] = useState<string | null>(null);
 
-  // Normalize pathname to handle trailing slash
+  // Sync optimistic state when route transition completes
+  useEffect(() => {
+    setOptimisticHref(null);
+  }, [pathname]);
+
+  // Normalize pathname to handle trailing slash and immediate optimistic clicks
   const isActive = (href: string) => {
+    const current = optimisticHref ?? pathname;
     if (href === '/') {
-      return pathname === '/' || pathname === '';
+      return current === '/' || current === '';
     }
     const cleanHref = href.replace(/\/$/, '');
-    const cleanPath = pathname.replace(/\/$/, '');
-    return cleanPath === cleanHref;
+    const cleanCurrent = current.replace(/\/$/, '');
+    return cleanCurrent === cleanHref;
   };
 
   return (
@@ -45,6 +62,7 @@ export default function Navbar() {
         <MagneticPull strength={0.18}>
           <Link
             href="/"
+            prefetch={true}
             className="group flex items-center gap-2.5 text-ink-primary transition-colors"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface border border-surface-border text-accent-primary font-bold shadow-soft-sm group-hover:border-accent-primary transition-colors duration-200">
@@ -65,46 +83,51 @@ export default function Navbar() {
         <LayoutGroup id="desktop-navbar">
           <nav
             onMouseLeave={() => setHoveredHref(null)}
-            className="hidden md:flex items-center gap-1 bg-surface/40 p-1.5 rounded-full border border-surface-border/50"
+            className="hidden md:flex items-center gap-1 bg-surface/60 backdrop-blur-md p-1.5 rounded-full border border-surface-border shadow-soft-sm"
           >
             {navItems.map((item) => {
               const active = isActive(item.href);
               const hovered = !active && hoveredHref === item.href;
               return (
-                <motion.div
-                  key={item.href}
-                  whileTap={{ scale: 0.95 }}
-                  transition={SNAPPY_SPRING}
-                  className="relative"
-                >
+                <div key={item.href} className="relative">
                   <Link
                     href={item.href}
+                    prefetch={true}
+                    onClick={() => setOptimisticHref(item.href)}
                     onMouseEnter={() => setHoveredHref(item.href)}
                     onFocus={() => setHoveredHref(item.href)}
                     onBlur={() => setHoveredHref(null)}
-                    className={`relative block px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-full transition-colors duration-150 ${
+                    className={`relative block px-4 py-1.5 text-xs lg:text-sm font-medium rounded-full transition-colors duration-150 select-none ${
                       active
-                        ? 'text-accent-primary font-semibold'
+                        ? 'text-accent-primaryDark font-semibold'
                         : 'text-ink-muted hover:text-ink-primary'
                     }`}
                   >
-                    {hovered && (
-                      <motion.span
-                        layoutId="navHoverPill"
-                        className="absolute inset-0 z-0 rounded-full bg-surface-hover/90 border border-surface-border shadow-soft-sm"
-                        transition={SNAPPY_SPRING}
-                      />
-                    )}
+                    {/* Ghost Spotlight hover layer */}
+                    <AnimatePresence>
+                      {hovered && (
+                        <motion.span
+                          initial={{ opacity: 0, scale: 0.94 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.94 }}
+                          transition={{ duration: 0.12 }}
+                          className="absolute inset-0 z-0 rounded-full bg-surface-hover/70 border border-surface-border/50"
+                        />
+                      )}
+                    </AnimatePresence>
+
+                    {/* Organic Liquid Sliding Capsule */}
                     {active && (
                       <motion.span
-                        layoutId="activeNavPill"
-                        className="absolute inset-0 z-[1] rounded-full bg-accent-soft/35 border border-accent-soft/60 shadow-soft-sm"
-                        transition={SNAPPY_SPRING}
+                        layoutId="activeLiquidCapsule"
+                        transition={LIQUID_SPRING}
+                        className="absolute inset-0 z-0 rounded-full bg-canvas border border-accent-soft shadow-[0_2px_10px_-2px_rgba(227,106,106,0.22)]"
                       />
                     )}
+
                     <span className="relative z-10">{item.name}</span>
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
           </nav>
@@ -115,6 +138,7 @@ export default function Navbar() {
           <MagneticPull strength={0.24} className="hidden sm:inline-flex">
             <Link
               href="/contact/"
+              prefetch={true}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-canvas bg-accent-primary hover:bg-accent-primaryDark rounded-full shadow-soft-sm transition-colors duration-200"
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -150,22 +174,29 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    prefetch={true}
+                    onClick={() => {
+                      setOptimisticHref(item.href);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       active
-                        ? 'bg-accent-soft/30 text-accent-primary font-semibold border border-accent-soft/60'
+                        ? 'bg-accent-soft/35 text-accent-primaryDark font-semibold border border-accent-soft/70 shadow-soft-sm'
                         : 'text-ink-muted hover:text-ink-primary hover:bg-surface/60'
                     }`}
                   >
                     <span>{item.name}</span>
-                    {active && <span className="h-2 w-2 rounded-full bg-accent-primary" />}
                   </Link>
                 );
               })}
               <div className="pt-2 border-t border-surface-border/60">
                 <Link
                   href="/contact/"
-                  onClick={() => setMobileMenuOpen(false)}
+                  prefetch={true}
+                  onClick={() => {
+                    setOptimisticHref('/contact/');
+                    setMobileMenuOpen(false);
+                  }}
                   className="flex w-full items-center justify-center gap-2 py-2.5 text-sm font-medium text-canvas bg-accent-primary rounded-xl shadow-soft-sm"
                 >
                   <Sparkles className="w-4 h-4" />

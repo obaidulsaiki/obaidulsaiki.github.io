@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ArrowRight, GraduationCap, Briefcase, Microscope, Users, Compass, Mail } from 'lucide-react';
 import Hero from '@/components/home/Hero';
 import AboutMe from '@/components/home/AboutMe';
-import FeaturedResearch from '@/components/home/FeaturedResearch';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import SkillsShowcase from '@/components/home/SkillsShowcase';
 
@@ -55,16 +54,13 @@ export default function HomePage() {
       {/* 2. Section: About Me (Focus & Pillars) */}
       <AboutMe />
 
-      {/* 3. Section: Featured Research Spotlight */}
-      <FeaturedResearch />
+      {/* 3. Section: Skills Collected Throughout the Years */}
+      <SkillsShowcase />
 
       {/* 4. Section: Featured Projects (Engineering Systems) */}
       <FeaturedProjects />
 
-      {/* 5. Section: Skills Collected Throughout the Years */}
-      <SkillsShowcase />
-
-      {/* 6. Interactive Jump Links to Other Sections */}
+      {/* 5. Interactive Jump Links to Other Sections */}
       <section className="space-y-6 pt-4 border-t border-surface-border/80">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
           <div>

@@ -10,7 +10,7 @@ interface PageTransitionProps {
 }
 
 /**
- * Re-animates route views smoothly when switching between Navbar tabs in Next.js App Router.
+ * Featherweight route crossfade without vertical jumping or subpixel text blurring.
  */
 export default function PageTransition({ children, className = '' }: PageTransitionProps) {
   const pathname = usePathname();
@@ -20,11 +20,11 @@ export default function PageTransition({ children, className = '' }: PageTransit
     <MotionConfig reducedMotion="user">
       <motion.div
         key={routeKey}
-        initial={{ opacity: 0, y: 10, scale: 0.996 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{
-          duration: 0.24,
-          ease: [0.16, 1, 0.3, 1],
+          duration: 0.12,
+          ease: 'easeOut',
         }}
         className={`w-full min-h-[calc(100vh-140px)] ${className}`}
       >
