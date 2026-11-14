@@ -119,6 +119,19 @@ export default function Hero() {
               </Link>
             </MagneticPull>
 
+            {/* Google Scholar Button */}
+            <MagneticPull strength={0.2}>
+              <a
+                href={profileData.socials.scholar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-canvas border border-surface-border text-ink-primary font-medium text-sm hover:border-accent-primary hover:bg-surface-hover transition-colors duration-200"
+              >
+                <GraduationCap className="w-4 h-4 text-accent-primary" />
+                <span>Google Scholar</span>
+              </a>
+            </MagneticPull>
+
             {/* Social Icons */}
             <div className="flex items-center gap-2 pl-2">
               <MagneticPull strength={0.3}>
@@ -150,6 +163,17 @@ export default function Hero() {
                   className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
                 >
                   <Mail className="w-4 h-4" />
+                </a>
+              </MagneticPull>
+              <MagneticPull strength={0.3}>
+                <a
+                  href={profileData.socials.scholar}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Google Scholar Profile"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas border border-surface-border text-ink-muted hover:text-accent-primary hover:border-accent-primary transition-colors duration-200"
+                >
+                  <GraduationCap className="w-4 h-4" />
                 </a>
               </MagneticPull>
             </div>

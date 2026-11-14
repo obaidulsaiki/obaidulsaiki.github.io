@@ -1,244 +1,803 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import {
   GraduationCap,
   Calendar,
   MapPin,
   Award,
   CheckCircle2,
-  BookOpen,
-  Microscope,
-  Sparkles,
-  ChevronRight,
+  Briefcase,
   School,
+  Rocket,
+  BookOpen,
+  Github,
+  HardDrive,
+  ArrowUpRight,
+  Code2,
+  BrainCircuit,
+  Terminal,
+  RotateCcw,
+  ArrowUp,
 } from 'lucide-react';
-import { educationMilestones, courseCategories } from '@/data/education';
-import { SlidingFilterTabs } from '@/components/animations/MotionPrimitives';
+import { educationMilestones, topicNotes } from '@/data/education';
 
-export default function EducationTimeline() {
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+const topicIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  dsa: Code2,
+  'ml-dl': BrainCircuit,
+  'python-ai': Terminal,
+};
 
+/**
+ * Aerodynamic Aerospace Rocket Craft
+ * Custom SVG vector with directional exhaust flame trail.
+ * Clean, box-less silhouette that eliminates double-circle collisions on timeline waypoints.
+ */
+function AerospaceRocketCraft() {
   return (
-    <div className="space-y-16">
-      {/* 1. Chronological Timeline */}
-      <div className="relative pl-6 sm:pl-10 space-y-12 before:absolute before:left-3 sm:before:left-5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-accent-primary before:via-accent-soft before:to-surface-border">
-        {educationMilestones.map((item, index) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.15 }}
-            className="relative group"
-          >
-            {/* Timeline Node Icon Indicator */}
-            <div className="absolute -left-6 sm:-left-10 top-1.5 flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-canvas border-2 border-accent-primary text-accent-primary shadow-soft-sm group-hover:scale-110 group-hover:bg-accent-soft/30 transition-all duration-300">
-              {index === 0 ? (
-                <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
-              ) : (
-                <School className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              )}
-            </div>
-
-            {/* Milestone Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-surface/50 border border-surface-border group-hover:border-accent-primary/60 group-hover:bg-surface/80 transition-all duration-300 shadow-soft-sm space-y-4">
-              {/* Header: Degree & Institution */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-surface-border/60 pb-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-accent-soft/40 text-accent-primary border border-accent-soft/60">
-                      {item.institutionShort}
-                    </span>
-                    {item.gradeOrHonors && (
-                      <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-canvas border border-surface-border text-ink-muted">
-                        {item.gradeOrHonors}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-ink-primary tracking-tight group-hover:text-accent-primary transition-colors">
-                    {item.degree}
-                  </h3>
-                  <p className="text-sm font-semibold text-accent-primaryDark flex flex-wrap items-center gap-2">
-                    <span>{item.institution}</span>
-                    <span className="text-ink-subtle">·</span>
-                    <span className="text-xs font-normal text-ink-muted flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-accent-primary" /> {item.location}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas border border-surface-border text-xs font-mono text-ink-primary shrink-0 self-start sm:self-auto shadow-soft-sm">
-                  <Calendar className="w-3.5 h-3.5 text-accent-primary" />
-                  <span>{item.period}</span>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm text-ink-muted leading-relaxed">
-                {item.description}
-              </p>
-
-              {/* Key Highlights */}
-              {item.highlights && item.highlights.length > 0 && (
-                <div className="space-y-2 pt-1">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-accent-primary" />
-                    <span>Academic Highlights & Achievements</span>
-                  </h4>
-                  <ul className="space-y-2">
-                    {item.highlights.map((highlight, hIdx) => (
-                      <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-ink-muted leading-relaxed">
-                        <CheckCircle2 className="w-4 h-4 text-accent-primary shrink-0 mt-0.5" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Key Courses Pills */}
-              {item.keyCourses && item.keyCourses.length > 0 && (
-                <div className="pt-2">
-                  <div className="flex flex-wrap gap-2">
-                    {item.keyCourses.map((course, cIdx) => (
-                      <span
-                        key={cIdx}
-                        className="px-3 py-1 rounded-lg bg-canvas border border-surface-border text-xs font-medium text-ink-muted hover:border-accent-primary hover:text-accent-primary transition-colors"
-                      >
-                        {course}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        ))}
+    <div className="relative flex flex-col items-center select-none pointer-events-none transform-gpu">
+      {/* Thruster Exhaust Flame Trail (Shoots upwards opposite to flight direction) */}
+      <div className="absolute -top-7 w-4 h-9 flex items-center justify-center overflow-visible">
+        {/* Core dynamic flame */}
+        <motion.div
+          animate={{
+            height: [18, 28, 16, 26],
+            opacity: [0.85, 1, 0.75, 0.95],
+            scaleX: [0.9, 1.15, 0.85, 1.05],
+          }}
+          transition={{
+            duration: 0.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="w-2.5 rounded-full bg-gradient-to-t from-accent-primary via-amber-400 to-transparent blur-[1px] shadow-[0_0_14px_rgba(227,106,106,0.95)]"
+        />
+        {/* Ambient atmospheric heat haze */}
+        <div className="absolute inset-0 w-5 h-9 -top-1 rounded-full bg-accent-soft/40 blur-sm" />
       </div>
 
-      {/* 2. Capstone Research & Biomedical Thesis Spotlight */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-surface to-surface-hover border-2 border-accent-soft p-6 sm:p-8 shadow-soft-md space-y-4"
+      {/* Aerodynamic Rocket Fuselage pointing downwards */}
+      <svg
+        width="28"
+        height="40"
+        viewBox="0 0 28 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="drop-shadow-[0_4px_14px_rgba(227,106,106,0.6)]"
       >
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-soft/40 text-accent-primary border border-accent-soft">
-            <Microscope className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] uppercase tracking-wider font-mono font-semibold text-accent-primaryDark">
-                Undergraduate Capstone Thesis
-              </span>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-accent-primary text-canvas">
-                CSC 488 · Grade: A+ (6.0 Credits)
-              </span>
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-ink-primary mt-0.5">
-              Deep Learning in Medical Imaging & Biomedical Signal Computing
-            </h3>
-          </div>
-        </div>
+        {/* Thruster Nozzle at top */}
+        <path d="M11 6 L17 6 L16 9 L12 9 Z" fill="#374151" />
 
-        <p className="text-sm text-ink-muted leading-relaxed">
-          Completed under course code CSC 488 (6.0 credit hours, Grade: A+). Investigated deep learning and state-space architectures for automated medical image analysis (low-dose CT reconstruction, brain MRI Alzheimer&apos;s classification) and biomedical signal processing (ECG arrhythmia classification), establishing the empirical foundation for multiple 1st-author publications.
-        </p>
-
-        <div className="flex flex-wrap items-center gap-2 pt-2">
-          <span className="px-3 py-1 rounded-md bg-canvas border border-surface-border text-xs font-mono text-ink-primary font-medium">
-            PyTorch Deep Learning
-          </span>
-          <span className="px-3 py-1 rounded-md bg-canvas border border-surface-border text-xs font-mono text-ink-primary font-medium">
-            Medical Image Analysis (CT / MRI)
-          </span>
-          <span className="px-3 py-1 rounded-md bg-canvas border border-surface-border text-xs font-mono text-ink-primary font-medium">
-            Biomedical Signals (ECG / EEG)
-          </span>
-          <span className="px-3 py-1 rounded-md bg-canvas border border-surface-border text-xs font-mono text-ink-primary font-medium">
-            State-Space & Transformer Models
-          </span>
-        </div>
-      </motion.div>
-
-      {/* 3. Detailed Academic Coursework Curriculum Explorer */}
-      <section className="space-y-6 pt-4 border-t border-surface-border/80">
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft/30 border border-accent-soft/50 text-xs font-semibold text-accent-primary">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Curriculum Explorer</span>
-          </div>
-          <h3 className="text-2xl font-bold text-ink-primary tracking-tight">
-            Comprehensive Coursework
-          </h3>
-          <p className="text-xs sm:text-sm text-ink-muted">
-            The core theoretical and applied modules completed throughout academic training at IUBAT.
-          </p>
-        </div>
-
-        {/* Category Tabs */}
-        <SlidingFilterTabs
-          items={courseCategories.map((cat, idx) => ({
-            id: String(idx),
-            label: cat.category,
-          }))}
-          selectedId={String(selectedCategory)}
-          onSelect={(id) => setSelectedCategory(Number(id))}
-          layoutPrefix="edu-course-filter"
-          roundedClass="rounded-xl"
-          buttonPaddingClass="px-4 py-2 text-xs sm:text-sm"
+        {/* Port Stabilizer Fin */}
+        <path
+          d="M8 17 L2 26 C2 29 4.5 29 7 27 L8 24 Z"
+          fill="#C94E4E"
+          stroke="#FFFBF1"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
         />
 
-        {/* Selected Category Course Cards */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedCategory}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            {courseCategories[selectedCategory].courses.map((course, cIdx) => (
-              <div
-                key={cIdx}
-                className="p-4 sm:p-5 rounded-2xl bg-surface/40 border border-surface-border/80 hover:border-accent-primary/60 hover:bg-surface/70 transition-all duration-200 shadow-soft-sm space-y-2.5 flex flex-col justify-between"
-              >
-                <div className="space-y-1.5">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-border/50 pb-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-md bg-canvas border border-surface-border text-ink-primary">
-                        {course.code}
-                      </span>
-                      {course.credits > 0 && (
-                        <span className="text-[10px] font-mono text-ink-subtle">
-                          {course.credits} cr
-                        </span>
-                      )}
-                    </div>
-                    {course.grade && (
-                      <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-accent-soft/40 border border-accent-soft/60 text-accent-primary">
-                        Grade: {course.grade}
-                      </span>
-                    )}
-                  </div>
-                  <h4 className="font-bold text-ink-primary text-sm sm:text-base leading-snug">
-                    {course.name}
-                  </h4>
-                  <p className="text-xs text-ink-muted leading-relaxed">
-                    {course.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </section>
+        {/* Starboard Stabilizer Fin */}
+        <path
+          d="M20 17 L26 26 C26 29 23.5 29 21 27 L20 24 Z"
+          fill="#C94E4E"
+          stroke="#FFFBF1"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+
+        {/* Main Aerodynamic Fuselage Hull pointing down */}
+        <path
+          d="M14 38 C17.5 30 20.5 20 20.5 9 C20.5 7 17.5 6 14 6 C10.5 6 7.5 7 7.5 9 C7.5 20 10.5 30 14 38 Z"
+          fill="#E36A6A"
+          stroke="#FFFBF1"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Central Fuselage Spine Accent */}
+        <path d="M14 7 L14 34" stroke="#FFFBF1" strokeWidth="1" strokeOpacity="0.5" strokeLinecap="round" />
+
+        {/* Cockpit Window Glint */}
+        <circle cx="14" cy="15" r="3.2" fill="#FFFBF1" stroke="#C94E4E" strokeWidth="1" />
+        <circle cx="14" cy="15" r="1.8" fill="#991B1B" opacity="0.65" />
+        <circle cx="15" cy="14" r="0.8" fill="#FFFFFF" />
+
+        {/* Downward Nose Beacon Tip */}
+        <circle cx="14" cy="36" r="1.2" fill="#FFFBF1" />
+      </svg>
     </div>
   );
 }
 
+export default function EducationTimeline() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const flightTrackRef = useRef<HTMLDivElement>(null);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // 0: launch pad, 1-3: milestone degrees, 4: topic notes header, 5: landing pad touchdown
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [thresholds, setThresholds] = useState<number[]>([0.18, 0.45, 0.72, 0.88, 0.98]);
+  const [trackBottomOffset, setTrackBottomOffset] = useState<number>(24);
+
+  // Scroll direction detection for bi-directional rocket orientation
+  const lastScrollY = useRef<number>(0);
+  const [isScrollingUp, setIsScrollingUp] = useState<boolean>(false);
+
+  // Motion value tracking scroll progress from 0% (top departure pad) to 100% (docked at Landing Pad)
+  const rawProgress = useMotionValue(0);
+
+  const smoothProgress = useSpring(rawProgress, {
+    stiffness: 220,
+    damping: 28,
+    mass: 0.35,
+  });
+
+  // Calculate rocket vertical descent down the parallel flight lane
+  const rocketTop = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+
+  // Viewport scroll listener with direction sensing and top-pad auto-reset
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineRef.current) return;
+      const currentScroll = window.scrollY;
+      const diff = currentScroll - lastScrollY.current;
+
+      // Direction detection with 4px deadband to prevent scroll flutter
+      if (currentScroll <= 25) {
+        // Returned to top departure pad: reset orientation to point down (0deg) ready for launch
+        setIsScrollingUp(false);
+      } else if (diff < -4) {
+        // Scrolling up: rocket turns 180deg to face upward
+        setIsScrollingUp(true);
+      } else if (diff > 4) {
+        // Scrolling down: rocket turns back to 0deg to face downward
+        setIsScrollingUp(false);
+      }
+      lastScrollY.current = currentScroll;
+
+      // Viewport scroll progress towards terminal landing stop at bottom of Topic Notes
+      const windowHeight = window.innerHeight;
+      const landingEl = lineRefs.current[4];
+
+      let endScroll: number;
+      if (landingEl) {
+        const landingRect = landingEl.getBoundingClientRect();
+        const landingY = landingRect.top + window.scrollY;
+        // Reach 100% when Landing Pad arrives comfortably in lower-mid viewport
+        endScroll = Math.max(150, landingY - windowHeight * 0.65);
+      } else {
+        const rect = timelineRef.current.getBoundingClientRect();
+        const timelineTop = rect.top + window.scrollY;
+        endScroll = Math.max(150, timelineTop + timelineRef.current.offsetHeight - windowHeight * 0.7);
+      }
+
+      const progress = Math.max(0, Math.min(1, currentScroll / endScroll));
+      rawProgress.set(progress);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [rawProgress]);
+
+  // Smooth scroll directly to a clicked milestone station or section
+  const scrollToMilestone = (idx: number) => {
+    const lineEl = lineRefs.current[idx];
+    if (!lineEl) return;
+    const lineRect = lineEl.getBoundingClientRect();
+    const targetY = lineRect.top + window.scrollY - window.innerHeight * 0.35;
+    if (targetY < window.scrollY) {
+      setIsScrollingUp(true);
+    } else {
+      setIsScrollingUp(false);
+    }
+    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+  };
+
+  // Smooth re-launch glide back to top departure pad
+  const scrollToTop = () => {
+    setIsScrollingUp(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Measure exact vertical line positions for all milestones, topic notes, and landing pad
+  useEffect(() => {
+    const calculatePositions = () => {
+      if (!flightTrackRef.current || !timelineRef.current) return;
+      const trackRect = flightTrackRef.current.getBoundingClientRect();
+      const trackTop = trackRect.top + window.scrollY;
+      const trackHeight = trackRect.height;
+      if (trackHeight <= 0) return;
+
+      const newThresholds: number[] = [];
+      lineRefs.current.forEach((el) => {
+        if (!el) return;
+        const lineRect = el.getBoundingClientRect();
+        const lineCenterY = lineRect.top + window.scrollY + lineRect.height / 2;
+        const fraction = (lineCenterY - trackTop) / trackHeight;
+        newThresholds.push(Math.max(0.01, Math.min(0.99, fraction)));
+      });
+
+      if (newThresholds.length === 5) {
+        setThresholds(newThresholds);
+      }
+
+      // Lock bottom of flight rail and stem line exactly to the center of Landing Pad
+      const lastEl = lineRefs.current[4];
+      if (lastEl && timelineRef.current) {
+        const lastRect = lastEl.getBoundingClientRect();
+        const timelineRect = timelineRef.current.getBoundingClientRect();
+        const bottomOffset = timelineRect.bottom - (lastRect.top + lastRect.height / 2);
+        if (bottomOffset > 0) {
+          setTrackBottomOffset(Math.round(bottomOffset));
+        }
+      }
+    };
+
+    calculatePositions();
+    const timer = setTimeout(calculatePositions, 200);
+    window.addEventListener('resize', calculatePositions);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', calculatePositions);
+    };
+  }, []);
+
+  // Dynamic milestone ignition: strictly triggers only when rocket arrives parallel
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on('change', (latest) => {
+      const t1 = thresholds[0] ?? 0.18;
+      const t2 = thresholds[1] ?? 0.45;
+      const t3 = thresholds[2] ?? 0.72;
+      const t4 = thresholds[3] ?? 0.88;
+      const t5 = thresholds[4] ?? 0.98;
+
+      if (latest >= t5) {
+        setActiveStep(5); // Touchdown confirmed at landing pad
+      } else if (latest >= t4) {
+        setActiveStep(4); // Reached Topic-Wise Academic Notes
+      } else if (latest >= t3) {
+        setActiveStep(3); // Reached Milestone 3 (Kakoli)
+      } else if (latest >= t2) {
+        setActiveStep(2); // Reached Milestone 2 (Milestone College)
+      } else if (latest >= t1) {
+        setActiveStep(1); // Reached Milestone 1 (IUBAT)
+      } else {
+        setActiveStep(0); // Launch standby (dormant)
+      }
+    });
+    return () => unsubscribe();
+  }, [smoothProgress, thresholds]);
+
+  // Lane 2: Active vertical stem progress starting at Milestone 1 and tracking down to Landing Pad
+  const t1 = thresholds[0] ?? 0.18;
+  const t5 = thresholds[4] ?? 0.98;
+
+  const stemProgress = useTransform(smoothProgress, (latest) => {
+    if (latest <= t1) return 0;
+    if (latest >= t5) return 1;
+    return (latest - t1) / (t5 - t1);
+  });
+
+  return (
+    <div className="space-y-16">
+      {/* Continuous Timeline & Runway Container Wrapping Degrees, Notes & Terminal Landing Pad */}
+      <div ref={timelineRef} className="relative space-y-14 -ml-2 sm:-ml-4 lg:-ml-6 xl:-ml-8 pt-2">
+        {/* Lane 1: Dedicated Rocket Flight Track (Positioned Far Left into Gutter) */}
+        <div
+          ref={flightTrackRef}
+          style={{ bottom: `${trackBottomOffset}px` }}
+          className="absolute top-2 left-3 sm:left-4 md:left-5 lg:left-6 -translate-x-1/2 w-1 pointer-events-none z-10"
+        >
+          {/* Launch Beacon Origin Indicator */}
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <span className="w-2.5 h-2.5 rounded-full bg-accent-primary border border-canvas shadow-[0_0_10px_rgba(227,106,106,1)]" />
+          </div>
+
+          {/* Guide Wire Track (Background) */}
+          <div className="absolute inset-0 w-0.5 mx-auto bg-surface-border/80 rounded-full" />
+
+          {/* Glowing Drawn Plasma Trail (Scroll Driven) */}
+          <motion.div
+            style={{ scaleY: smoothProgress, originY: 0 }}
+            className="absolute inset-0 w-1 mx-auto bg-gradient-to-b from-accent-primary via-amber-400 to-accent-primary shadow-[0_0_14px_rgba(227,106,106,0.95)] rounded-full origin-top"
+          />
+
+          {/* Moving Aerodynamic Rocket Craft with Bi-Directional Flip */}
+          <motion.div
+            style={{ top: rocketTop, x: '-50%', y: '-50%' }}
+            className="absolute left-1/2 z-30 pointer-events-none"
+          >
+            <motion.div
+              animate={{ rotate: isScrollingUp ? 180 : 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 280,
+                damping: 26,
+                mass: 0.4,
+              }}
+              style={{ transformOrigin: 'center 20px' }}
+              className="flex items-center justify-center"
+            >
+              <AerospaceRocketCraft />
+            </motion.div>
+          </motion.div>
+
+          {/* Terminal Touchdown Base Ring at Track End */}
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <span
+              className={`w-3 h-3 rounded-full border-2 transition-all duration-500 ${
+                activeStep >= 5
+                  ? 'bg-emerald-500 border-canvas shadow-[0_0_12px_rgba(16,185,129,1)] scale-110'
+                  : 'bg-canvas border-surface-border'
+              }`}
+            />
+          </div>
+        </div>
+
+        {/* Lane 2: Milestone Stem Wire Connecting Station Nodes (01 through 04 and down to Landing Pad) */}
+        <div
+          style={{ bottom: `${trackBottomOffset}px` }}
+          className="absolute top-10 left-16 sm:left-22 md:left-26 lg:left-30 -translate-x-1/2 w-0.5 pointer-events-none z-0"
+        >
+          {/* Dormant guide wire */}
+          <div className="absolute inset-0 w-0.5 bg-surface-border/70 rounded-full" />
+
+          {/* Active glowing stem line that grows downwards tracking the rocket */}
+          <motion.div
+            style={{ scaleY: stemProgress, originY: 0 }}
+            className="absolute inset-0 w-1 -left-[1px] bg-gradient-to-b from-accent-primary via-accent-soft to-accent-primary shadow-[0_0_12px_rgba(227,106,106,0.9)] rounded-full origin-top"
+          />
+
+          {/* Terminal Stem Base Pin */}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <span
+              className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                activeStep >= 5 ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.9)]' : 'bg-surface-border'
+              }`}
+            />
+          </div>
+        </div>
+
+        {/* 1. Academic Degrees & Milestones (Stations 01, 02, 03) */}
+        {educationMilestones.map((item, index) => {
+          const isBCSE = item.id === 'iubat-bsc-cse';
+          const isReached = activeStep >= index + 1;
+
+          return (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.1 }}
+              className="relative flex items-start group"
+            >
+              {/* Left Telemetry Column: Shifted into Left Margin Runway */}
+              <div className="w-20 sm:w-28 md:w-32 lg:w-36 shrink-0 relative flex items-start pt-5">
+                {/* Dynamic Glowing Telemetry Bridge */}
+                <div
+                  ref={(el) => {
+                    lineRefs.current[index] = el;
+                  }}
+                  className="absolute left-3 sm:left-4 md:left-5 lg:left-6 right-auto top-10 pointer-events-none z-10 flex items-center"
+                >
+                  <div
+                    className={`transition-all duration-500 rounded-full ${
+                      isReached
+                        ? 'h-[2.5px] w-[52px] sm:w-[72px] md:w-[84px] lg:w-[96px] bg-gradient-to-r from-accent-primary via-accent-soft to-accent-primary shadow-[0_0_16px_rgba(227,106,106,1)] opacity-100'
+                        : 'h-[1.5px] w-[52px] sm:w-[72px] md:w-[84px] lg:w-[96px] bg-surface-border/60 border-t border-dashed border-surface-border opacity-35'
+                    }`}
+                  />
+                  {isReached && (
+                    <span className="w-2 h-2 rounded-full bg-accent-primary -ml-1 shrink-0 animate-ping shadow-[0_0_8px_rgba(227,106,106,1)]" />
+                  )}
+                </div>
+
+                {/* Lane 2: Milestone Endpoint Station Node with Click-to-Scroll */}
+                <div
+                  onClick={() => scrollToMilestone(index)}
+                  title={`Jump to ${item.degree}`}
+                  className="absolute left-16 sm:left-22 md:left-26 lg:left-30 -translate-x-1/2 top-5 z-20 cursor-pointer"
+                >
+                  <div
+                    className={`relative flex items-center justify-center rounded-2xl transition-all duration-500 hover:scale-110 ${
+                      isReached
+                        ? 'w-9 h-9 sm:w-10 sm:h-10 bg-canvas border-2 border-accent-primary text-accent-primary shadow-[0_0_18px_rgba(227,106,106,0.65)] scale-105'
+                        : 'w-9 h-9 sm:w-10 sm:h-10 bg-surface/90 border border-surface-border text-ink-muted/70 shadow-soft-sm'
+                    }`}
+                  >
+                    {/* Milestone Sequential Pip */}
+                    <span
+                      className={`absolute -top-1.5 -right-1 font-mono text-[8px] font-bold px-1.5 py-0.2 rounded-full border transition-all duration-300 ${
+                        isReached
+                          ? 'bg-accent-primary text-canvas border-accent-primary shadow-[0_0_8px_rgba(227,106,106,0.8)]'
+                          : 'bg-surface border-surface-border text-ink-subtle'
+                      }`}
+                    >
+                      0{index + 1}
+                    </span>
+
+                    {/* Active Radar Pulse Halo */}
+                    {isReached && (
+                      <span className="absolute inset-0 rounded-2xl border-2 border-accent-soft animate-ping opacity-35 pointer-events-none" />
+                    )}
+
+                    {/* Academic Icon */}
+                    {index === 0 && <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {index === 1 && <Award className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {index === 2 && <School className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  </div>
+
+                  {/* Persistent Glowing Docking Link from Milestone Station into Card */}
+                  <div
+                    className={`hidden sm:block absolute left-full top-1/2 -translate-y-1/2 w-2.5 sm:w-3.5 transition-all duration-300 rounded-full ${
+                      isReached
+                        ? 'h-[2px] bg-accent-primary shadow-[0_0_10px_rgba(227,106,106,0.9)] opacity-100'
+                        : 'h-[1.5px] bg-surface-border opacity-40'
+                    }`}
+                  />
+                </div>
+              </div>
+
+              {/* Right Column: Expanded Milestone Card with 3D Depth */}
+              <div className="flex-1 min-w-0 pl-2 sm:pl-4 w-full">
+                <div
+                  className={`p-5 sm:p-7 rounded-3xl bg-surface/50 border transition-all duration-300 shadow-soft-sm space-y-4 transform-gpu hover:-translate-y-0.5 ${
+                    isReached
+                      ? 'border-accent-primary/60 bg-surface/75'
+                      : 'border-surface-border group-hover:border-accent-primary/40'
+                  }`}
+                >
+                  {/* Card Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-surface-border/60 pb-3.5">
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-accent-soft/40 text-accent-primary border border-accent-soft/60">
+                          {item.institutionShort}
+                        </span>
+                        {item.gradeOrHonors && (
+                          <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-canvas border border-surface-border text-ink-primary shadow-soft-sm">
+                            {item.gradeOrHonors}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-bold text-ink-primary tracking-tight group-hover:text-accent-primary transition-colors">
+                        {item.degree}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm font-semibold text-accent-primaryDark flex flex-wrap items-center gap-2">
+                        <span>{item.institution}</span>
+                        <span className="text-ink-subtle hidden sm:inline">·</span>
+                        <span className="text-xs font-normal text-ink-muted flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-accent-primary" /> {item.location}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas border border-surface-border text-xs font-mono text-ink-primary shrink-0 self-start sm:self-auto shadow-soft-sm">
+                      <Calendar className="w-3.5 h-3.5 text-accent-primary" />
+                      <span>{item.period}</span>
+                    </div>
+                  </div>
+
+                  {/* Justified Description */}
+                  <p className="text-xs sm:text-sm text-ink-muted text-justify [text-justify:inter-word] leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  {/* Academic Highlights */}
+                  {item.highlights && item.highlights.length > 0 && (
+                    <div className="space-y-1.5 pt-1">
+                      <h4 className="text-[11px] font-mono font-bold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
+                        <Award className="w-3.5 h-3.5 text-accent-primary" />
+                        <span>Academic Highlights</span>
+                      </h4>
+                      <ul className="space-y-1.5">
+                        {item.highlights.map((highlight, hIdx) => (
+                          <li
+                            key={hIdx}
+                            className="flex items-start gap-2 text-xs text-ink-muted text-justify [text-justify:inter-word] leading-relaxed"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-accent-primary shrink-0 mt-0.5" />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Nested Under BCSE: Capstone Thesis & Practicum Practice Cards */}
+                  {isBCSE && item.thesis && item.practicum && (
+                    <div className="pt-3 space-y-3.5 border-t border-surface-border/60">
+                      {/* Nested Capstone Thesis */}
+                      <div className="p-4 sm:p-5 rounded-2xl bg-canvas border border-accent-soft/70 shadow-soft-sm space-y-2.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-border/50 pb-2">
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-soft/40 text-accent-primary border border-accent-soft">
+                              <span className="font-bold text-sm leading-none select-none font-sans">অ</span>
+                            </div>
+                            <span className="font-mono text-xs font-bold text-ink-primary">
+                              {item.thesis.title}
+                            </span>
+                          </div>
+                          <span className="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full bg-accent-primary text-canvas">
+                            {item.thesis.code} · {item.thesis.grade} ({item.thesis.credits})
+                          </span>
+                        </div>
+                        <p className="text-xs text-ink-muted text-justify [text-justify:inter-word] leading-relaxed">
+                          {item.thesis.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {item.thesis.tags.map((tag, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="px-2.5 py-0.5 rounded-md bg-surface border border-surface-border text-[11px] font-mono text-ink-primary font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Nested Engineering Practicum & Practice */}
+                      <div className="p-4 sm:p-5 rounded-2xl bg-canvas border border-surface-border shadow-soft-sm space-y-2.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-border/50 pb-2">
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-surface border border-surface-border text-accent-primary">
+                              <Briefcase className="w-4 h-4" />
+                            </div>
+                            <span className="font-mono text-xs font-bold text-ink-primary">
+                              {item.practicum.title}
+                            </span>
+                          </div>
+                          <span className="font-mono text-[11px] font-semibold px-2 py-0.5 rounded-full bg-surface border border-surface-border text-ink-primary">
+                            {item.practicum.code} · {item.practicum.grade} ({item.practicum.credits})
+                          </span>
+                        </div>
+                        <p className="text-xs text-ink-muted text-justify [text-justify:inter-word] leading-relaxed">
+                          {item.practicum.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {item.practicum.tags.map((tag, pIdx) => (
+                            <span
+                              key={pIdx}
+                              className="px-2.5 py-0.5 rounded-md bg-surface border border-surface-border text-[11px] font-mono text-ink-primary font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+
+        {/* 2. Topic-Wise Academic Notes (Station 04) with Touchdown Landing Pad */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="relative flex items-start group pt-2"
+        >
+          {/* Left Telemetry Column for Station 04 */}
+          <div className="w-20 sm:w-28 md:w-32 lg:w-36 shrink-0 relative flex items-start pt-5">
+            {/* Dynamic Glowing Telemetry Bridge */}
+            <div
+              ref={(el) => {
+                lineRefs.current[3] = el;
+              }}
+              className="absolute left-3 sm:left-4 md:left-5 lg:left-6 right-auto top-10 pointer-events-none z-10 flex items-center"
+            >
+              <div
+                className={`transition-all duration-500 rounded-full ${
+                  activeStep >= 4
+                    ? 'h-[2.5px] w-[52px] sm:w-[72px] md:w-[84px] lg:w-[96px] bg-gradient-to-r from-accent-primary via-accent-soft to-accent-primary shadow-[0_0_16px_rgba(227,106,106,1)] opacity-100'
+                    : 'h-[1.5px] w-[52px] sm:w-[72px] md:w-[84px] lg:w-[96px] bg-surface-border/60 border-t border-dashed border-surface-border opacity-35'
+                }`}
+              />
+              {activeStep >= 4 && (
+                <span className="w-2 h-2 rounded-full bg-accent-primary -ml-1 shrink-0 animate-ping shadow-[0_0_8px_rgba(227,106,106,1)]" />
+              )}
+            </div>
+
+            {/* Lane 2: Station Node 04 */}
+            <div
+              onClick={() => scrollToMilestone(3)}
+              title="Jump to Topic-Wise Academic Notes"
+              className="absolute left-16 sm:left-22 md:left-26 lg:left-30 -translate-x-1/2 top-5 z-20 cursor-pointer"
+            >
+              <div
+                className={`relative flex items-center justify-center rounded-2xl transition-all duration-500 hover:scale-110 ${
+                  activeStep >= 4
+                    ? 'w-9 h-9 sm:w-10 sm:h-10 bg-canvas border-2 border-accent-primary text-accent-primary shadow-[0_0_18px_rgba(227,106,106,0.65)] scale-105'
+                    : 'w-9 h-9 sm:w-10 sm:h-10 bg-surface/90 border border-surface-border text-ink-muted/70 shadow-soft-sm'
+                }`}
+              >
+                <span
+                  className={`absolute -top-1.5 -right-1 font-mono text-[8px] font-bold px-1.5 py-0.2 rounded-full border transition-all duration-300 ${
+                    activeStep >= 4
+                      ? 'bg-accent-primary text-canvas border-accent-primary shadow-[0_0_8px_rgba(227,106,106,0.8)]'
+                      : 'bg-surface border-surface-border text-ink-subtle'
+                  }`}
+                >
+                  04
+                </span>
+
+                {activeStep >= 4 && (
+                  <span className="absolute inset-0 rounded-2xl border-2 border-accent-soft animate-ping opacity-35 pointer-events-none" />
+                )}
+
+                <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+
+              {/* Persistent Glowing Docking Link */}
+              <div
+                className={`hidden sm:block absolute left-full top-1/2 -translate-y-1/2 w-2.5 sm:w-3.5 transition-all duration-300 rounded-full ${
+                  activeStep >= 4
+                    ? 'h-[2px] bg-accent-primary shadow-[0_0_10px_rgba(227,106,106,0.9)] opacity-100'
+                    : 'h-[1.5px] bg-surface-border opacity-40'
+                }`}
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Topic Notes Section with 3 Cards and Compact Terminal Landing Pad */}
+          <div className="flex-1 min-w-0 pl-2 sm:pl-4 w-full space-y-6">
+            {/* Section Header */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-surface/40 border border-surface-border/80 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft/30 border border-accent-soft/50 text-xs font-semibold text-accent-primary">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Academic Knowledge Repositories</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-ink-primary tracking-tight">
+                Topic-Wise Academic Notes
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-muted text-justify [text-justify:inter-word] leading-relaxed">
+                Curated technical notes, algorithmic paradigms, mathematical backbones, and reproducible code repositories organized topic-wise with direct access to GitHub code and Google Drive document archives.
+              </p>
+            </div>
+
+            {/* 3 Compact 3D Topic Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+              {topicNotes.map((note, nIdx) => {
+                const Icon = topicIcons[note.id] || BookOpen;
+
+                return (
+                  <motion.div
+                    key={note.id}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.35, delay: nIdx * 0.08 }}
+                    className="group h-full p-4 sm:p-4.5 rounded-2xl sm:rounded-3xl bg-surface/50 border border-surface-border hover:border-accent-primary/60 hover:bg-surface/80 transition-all duration-300 shadow-soft-sm flex flex-col justify-between space-y-3 transform-gpu hover:-translate-y-0.5"
+                  >
+                    <div className="space-y-2.5">
+                      {/* Card Header & Badge */}
+                      <div className="flex items-center justify-between gap-2 border-b border-surface-border/60 pb-2">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-canvas border border-surface-border text-accent-primary group-hover:scale-105 group-hover:border-accent-primary transition-all shadow-soft-sm">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <span className="text-[9px] uppercase tracking-wider font-mono font-bold px-2 py-0.5 rounded-full bg-canvas border border-surface-border text-ink-subtle">
+                          {note.category}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h4 className="text-sm sm:text-base font-bold text-ink-primary group-hover:text-accent-primary transition-colors leading-snug">
+                        {note.topic}
+                      </h4>
+
+                      {/* Justified Description */}
+                      <p className="text-xs text-ink-muted text-justify [text-justify:inter-word] leading-relaxed line-clamp-3">
+                        {note.description}
+                      </p>
+
+                      {/* Top 3 Core Concepts Tags */}
+                      <div className="space-y-1 pt-0.5">
+                        <div className="flex flex-wrap gap-1">
+                          {note.keyConcepts.slice(0, 3).map((concept, cIdx) => (
+                            <span
+                              key={cIdx}
+                              className="px-2 py-0.5 rounded-md bg-canvas border border-surface-border text-[10px] font-mono text-ink-primary"
+                            >
+                              {concept}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Single Contextual Link Button: GitHub or Drive */}
+                    <div className="pt-2.5 border-t border-surface-border/60">
+                      {note.githubUrl ? (
+                        <a
+                          href={note.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl bg-canvas border border-surface-border hover:border-accent-primary text-xs font-semibold text-ink-primary hover:text-accent-primary transition-all shadow-soft-sm w-full"
+                        >
+                          <Github className="w-3.5 h-3.5 text-accent-primary" />
+                          <span className="relative">
+                            View on GitHub
+                            <span className="absolute -bottom-0.5 left-0 w-full h-[1.5px] bg-accent-primary transform scale-x-0 group-hover/link:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+                          </span>
+                          <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </a>
+                      ) : note.driveUrl ? (
+                        <a
+                          href={note.driveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl bg-canvas border border-surface-border hover:border-accent-primary text-xs font-semibold text-ink-primary hover:text-accent-primary transition-all shadow-soft-sm w-full"
+                        >
+                          <HardDrive className="w-3.5 h-3.5 text-accent-primary" />
+                          <span className="relative">
+                            View on Drive
+                            <span className="absolute -bottom-0.5 left-0 w-full h-[1.5px] bg-accent-primary transform scale-x-0 group-hover/link:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+                          </span>
+                          <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </a>
+                      ) : null}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Compact Terminal Landing Pad Bar (Option 2 - Placed directly below Image 2) */}
+            <div
+              ref={(el) => {
+                lineRefs.current[4] = el;
+              }}
+              className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-surface-border/60"
+            >
+              {/* Touchdown Status Micro-Pill */}
+              <div
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium transition-all duration-500 shadow-soft-sm ${
+                  activeStep >= 5
+                    ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.15)]'
+                    : 'bg-surface/80 border-surface-border text-ink-muted'
+                }`}
+              >
+                <span
+                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                    activeStep >= 5
+                      ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.9)] animate-pulse'
+                      : 'bg-surface-border'
+                  }`}
+                />
+                <span>
+                  {activeStep >= 5 ? 'Touchdown Confirmed · 100.0000% Traversed' : 'Approaching Terminal Runway'}
+                </span>
+              </div>
+
+              {/* Re-launch to Departure Pad Quick Action */}
+              <button
+                onClick={scrollToTop}
+                type="button"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-canvas border border-surface-border hover:border-accent-primary text-xs font-semibold text-ink-primary hover:text-accent-primary transition-all shadow-soft-sm hover:scale-105 active:scale-95 cursor-pointer group/btn"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-accent-primary transition-transform duration-300 group-hover/btn:-rotate-90" />
+                <span>Re-launch to Departure Pad</span>
+                <ArrowUp className="w-3.5 h-3.5 text-ink-subtle group-hover/btn:text-accent-primary group-hover/btn:-translate-y-0.5 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

@@ -1,3 +1,21 @@
+export interface ThesisInfo {
+  title: string;
+  code: string;
+  credits: string;
+  grade: string;
+  description: string;
+  tags: string[];
+}
+
+export interface PracticumInfo {
+  title: string;
+  code: string;
+  credits: string;
+  grade: string;
+  description: string;
+  tags: string[];
+}
+
 export interface EducationMilestone {
   id: string;
   degree: string;
@@ -9,7 +27,19 @@ export interface EducationMilestone {
   gradeOrHonors: string;
   description: string;
   highlights: string[];
-  keyCourses: string[];
+  keyCourses?: string[];
+  thesis?: ThesisInfo;
+  practicum?: PracticumInfo;
+}
+
+export interface TopicNoteItem {
+  id: string;
+  topic: string;
+  category: string;
+  description: string;
+  keyConcepts: string[];
+  githubUrl?: string;
+  driveUrl?: string;
 }
 
 export interface CourseItem {
@@ -42,35 +72,38 @@ export const educationMilestones: EducationMilestone[] = [
       'Earned A+ in CSC 488: Thesis (6.0 credits) and CSC 391: Data Structures and Algorithms (4.0 credits).',
       'Earned straight A+ across all core programming sequences: JAVA (CSC 383/384), C++ (CSC 283/284), and C (CSC 183/184).',
       'Earned straight A+ across core systems: Operating System (CSC 307), Database Systems (CSC 433/434), Computer Networks (CSC 465/466), and Software Engineering (CSC 469/470).',
-      'Ranked 13th in the IUBAT Intra University Programming Contest (2024) and 418th in ICPC Asia Regional Preliminary (2023).',
-      'Served as Competitive Programming Mentor (Level 0) and Executive Member of BASIS IUBAT Student Branch.',
     ],
-    keyCourses: [
-      'CSC 488: Thesis (6.0 Cr · A+)',
-      'CSC 391: Data Structures & Algorithms (4.0 Cr · A+)',
-      'CSC 383 & 384: Programming (JAVA) & Lab (4.0 Cr · A+)',
-      'CSC 283 & 284: Programming (C++) & Lab (4.0 Cr · A+)',
-      'CSC 183 & 184: Programming C & Lab (4.0 Cr · A+)',
-      'CSC 433 & 434: Database Management Systems & Lab (4.0 Cr · A+)',
-      'CSC 307: Operating System (3.0 Cr · A+)',
-      'CSC 465 & 466: Data Communication & Computer Network (4.0 Cr · A+)',
-      'CSC 469 & 470: Software Engineering & Lab (4.0 Cr · A+)',
-      'CSC 397: Theory of Computation (4.0 Cr · A+)',
-      'CSC 437: Compiler Design (3.0 Cr · A)',
-      'CSC 455: Computer Graphics (3.0 Cr · A+)',
-      'CSC 471: Microprocessor Based System Design (3.0 Cr · A+)',
-      'CSC 247: Computer Organization & Architecture (3.0 Cr · A+)',
-      'CSC 197: Assembly Language (3.0 Cr · A+)',
-      'CSC 439 & 440: Visual Programming & Lab (4.0 Cr · A+)',
-      'CSC 387: System Analysis & Design (3.0 Cr · A+)',
-      'CSC 461: Programming Languages & Structures (3.0 Cr · A+)',
-      'CSC 490: Practicum (6.0 Cr · A)',
-      'STA 240: Statistics (3.0 Cr · A+)',
-      'MAT 257: Discrete Mathematics (3.0 Cr · A-)',
-      'MAT 247: Numerical Analysis (3.0 Cr · A-)',
-      'MAT 147: Applied Calculus (3.0 Cr · A)',
-      'MAT 219: Linear Algebra (2.0 Cr · B+)',
-    ],
+    thesis: {
+      title: 'Aspect-Based Hate Speech Detection and Analysis Using BERT Architectures',
+      code: 'CSC 488',
+      credits: '6.0 Credits',
+      grade: 'Grade: A+',
+      description:
+        'Conducted capstone thesis research on aspect-based hate speech detection and analysis using BERT architectures evaluated on the EmoNoBa benchmark dataset. Introduced a novel methodological contribution by formulating and maintaining contextual aspect embeddings directly within transformer layers, earning high commendation and exceptional praise from the departmental thesis defense committee.',
+      tags: [
+        'BERT Architectures',
+        'Aspect Embeddings',
+        'EmoNoBa Dataset',
+        'Bengali NLP',
+        'Hate Speech Detection',
+        'A+ Grade (6.0 Cr)',
+      ],
+    },
+    practicum: {
+      title: 'EduMaster: AI-Powered Learning Management System (LMS)',
+      code: 'CSC 490',
+      credits: '6.0 Credits',
+      grade: 'Grade: A',
+      description:
+        'Architected and deployed EduMaster, a production-grade AI-powered Learning Management System featuring automated student performance analytics, intelligent content recommendation, and 104 robust RESTful API endpoints. Defended before the IUBAT Practicum Board in January 2026, earning Grade A for end-to-end full-stack systems engineering.',
+      tags: [
+        'AI Learning Management System',
+        'Full-Stack Architecture',
+        'RESTful APIs (104 Endpoints)',
+        'Student Analytics',
+        'Grade: A (6.0 Cr)',
+      ],
+    },
   },
   {
     id: 'hsc-science',
@@ -80,20 +113,77 @@ export const educationMilestones: EducationMilestone[] = [
     location: 'Dhaka, Bangladesh',
     period: 'June 2018 – January 2020',
     status: 'Completed',
-    gradeOrHonors: 'GPA 5.00 / 5.00 (Golden Distinction)',
+    gradeOrHonors: 'GPA 5.00 / 5.00',
     description:
-      'Rigorous pre-university science curriculum under the Board of Intermediate and Secondary Education, achieving the highest possible distinction with GPA 5.00/5.00.',
+      'Rigorous pre-university science curriculum under the Board of Intermediate and Secondary Education, completing foundational higher mathematics, physics, and chemistry with GPA 5.00/5.00.',
     highlights: [
-      'Perfect GPA 5.00 / 5.00 in National Higher Secondary Examinations.',
-      'Distinction in Higher Mathematics (Calculus, Coordinate Geometry, Trigonometry) and Physics.',
-      'Active participant in science seminars and competitive mathematics study circles.',
+      'GPA 5.00 / 5.00 in National Higher Secondary Examinations.',
+      'Distinction in Higher Mathematics (Calculus, Coordinate Geometry, Vectors) and Physics.',
     ],
-    keyCourses: [
-      'Higher Mathematics (Differential & Integral Calculus, Vectors, Coordinate Geometry)',
-      'Physics (Classical Mechanics, Thermodynamics, Waves, Modern Physics)',
-      'Chemistry (Inorganic, Organic, and Physical Reaction Kinetics)',
-      'Information & Communication Technology (Logic Gates, Algorithms, C Programming)',
+  },
+  {
+    id: 'ssc-science',
+    degree: 'Secondary School Certificate (SSC) — Science',
+    institution: 'Kakoli High School and College',
+    institutionShort: 'KHSC',
+    location: 'Dhaka, Bangladesh',
+    period: 'Passing Year: 2016',
+    status: 'Completed',
+    gradeOrHonors: 'GPA 5.00 / 5.00',
+    description:
+      'Completed secondary education curriculum in the Science group with a perfect GPA 5.00/5.00, establishing early foundational excellence in general mathematics, physics, chemistry, biology, and analytical problem solving.',
+    highlights: [
+      'Perfect GPA 5.00 / 5.00 in National Secondary School Examinations (Dhaka Board).',
+      'Distinction in General Mathematics, Physics, Chemistry, and Analytical Science.',
     ],
+  },
+];
+
+export const topicNotes: TopicNoteItem[] = [
+  {
+    id: 'dsa',
+    topic: 'Data Structures & Algorithms',
+    category: 'Core Computer Science',
+    description:
+      'Comprehensive reference notes and solution patterns covering asymptotic complexity proofs, balanced binary search trees, graph theory (Dijkstra, BFS/DFS, Bellman-Ford), dynamic programming memoization, and competitive programming paradigms.',
+    keyConcepts: [
+      'Balanced BSTs & Heaps',
+      'Graph Traversals & Shortest Paths',
+      'Dynamic Programming & Bitmasking',
+      'Divide and Conquer',
+      'Asymptotic Big-O Analysis',
+    ],
+    githubUrl: 'https://github.com/obaidulsaiki?tab=repositories&q=data-structures',
+  },
+  {
+    id: 'ml-dl',
+    topic: 'Machine Learning & Deep Learning',
+    category: 'Artificial Intelligence & Vision',
+    description:
+      'Theoretical notes, mathematical formulations, and PyTorch implementations covering convolutional backbones, vision transformers (ViT), state-space continuous Mamba models, loss formulations, and clinical evaluation metrics.',
+    keyConcepts: [
+      'PyTorch Neural Backbones',
+      'State-Space Mamba & ViT',
+      'Loss Formulations & Optimization',
+      'Medical Image Segmentation',
+      'Explainable AI (Grad-CAM, SHAP)',
+    ],
+    driveUrl: 'https://drive.google.com/drive/',
+  },
+  {
+    id: 'python-ai',
+    topic: 'Python for AI & Research',
+    category: 'Research Engineering',
+    description:
+      'Production research workflows with Python: vectorized NumPy matrix manipulations, Pandas exploratory analysis, PyTorch custom datasets & DataLoaders, scientific plotting, and multi-process batch pipelines.',
+    keyConcepts: [
+      'Vectorized NumPy Computations',
+      'Pandas Data Cleaning & Wrangling',
+      'PyTorch Custom Dataset Pipelines',
+      'Matplotlib & Seaborn Visualizations',
+      'Multiprocessing & CLI Workflows',
+    ],
+    githubUrl: 'https://github.com/obaidulsaiki?tab=repositories&q=python',
   },
 ];
 
@@ -375,7 +465,7 @@ export const courseCategories: CourseCategory[] = [
         credits: 6,
         grade: 'A+',
         description:
-          '6-credit undergraduate capstone research investigating deep convolutional and state-space architectures for automated biomedical signal analysis and medical image reconstruction. Awarded highest grade (A+).',
+          '6-credit undergraduate capstone research investigating aspect-based hate speech detection using BERT architectures on the EmoNoBa benchmark dataset with novel aspect embedding formulation. Awarded highest grade (A+) with exceptional defense commendation.',
       },
       {
         code: 'CSC 490',
@@ -383,7 +473,7 @@ export const courseCategories: CourseCategory[] = [
         credits: 6,
         grade: 'A',
         description:
-          '6-credit professional engineering practicum engaging in industry-standard software development cycles and full-stack software delivery. Showcased and defended EduMaster (AI-assisted LMS with 104 REST APIs) before the IUBAT Practicum Board in January 2026.',
+          '6-credit professional engineering practicum engaging in industry-standard software development cycles and full-stack software delivery. Showcased and defended EduMaster (AI-powered LMS with 104 REST APIs) before the IUBAT Practicum Board in January 2026.',
       },
       {
         code: 'CSC 496',

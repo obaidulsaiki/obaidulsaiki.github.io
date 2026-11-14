@@ -34,6 +34,7 @@ export interface ProfileData {
     phone: string;
     phoneFormatted: string;
     website: string;
+    scholar: string;
   };
 }
 
@@ -93,5 +94,6 @@ export const profileData: ProfileData = {
     phone: '01883440377',
     phoneFormatted: '+880 1883-440377',
     website: 'https://obaidulhaque.me',
+    scholar: 'https://scholar.google.com/citations?view_op=search_authors&mauthors=Obaidul+Haque',
   },
 };

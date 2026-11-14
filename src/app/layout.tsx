@@ -39,7 +39,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-canvas text-ink-primary antialiased min-h-screen flex flex-col selection:bg-accent-soft selection:text-ink-primary">
         <Navbar />
-        <main className="flex-1 w-full mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+        <main className="flex-1 w-full mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />

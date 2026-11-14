@@ -43,7 +43,7 @@ export default function FeaturedResearch() {
       {/* Compact Top 3 Papers Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {spotlightPapers.map((paper, index) => {
-          const isPublished = paper.status === 'Published';
+          const isPublished = paper.status.toLowerCase() === 'published';
 
           return (
             <motion.div

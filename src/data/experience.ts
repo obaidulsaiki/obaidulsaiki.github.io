@@ -21,8 +21,9 @@ export interface FeaturedProject {
   tech: string[];
   description: string;
   highlights: string[];
-  githubUrl: string;
+  githubUrl?: string;
   stats: string;
+  isProprietary?: boolean;
 }
 
 export const experienceData: ExperienceItem[] = [
@@ -36,23 +37,26 @@ export const experienceData: ExperienceItem[] = [
     status: 'Current',
     highlightBadge: 'AI SaaS & Full Stack',
     overview:
-      'Engineered full-stack SaaS production applications utilizing TypeScript, React, Next.js, and Node.js, integrating enterprise AI and LLM workflows to deliver intelligent automation.',
+      'Engineered full-stack SaaS production architectures for the SAASk platform, building an intelligent real-time AI Voice Assistant pipeline and fine-tuning domain-specific LLM architectures to deliver intelligent enterprise workflow automation.',
     achievements: [
-      'Developed responsive full-stack SaaS applications using TypeScript, React, Next.js, and Node.js with modern component architectures.',
-      'Integrated existing AI/LLM services into application workflows to enable intelligent automation, context-aware reasoning, and AI-assisted user functionality.',
-      'Designed and implemented high-performance RESTful APIs, optimizing payload delivery, caching layers, and database queries.',
-      'Collaborated seamlessly with cross-functional distributed teams in Agile development cycles, managing Git-based version control and peer code reviews.',
+      'Engineered core enterprise SaaS modules for the SAASk platform utilizing TypeScript, React, Next.js, and Node.js with modern component architectures.',
+      'Developed and integrated an intelligent AI Voice Assistant featuring speech-to-text transcription, context-aware reasoning, and low-latency audio response streaming.',
+      'Conducted domain-specific LLM tuning, optimizing system prompts, context-window embeddings, and inference parameters to maximize SaaS workflow precision.',
+      'Designed and implemented high-performance RESTful APIs and WebSocket streaming channels, optimizing payload delivery, caching layers, and database queries.',
+      'Collaborated seamlessly across distributed cross-functional teams in Agile development cycles, managing Git-based version control and peer code reviews.',
     ],
     techStack: [
       'TypeScript',
       'Next.js',
       'React',
       'Node.js',
-      'AI/LLM Integration',
+      'AI Voice Assistant',
+      'LLM Tuning',
       'REST APIs',
+      'WebSockets',
+      'Docker',
       'Git',
       'Agile',
-      'Docker',
     ],
   },
   {
@@ -87,36 +91,37 @@ export const experienceData: ExperienceItem[] = [
 
 export const featuredProjects: FeaturedProject[] = [
   {
-    id: 'edumaster-lms',
-    title: 'EduMaster',
-    subtitle: 'AI-Assisted Learning Management System',
-    period: 'January 2026',
-    tech: ['Spring Boot', 'React', 'PostgreSQL', 'LangChain4j', 'Ollama', 'JWT', 'WebSockets'],
-    stats: '104 REST APIs · IUBAT Practicum Board',
+    id: 'saask-ai-platform',
+    title: 'SAASk Project',
+    subtitle: 'Enterprise AI SaaS Platform with Voice Assistant & LLM Tuning',
+    period: 'March 2026 – August 2026',
+    tech: ['TypeScript', 'React', 'Next.js', 'Node.js', 'Voice Assistant', 'LLM Tuning', 'REST APIs', 'WebSockets', 'Docker'],
+    stats: 'Production SaaS · Voice AI & LLM Engine',
+    isProprietary: true,
     description:
-      'Production-grade full-stack LMS developed with Spring Boot, React, and PostgreSQL, showcased and defended before the IUBAT Practicum Board in January 2026. Integrates local LLM intelligence via LangChain4j and Ollama for automated context-aware learning assistance, course Q&A, and personalized career roadmaps.',
+      'Enterprise-grade full-stack SaaS platform engineered during my engagement at Saask Task. Featured an intelligent real-time AI Voice Assistant pipeline and fine-tuned domain-specific Large Language Models (LLMs) to automate context-aware workflows, audio reasoning, and interactive user operations.',
     highlights: [
-      'Showcased and defended before the Practicum Board at IUBAT (College of Engineering and Technology) in January 2026.',
-      'Engineered 104 secure REST API endpoints with role-based access control (RBAC), stateless JWT authentication, and OTP verification.',
-      'Embedded conversational course mentors using LangChain4j and Ollama for zero-cost, localized AI interactions.',
-      'Built real-time interactive learning modules with WebSockets, dynamic payment workflows, and automated PDF certificate/invoice generation.',
+      'Engineered an end-to-end AI Voice Assistant integrating speech-to-text recognition, contextual reasoning, and low-latency synthesized audio response playback.',
+      'Conducted domain-specific LLM tuning, optimizing system prompts, contextual embeddings, and inference parameters to maximize SaaS workflow execution accuracy.',
+      'Architected scalable backend microservices and secure RESTful APIs with Node.js and TypeScript, handling high-concurrency client sessions with minimal latency.',
+      'Built responsive, accessible UI modules in Next.js and React with live WebSocket streaming for instantaneous voice and text interactions.',
     ],
-    githubUrl: 'https://github.com/obaidulsaiki/EduMaster-LearningManagementSystem/',
   },
   {
-    id: 'research-tracker',
-    title: 'Research Tracker',
-    subtitle: 'Academic Research Management & Analytics Platform',
-    period: '2024 – 2025',
-    tech: ['Java', 'Spring Boot', 'Angular', 'TypeScript', 'PostgreSQL', 'Electron'],
-    stats: '32 REST API Endpoints',
+    id: 'store-management-pc',
+    title: 'Store Management Software',
+    subtitle: 'Retail ERP & Inventory Management PC Desktop Application',
+    period: '2025',
+    tech: ['Java Swing', 'React.js', 'AngularJS', 'REST APIs', 'Desktop GUI', 'PostgreSQL / MySQL', 'Event-Driven Architecture'],
+    stats: 'Desktop & Web Hybrid ERP',
+    isProprietary: true,
     description:
-      'Cross-platform desktop & web platform for managing academic research lifecycles. Automates metadata ingestion, co-author intelligence, and paper tracking with DOI-based OpenAlex integration.',
+      'Production-ready retail and inventory management desktop application built with Java Swing for robust on-premise store operations, coupled with modern web management dashboards developed with React.js and AngularJS for remote administration and analytics.',
     highlights: [
-      'Engineered 32 REST APIs with automated duplicate detection, diff-based paper version tracking, and audit logging.',
-      'Integrated OpenAlex API for automatic DOI citation and metadata retrieval.',
-      'Built multi-format export engines (CSV, Excel, PDF), automated database backup routines, and conference deadline countdown analytics.',
+      'Developed a high-performance offline-first desktop POS and inventory management GUI using Java Swing with multi-threaded data caching.',
+      'Engineered web-based administrative analytics and inventory monitoring portals using React.js and AngularJS, interfacing with backend service APIs.',
+      'Automated real-time stock reconciliation, invoice/receipt generation, barcode integration, and transaction audit trails across retail counters.',
+      'Optimized relational database queries and schema designs to ensure sub-millisecond barcode lookups and reliable transaction rollbacks.',
     ],
-    githubUrl: 'https://github.com/obaidulsaiki/research-tracker/',
   },
 ];
