@@ -61,7 +61,31 @@ export default function Hero() {
               Hello, I&apos;m{' '}
               <span className="text-accent-primary relative inline-block">
                 {profileData.name}
-                <span className="absolute left-0 -bottom-1 w-full h-1.5 bg-accent-soft/60 rounded-full" />
+                {/* Animated left-to-right underline with continuous glowing light wave */}
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originX: 0 }}
+                  className="absolute left-0 -bottom-1 w-full h-1.5 rounded-full overflow-hidden bg-accent-soft/40 shadow-soft-sm"
+                >
+                  {/* Base warm coral gradient */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-accent-soft via-accent-primary/50 to-accent-soft opacity-70" />
+
+                  {/* Fluid continuous light runner traveling left to right */}
+                  <motion.span
+                    animate={{
+                      x: ['-100%', '220%'],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2.6,
+                      ease: 'easeInOut',
+                      delay: 1.1,
+                    }}
+                    className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-accent-primary to-transparent opacity-95 shadow-[0_0_10px_rgba(227,106,106,0.9)]"
+                  />
+                </motion.span>
               </span>
             </h1>
             <p className="text-lg sm:text-xl font-bold text-accent-primaryDark">

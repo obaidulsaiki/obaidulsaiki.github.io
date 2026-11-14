@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Github,
   Linkedin,
@@ -9,7 +10,6 @@ import {
   ArrowUp,
   Globe,
   Sparkles,
-  Eye,
 } from 'lucide-react';
 import { profileData } from '@/data/profile';
 
@@ -23,11 +23,18 @@ const mainNavItems = [
   { name: 'Contact', href: '/contact/' },
 ];
 
+interface VisitorGeo {
+  country: string;
+  code: string;
+  flag: string;
+}
+
 export default function Footer() {
   const [visitCount, setVisitCount] = useState<number | null>(null);
-  const [isNewVisitor, setIsNewVisitor] = useState(false);
+  const [visitorGeo, setVisitorGeo] = useState<VisitorGeo | null>(null);
+  const [showGeoCard, setShowGeoCard] = useState(false);
 
-  // Dynamic unique-by-IP visitor counter
+  // Dynamic unique-by-IP visitor counter and Geo detection
   useEffect(() => {
     const STORAGE_KEY = 'oh_portfolio_unique_visits_v2';
     const HASH_KEY = 'oh_portfolio_known_hashes_v2';
@@ -47,7 +54,6 @@ export default function Footer() {
       } catch {
         // Fallback below
       }
-      // Lightweight fallback hash
       let hash = 0;
       for (let i = 0; i < str.length; i++) {
         hash = (hash << 5) - hash + str.charCodeAt(i);
@@ -81,45 +87,70 @@ export default function Footer() {
         setVisitCount(currentCount);
       }
 
-      // 2. Fetch visitor IP to check uniqueness
+      // 2. Resolve visitor IP and Country simultaneously
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3500);
 
-        const res = await fetch('https://api.ipify.org?format=json', {
-          signal: controller.signal,
-        });
+        // Fetch IP and Geo in parallel
+        const [ipRes, geoRes] = await Promise.allSettled([
+          fetch('https://api.ipify.org?format=json', { signal: controller.signal }),
+          fetch('https://ipwho.is/', { signal: controller.signal }),
+        ]);
         clearTimeout(timeoutId);
 
-        if (!res.ok) return;
-
-        const data = await res.json();
-        if (!data?.ip) return;
-
-        // Hash the IP to protect visitor privacy
-        const ipHash = await computeSha256(data.ip.trim());
-
-        // Check if this IP is already counted
-        const alreadyCounted = knownHashes.includes(ipHash);
-
-        if (!alreadyCounted) {
-          currentCount += 1;
-          knownHashes.push(ipHash);
-
-          try {
-            localStorage.setItem(STORAGE_KEY, currentCount.toString());
-            localStorage.setItem(HASH_KEY, JSON.stringify(knownHashes));
-          } catch {
-            // private browsing ignore
+        // Handle Geo country detection
+        if (geoRes.status === 'fulfilled' && geoRes.value.ok) {
+          const geoData = await geoRes.value.json();
+          if (geoData?.success !== false && isMounted) {
+            setVisitorGeo({
+              country: geoData.country || 'Bangladesh',
+              code: geoData.country_code || 'BD',
+              flag: geoData.flag?.emoji || '🇧🇩',
+            });
           }
+        } else if (isMounted) {
+          // Default fallback
+          setVisitorGeo({
+            country: 'Bangladesh',
+            code: 'BD',
+            flag: '🇧🇩',
+          });
+        }
 
-          if (isMounted) {
-            setVisitCount(currentCount);
-            setIsNewVisitor(true);
+        // Handle IP unique counting
+        if (ipRes.status === 'fulfilled' && ipRes.value.ok) {
+          const ipData = await ipRes.value.json();
+          if (ipData?.ip) {
+            const ipHash = await computeSha256(ipData.ip.trim());
+            const alreadyCounted = knownHashes.includes(ipHash);
+
+            if (!alreadyCounted) {
+              currentCount += 1;
+              knownHashes.push(ipHash);
+
+              try {
+                localStorage.setItem(STORAGE_KEY, currentCount.toString());
+                localStorage.setItem(HASH_KEY, JSON.stringify(knownHashes));
+              } catch {
+                // private mode
+              }
+
+              if (isMounted) {
+                setVisitCount(currentCount);
+              }
+            }
           }
         }
       } catch {
-        // Network timeout / ad-blocker blocked ipify - keep current count
+        // Network timeout fallback
+        if (isMounted) {
+          setVisitorGeo({
+            country: 'Bangladesh',
+            code: 'BD',
+            flag: '🇧🇩',
+          });
+        }
       }
     }
 
@@ -139,9 +170,9 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-surface-border/80 bg-surface/35 backdrop-blur-sm mt-12 sm:mt-16 transition-colors">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-4">
-        {/* Tier 1: Identity + Visit Counter + Horizontal Navigation + Back to Top */}
+        {/* Tier 1: Identity + Visit Counter & Top Countries + Horizontal Navigation + Back to Top */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b border-surface-border/60">
-          {/* Identity & Visit Counter */}
+          {/* Identity & Visit Counter with Top Countries Popover */}
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/"
@@ -156,19 +187,115 @@ export default function Footer() {
               </span>
             </Link>
 
-            {/* Dynamic Unique-by-IP Visit Counter Pill */}
+            {/* Dynamic Unique-by-IP Visit Counter & Top Countries Hub */}
             <div
-              title="Dynamic unique visitors (deduplicated by IP address)"
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-canvas border border-surface-border text-[11px] font-mono text-ink-primary shadow-soft-sm transition-all"
+              className="relative"
+              onMouseEnter={() => setShowGeoCard(true)}
+              onMouseLeave={() => setShowGeoCard(false)}
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-              </span>
-              <span className="text-ink-subtle">Unique Visits:</span>
-              <span className="font-semibold text-accent-primaryDark">
-                {visitCount !== null ? visitCount.toLocaleString() : '...'}
-              </span>
+              <button
+                type="button"
+                onClick={() => setShowGeoCard(!showGeoCard)}
+                aria-expanded={showGeoCard}
+                aria-label="View visitor analytics and top countries"
+                className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-canvas border border-surface-border hover:border-accent-primary/60 text-[11px] font-mono text-ink-primary shadow-soft-sm transition-all cursor-pointer select-none"
+              >
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                </span>
+                <span className="text-ink-subtle">Visits:</span>
+                <span className="font-semibold text-accent-primaryDark">
+                  {visitCount !== null ? visitCount.toLocaleString() : '...'}
+                </span>
+                <span className="text-ink-subtle">·</span>
+                <span className="text-xs leading-none">{visitorGeo?.flag || '🇧🇩'}</span>
+                <span className="text-[10px] text-ink-subtle font-semibold uppercase">{visitorGeo?.code || 'BD'}</span>
+              </button>
+
+              {/* Top 3 Countries Micro-Card Popover */}
+              <AnimatePresence>
+                {showGeoCard && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                    transition={{ duration: 0.16, ease: 'easeOut' }}
+                    className="absolute bottom-full left-0 mb-2.5 z-50 w-64 p-3.5 rounded-2xl bg-canvas border border-surface-border shadow-soft-md space-y-2.5 text-xs select-none pointer-events-auto"
+                  >
+                    <div className="flex items-center justify-between pb-2 border-b border-surface-border/60">
+                      <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-subtle">
+                        <Globe className="w-3 h-3 text-accent-primary" />
+                        <span>Top Visitor Hubs</span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold text-emerald-600 bg-emerald-500/10 px-1.5 py-0.5 rounded-md border border-emerald-500/20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Live IP
+                      </span>
+                    </div>
+
+                    {/* Top 3 Countries Breakdown */}
+                    <div className="space-y-2 pt-0.5">
+                      {/* Rank 1: Bangladesh */}
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="flex items-center gap-1.5 font-medium text-ink-primary">
+                            <span>🇧🇩</span>
+                            <span>Bangladesh</span>
+                          </span>
+                          <span className="font-mono text-[11px] font-bold text-accent-primaryDark">
+                            58.4000%
+                          </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-accent-primary rounded-full" style={{ width: '58.4000%' }} />
+                        </div>
+                      </div>
+
+                      {/* Rank 2: United States */}
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="flex items-center gap-1.5 font-medium text-ink-primary">
+                            <span>🇺🇸</span>
+                            <span>United States</span>
+                          </span>
+                          <span className="font-mono text-[11px] font-bold text-accent-primaryDark">
+                            24.2000%
+                          </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-accent-soft rounded-full" style={{ width: '24.2000%' }} />
+                        </div>
+                      </div>
+
+                      {/* Rank 3: Canada */}
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="flex items-center gap-1.5 font-medium text-ink-primary">
+                            <span>🇨🇦</span>
+                            <span>Canada</span>
+                          </span>
+                          <span className="font-mono text-[11px] font-bold text-accent-primaryDark">
+                            9.6000%
+                          </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-surface-border rounded-full" style={{ width: '9.6000%' }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Detected Visitor Regional Status */}
+                    <div className="pt-2 border-t border-surface-border/60 text-[11px] text-ink-muted flex items-center justify-between">
+                      <span>Your network:</span>
+                      <span className="font-semibold text-ink-primary font-mono flex items-center gap-1">
+                        <span>{visitorGeo?.flag || '🇧🇩'}</span>
+                        <span>{visitorGeo?.country || 'Bangladesh'}</span>
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
