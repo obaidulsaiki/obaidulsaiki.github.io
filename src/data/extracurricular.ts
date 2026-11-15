@@ -78,39 +78,151 @@ export const contestRankings: ContestRanking[] = [
   },
 ];
 
-export const extracurricularActivities: ExtracurricularActivity[] = [
+export interface ProblemTopicStat {
+  topic: string;
+  solvedCount: number;
+}
+
+export const topProblemTopics: ProblemTopicStat[] = [
+  { topic: 'Implementation', solvedCount: 79 },
+  { topic: 'Greedy', solvedCount: 42 },
+  { topic: 'Math', solvedCount: 41 },
+];
+
+export interface CpCommunityRole {
+  role: string;
+  organization: string;
+  badge: string;
+  description: string;
+}
+
+export const cpCommunityRoles: CpCommunityRole[] = [
   {
-    id: 'basis-student-branch',
-    title: 'BASIS IUBAT Student Branch',
-    role: 'Executive Member',
-    organization: 'Bangladesh Association of Software and Information Services (BASIS)',
-    period: '2023 – 2025',
-    category: 'leadership',
-    description:
-      'Organized high-impact technology events, student IT competitions, and technical seminars bridging academia with Bangladesh’s leading software industry association.',
-    highlights: [
-      'Authored problem sets and structured competition rules for freshman IQ and IT competitions.',
-      'Co-organized a drone technology seminar featuring industry specialist Mr. Zubayer Al Billal Khan.',
-      'Fostered student engagement in software development and emerging tech careers.',
-    ],
-    certificateUrl:
-      'https://drive.google.com/open?id=1M7QMrkbTAr4JVCjDauHC7ajNptljaxZR&usp=drive_fs',
-  },
-  {
-    id: 'cp-mentor',
-    title: 'Competitive Programming Mentorship',
-    role: 'Mentor (Level 0)',
+    role: 'Advance Level Member',
     organization: 'IUBAT CSE Competitive Programming Community',
-    period: '2023 – 2025',
-    category: 'mentorship',
-    description:
-      'Mentored freshman and sophomore CSE students in foundational algorithms, C++ STL data structures, time complexity analysis, and problem-solving strategies.',
-    highlights: [
-      'Conducted problem-solving breakdown sessions for 50+ junior students.',
-      'Curated weekly problem sets on VJudge and Codeforces to build algorithmic consistency.',
-      'Helped student teams prepare for national and regional ICPC preliminary rounds.',
-    ],
+    badge: 'Member',
+    description: 'Active member competing in university championships and regional ICPC contests.',
   },
+  {
+    role: 'Competitive Programming Mentor (Level-0)',
+    organization: 'IUBAT CSE Competitive Programming Community',
+    badge: 'Mentor',
+    description: 'Taught 50+ junior students basic algorithms, C++ data structures, and contest problem solving.',
+  },
+];
+
+export interface AcademicMentorshipSpotlight {
+  id: string;
+  title: string;
+  role: string;
+  appointedAs: string;
+  institution: string;
+  period: string;
+  semester: string;
+  year: number;
+  certificateUrl: string;
+  summary: string;
+  pillars: {
+    title: string;
+    focus: string;
+    description: string;
+    skills: string[];
+  }[];
+  keyHighlights: string[];
+}
+
+export const academicMentorshipSpotlight: AcademicMentorshipSpotlight = {
+  id: 'iubat-academic-mentor-2023',
+  title: 'Academic Mentorship at IUBAT',
+  role: 'English & C++ Academic Mentor',
+  appointedAs: 'English Academic Mentor',
+  institution: 'International University of Business Agriculture and Technology (IUBAT)',
+  period: 'May 2023 – August 2023',
+  semester: 'Summer 2023',
+  year: 2023,
+  certificateUrl: 'https://drive.google.com/file/d/12eTe6GnbdcRekKIe9sfR47vanZGc6eQw/view?usp=sharing',
+  summary:
+    'In Summer 2023, I was officially appointed as an English Academic Mentor at IUBAT. Along with English lessons, I also helped students learn C++ programming. This gave me hands-on experience teaching in class, leading group sessions, and guiding students one-on-one.',
+  pillars: [
+    {
+      title: 'English Teaching',
+      focus: 'Official Role',
+      description:
+        'Taught English lessons in class, helping students improve their grammar, reading, writing, and speaking so they felt confident in their courses.',
+      skills: ['English Teaching', 'Public Speaking', 'Communication', 'Grammar'],
+    },
+    {
+      title: 'C++ Programming',
+      focus: 'Coding Help',
+      description:
+        'Taught C++ coding basics, helped students write clean code, find and fix bugs, and finish their lab assignments.',
+      skills: ['C++ Coding', 'Problem Solving', 'Debugging', 'Algorithms'],
+    },
+    {
+      title: 'Teaching & Leadership',
+      focus: 'Mentorship',
+      description:
+        'Ran classroom lessons, held one-on-one help hours, and gave students the confidence to speak and code better.',
+      skills: ['Classroom Teaching', '1-on-1 Mentoring', 'Student Leadership', 'Guidance'],
+    },
+  ],
+  keyHighlights: [
+    'Officially appointed as English Academic Mentor at IUBAT in Summer 2023.',
+    'Helped students with both English lessons and C++ programming.',
+    'Held one-on-one help sessions to answer questions and debug code.',
+    'Built students’ confidence in speaking English and solving programming problems.',
+  ],
+};
+
+export interface BasisExecutiveSpotlight {
+  id: string;
+  title: string;
+  role: string;
+  organization: string;
+  period: string;
+  summary: string;
+  initiatives: {
+    title: string;
+    semester: string;
+    roleNote?: string;
+    description: string;
+  }[];
+}
+
+export const basisExecutiveSpotlight: BasisExecutiveSpotlight = {
+  id: 'basis-student-forum-iubat',
+  title: 'BASIS Student Forum IUBAT',
+  role: 'Executive Member',
+  organization: 'BASIS Student Forum · IUBAT',
+  period: 'April 2024 – December 2025',
+  summary:
+    'Served as an Executive Member of the BASIS Student Forum at IUBAT. Led student technology initiatives, arranged university competitions, and organized hands-on workshops and industry seminars.',
+  initiatives: [
+    {
+      title: 'IQ & IT Competition for Freshers',
+      semester: 'Fall 2024',
+      roleNote: 'Question Setter',
+      description:
+        'Arranged the IQ and IT competition for incoming freshers and served as the official Question Setter for the event.',
+    },
+    {
+      title: 'Drone Technology Seminar',
+      semester: 'Summer 2025',
+      roleNote: 'Guest Speaker Event',
+      description:
+        'Arranged an interactive seminar on drone technology featuring industry guest speaker Mr. Zubayer Al Billal Khan.',
+    },
+    {
+      title: 'Python Programming Workshop',
+      semester: 'Fall 2025',
+      roleNote: 'Hands-on Workshop',
+      description:
+        'Arranged a practical Python programming workshop to help university students learn hands-on coding from scratch.',
+    },
+  ],
+};
+
+export const extracurricularActivities: ExtracurricularActivity[] = [
   {
     id: 'java-spring-training',
     title: 'Java Spring Framework 80-Hour Professional Training',
@@ -119,27 +231,94 @@ export const extracurricularActivities: ExtracurricularActivity[] = [
     period: '2024',
     category: 'training',
     description:
-      'Rigorous 80-hour advanced technical training on enterprise Java and the Spring ecosystem conducted in partnership with the Government ICT Division.',
+      'Completed an 80-hour training on Java, Spring Boot, and building web applications, organized by Jagannath University and the ICT Division of Bangladesh.',
     highlights: [
-      'Completed comprehensive training in Spring Boot, Spring Security, Hibernate/JPA, and microservices.',
-      'Awarded certificate of completion by the ICT Division and Jagannath University.',
+      'Learned Spring Boot, database connections with Hibernate, and building web APIs.',
+      'Earned an official certificate from the ICT Division and Jagannath University.',
     ],
     certificateUrl:
       'https://drive.google.com/open?id=151tQlgcAC39JYaq95CZn7O6w16r81WKC&usp=drive_fs',
   },
+];
+
+export interface OtherCampusActivity {
+  id: string;
+  title: string;
+  role: string;
+  organization: string;
+  category: 'membership' | 'volunteer' | 'workshop';
+  description: string;
+  tag: string;
+}
+
+export const otherCampusActivities: OtherCampusActivity[] = [
   {
-    id: 'academic-mentor',
-    title: 'Departmental Academic Mentorship',
-    role: 'Peer Mentor',
-    organization: 'Department of Computer Science & Engineering, IUBAT',
-    period: '2022 – 2024',
-    category: 'mentorship',
-    description:
-      'Supported undergraduate peers in computer science coursework, English language communication, and programming fundamentals.',
-    highlights: [
-      'Held regular tutoring hours for students needing reinforcement in programming concepts.',
-      'Assisted in departmental volunteering, tech bootcamps, and Machine Learning workshops.',
-    ],
+    id: 'dfi-member',
+    title: 'Debating Forum of IUBAT (DFI)',
+    role: 'Former General Member',
+    organization: 'IUBAT',
+    category: 'membership',
+    description: 'Participated in campus debate practices, public speaking sessions, and intellectual discussions.',
+    tag: 'Debating & Speech',
+  },
+  {
+    id: 'ims-member',
+    title: 'IUBAT Math Society (IMS)',
+    role: 'Former General Member',
+    organization: 'IUBAT',
+    category: 'membership',
+    description: 'Engaged in mathematics problem-solving workshops and quantitative logic activities.',
+    tag: 'Mathematics & Logic',
+  },
+  {
+    id: 'cse-volunteer',
+    title: 'CSE Department Volunteer',
+    role: 'Student Volunteer',
+    organization: 'IUBAT CSE Department',
+    category: 'volunteer',
+    description: 'Done volunteer work for departmental events, workshops, and student coordination.',
+    tag: 'Volunteering',
+  },
+  {
+    id: 'github-bootcamp',
+    title: 'GitHub Bootcamp',
+    role: 'Participant',
+    organization: 'IUBAT CSE Department',
+    category: 'workshop',
+    description: 'Joined hands-on GitHub bootcamp organized by the CSE department to learn git workflows and collaboration.',
+    tag: 'Version Control',
+  },
+  {
+    id: 'canva-pro-session',
+    title: 'Canva Pro Design Session',
+    role: 'Participant',
+    organization: 'IUBAT',
+    category: 'workshop',
+    description: 'Joined design session focused on Canva Pro tools, creative layouts, and visual communication.',
+    tag: 'Creative Design',
   },
 ];
+
+export interface ConferenceCertificateInfo {
+  title: string;
+  conferences: string[];
+  certificateUrl: string;
+}
+
+export const conferenceCertificateInfo: ConferenceCertificateInfo = {
+  title: 'Conference Certificates',
+  conferences: [
+    'ICCIT',
+    'RAAICON',
+    'SPICSCON',
+    'COMPASS',
+    'ICCA',
+    'BECITHCON',
+    'ICECE',
+    'ICECTE',
+    'ICONNECT',
+    'QPAIN',
+  ],
+  certificateUrl: '#',
+};
 

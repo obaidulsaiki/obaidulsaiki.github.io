@@ -41,28 +41,31 @@ export default function ResearchPage() {
   // Smart multi-field filter
   const filteredPapers = useMemo(() => {
     return researchPublications.filter((paper) => {
-      // 1. Search Query filter (matches title, authors, abstract, keywords, venue, publisher, PID)
+      // 1. Multi-term Smart Search Query filter (matches title, authors, authorList, abstract, keywords, tags, venue, publisher, category, level, year, PID)
       if (filters.searchQuery.trim() !== '') {
         const query = filters.searchQuery.toLowerCase().trim();
-        const matchesTitle = paper.title.toLowerCase().includes(query);
-        const matchesAuthors = paper.authors.toLowerCase().includes(query);
-        const matchesAbstract = paper.abstract.toLowerCase().includes(query);
-        const matchesKeywords = paper.keywords.some((kw) => kw.toLowerCase().includes(query));
-        const matchesVenue = paper.venue.toLowerCase().includes(query);
-        const matchesPublisher = paper.publisher.toLowerCase().includes(query);
-        const matchesPid = paper.pid ? paper.pid.toLowerCase().includes(query) : false;
-        const matchesYear = paper.year.toString().includes(query);
+        const terms = query.split(/\s+/).filter(Boolean);
 
-        if (
-          !matchesTitle &&
-          !matchesAuthors &&
-          !matchesAbstract &&
-          !matchesKeywords &&
-          !matchesVenue &&
-          !matchesPublisher &&
-          !matchesPid &&
-          !matchesYear
-        ) {
+        const searchableText = [
+          paper.title,
+          paper.authors,
+          paper.authorList.join(' '),
+          paper.abstract,
+          paper.keywords.join(' '),
+          paper.tags.join(' '),
+          paper.venue,
+          paper.publisher,
+          paper.category,
+          paper.level,
+          paper.status,
+          paper.year.toString(),
+          paper.pid || '',
+        ]
+          .join(' ')
+          .toLowerCase();
+
+        const matchesAllTerms = terms.every((term) => searchableText.includes(term));
+        if (!matchesAllTerms) {
           return false;
         }
       }
@@ -342,6 +345,7 @@ export default function ResearchPage() {
       <AuthorLeaderboard
         papers={researchPublications}
         selectedAuthor={filters.author}
+        searchQuery={filters.searchQuery}
         onSelectAuthor={(author) => {
           setFilters((prev) => ({ ...prev, author }));
           setCurrentPage(1);

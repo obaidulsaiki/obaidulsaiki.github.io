@@ -12,7 +12,7 @@ export interface FilterState {
   publisher: string; // 'all' | 'IEEE' | 'ACM' | 'Springer Nature' | 'Elsevier'
   level: string; // 'all' | 'Q1' | 'Q2' | 'A' | 'B' | 'C'
   author: string | null;
-  collaboratorRole: string; // 'all' | 'Sir' | "Ma'am" | 'Partner' | 'Senior Brother' | 'Small Brother' | 'Friends'
+  collaboratorRole: string; // 'all' | 'Sir' | "Ma'am" | 'Research Partner' | 'Senior Brother' | 'Small Brother' | 'Friends'
 }
 
 interface Props {
@@ -85,26 +85,54 @@ export default function ResearchFilterToolbar({
       {/* 2. Interactive Filter Command Center */}
       <div className="p-4 sm:p-5 rounded-3xl bg-surface/50 border border-surface-border shadow-soft-sm space-y-4">
         {/* Row A: Smart Search Bar */}
-        <div className="relative w-full">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-accent-primary" />
-          <input
-            type="text"
-            value={filters.searchQuery}
-            onChange={(e) =>
-              onChange((prev) => ({ ...prev, searchQuery: e.target.value }))
-            }
-            placeholder="Smart search: title, author (e.g. Jibon, Rakib), keyword, venue, publisher, or year..."
-            className="w-full pl-10 pr-10 py-2.5 rounded-2xl bg-canvas border border-surface-border focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20 text-xs sm:text-sm text-ink-primary placeholder:text-ink-subtle outline-none transition-all shadow-soft-sm"
-          />
-          {filters.searchQuery && (
-            <button
-              type="button"
-              onClick={() => onChange((prev) => ({ ...prev, searchQuery: '' }))}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-surface text-ink-muted hover:text-ink-primary"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          )}
+        <div className="space-y-2">
+          <div className="relative w-full">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-accent-primary" />
+            <input
+              type="text"
+              value={filters.searchQuery}
+              onChange={(e) => {
+                const query = e.target.value;
+                onChange((prev) => ({ ...prev, searchQuery: query }));
+              }}
+              placeholder="Search by title, author (e.g. Jibon, Rakib), keyword, venue, publisher, or year..."
+              className="w-full pl-10 pr-24 py-2.5 rounded-2xl bg-canvas border border-surface-border focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20 text-xs sm:text-sm text-ink-primary placeholder:text-ink-subtle outline-none transition-all shadow-soft-sm"
+            />
+            {filters.searchQuery && (
+              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-accent-soft/40 text-accent-primary font-bold hidden sm:inline">
+                  {filteredCount} {filteredCount === 1 ? 'match' : 'matches'}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => onChange((prev) => ({ ...prev, searchQuery: '' }))}
+                  className="p-1 rounded-full hover:bg-surface text-ink-muted hover:text-ink-primary cursor-pointer transition-colors"
+                  title="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Suggestion Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 text-[10px] font-mono text-ink-subtle scrollbar-none">
+            <span className="shrink-0 font-bold text-ink-muted">Quick filters:</span>
+            {['Mamba', 'EEG', 'Stroke', 'Ferdaus Jibon', 'Rakib', 'Q1', 'ICCIT', 'Bangla'].map((quick) => (
+              <button
+                key={quick}
+                type="button"
+                onClick={() => onChange((prev) => ({ ...prev, searchQuery: quick }))}
+                className={`px-2 py-0.5 rounded-lg border transition-all cursor-pointer whitespace-nowrap ${
+                  filters.searchQuery.toLowerCase() === quick.toLowerCase()
+                    ? 'bg-accent-primary text-canvas border-accent-primary font-bold'
+                    : 'bg-canvas hover:bg-surface text-ink-muted hover:text-ink-primary border-surface-border/80'
+                }`}
+              >
+                {quick}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Row B: Paper Status Lifecycle Pipeline */}
@@ -241,7 +269,7 @@ export default function ResearchFilterToolbar({
               <option value="all">All Roles</option>
               <option value="Sir">Sir (Faculty)</option>
               <option value="Ma'am">Ma&apos;am (Faculty)</option>
-              <option value="Partner">Partner (Mariha Tabassum)</option>
+              <option value="Research Partner">Research Partner (Mariha Tabassum)</option>
               <option value="Senior Brother">Senior Brother</option>
               <option value="Small Brother">Small Brother</option>
               <option value="Friends">Friends</option>

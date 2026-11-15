@@ -8,10 +8,11 @@ import { ResearchPublication } from '@/data/research';
 interface Props {
   papers: ResearchPublication[];
   selectedAuthor: string | null;
+  searchQuery?: string;
   onSelectAuthor: (authorName: string | null) => void;
 }
 
-export type AuthorRelationship = 'Sir' | "Ma'am" | 'Partner' | 'Friends' | 'Small Brother' | 'Senior Brother';
+export type AuthorRelationship = 'Sir' | "Ma'am" | 'Research Partner' | 'Friends' | 'Small Brother' | 'Senior Brother';
 
 export function getAuthorRelationship(name: string): AuthorRelationship {
   const n = name.toLowerCase();
@@ -29,7 +30,9 @@ export function getAuthorRelationship(name: string): AuthorRelationship {
     n.includes('sonia') ||
     n.includes('afroz') ||
     n.includes('nusrat') ||
-    n.includes('tamanna')
+    n.includes('tamanna') ||
+    n.includes('afrin') ||
+    n.includes('rafat')
   ) {
     return "Ma'am";
   }
@@ -61,14 +64,15 @@ export function getAuthorRelationship(name: string): AuthorRelationship {
     n.includes('mamoon') ||
     n.includes('sheekar') ||
     n.includes('banerjee') ||
-    n.includes('saidur')
+    n.includes('saidur') ||
+    n.includes('naeem')
   ) {
     return 'Sir';
   }
 
-  // Partner (Mariha Tabassum is the sole partner)
+  // Research Partner (Mariha Tabassum is the sole research partner)
   if (n.includes('mariha')) {
-    return 'Partner';
+    return 'Research Partner';
   }
 
   // Senior Brother / Mentor / Senior Lab Peer
@@ -102,7 +106,12 @@ export interface AuthorStat {
   relationship: AuthorRelationship;
 }
 
-export default function AuthorLeaderboard({ papers, selectedAuthor, onSelectAuthor }: Props) {
+export default function AuthorLeaderboard({
+  papers,
+  selectedAuthor,
+  searchQuery,
+  onSelectAuthor,
+}: Props) {
   const [showAllAuthors, setShowAllAuthors] = useState(false);
   const [selectedRole, setSelectedRole] = useState<AuthorRelationship | 'All'>('All');
 
@@ -158,7 +167,7 @@ export default function AuthorLeaderboard({ papers, selectedAuthor, onSelectAuth
       All: authorStats.length,
       Sir: 0,
       "Ma'am": 0,
-      Partner: 0,
+      'Research Partner': 0,
       'Senior Brother': 0,
       'Small Brother': 0,
       Friends: 0,
@@ -169,11 +178,23 @@ export default function AuthorLeaderboard({ papers, selectedAuthor, onSelectAuth
     return counts;
   }, [authorStats]);
 
-  // Filter collaborator cards based on the selected relationship category
+  // Filter collaborator cards based on the selected relationship category and search query
   const filteredAuthors = useMemo(() => {
-    if (selectedRole === 'All') return authorStats;
-    return authorStats.filter((a) => a.relationship === selectedRole);
-  }, [authorStats, selectedRole]);
+    let list = authorStats;
+    if (selectedRole !== 'All') {
+      list = list.filter((a) => a.relationship === selectedRole);
+    }
+    if (searchQuery && searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(
+        (a) =>
+          a.name.toLowerCase().includes(q) ||
+          a.relationship.toLowerCase().includes(q) ||
+          a.domains.some((d) => d.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }, [authorStats, selectedRole, searchQuery]);
 
   const displayedAuthors = showAllAuthors ? filteredAuthors : filteredAuthors.slice(0, 8);
 
@@ -182,7 +203,7 @@ export default function AuthorLeaderboard({ papers, selectedAuthor, onSelectAuth
       case 'Sir':
       case "Ma'am":
         return 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/40 font-bold';
-      case 'Partner':
+      case 'Research Partner':
         return 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/40 font-bold';
       case 'Senior Brother':
         return 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/40 font-semibold';
@@ -240,7 +261,7 @@ export default function AuthorLeaderboard({ papers, selectedAuthor, onSelectAuth
               { id: 'All', label: 'All', count: roleCounts['All'], badgeColor: 'bg-surface-border/60 text-ink-primary' },
               { id: 'Sir', label: 'Sir', count: roleCounts['Sir'], badgeColor: 'bg-purple-500/20 text-purple-700 dark:text-purple-300' },
               { id: "Ma'am", label: "Ma'am", count: roleCounts["Ma'am"], badgeColor: 'bg-purple-500/20 text-purple-700 dark:text-purple-300' },
-              { id: 'Partner', label: 'Partner', count: roleCounts['Partner'], badgeColor: 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300' },
+              { id: 'Research Partner', label: 'Research Partner', count: roleCounts['Research Partner'], badgeColor: 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300' },
               { id: 'Senior Brother', label: 'Senior Brother', count: roleCounts['Senior Brother'], badgeColor: 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300' },
               { id: 'Small Brother', label: 'Small Brother', count: roleCounts['Small Brother'], badgeColor: 'bg-teal-500/20 text-teal-700 dark:text-teal-300' },
               { id: 'Friends', label: 'Friends', count: roleCounts['Friends'], badgeColor: 'bg-sky-500/20 text-sky-700 dark:text-sky-300' },
