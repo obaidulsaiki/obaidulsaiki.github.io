@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/animations/PageTransition';
+import BunnyPageFlip from '@/components/common/BunnyPageFlip';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://obaidulhaque.me'),
@@ -38,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-canvas text-ink-primary antialiased min-h-screen flex flex-col selection:bg-accent-soft selection:text-ink-primary">
+        <BunnyPageFlip />
         <Navbar />
         <main className="flex-1 w-full mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <PageTransition>{children}</PageTransition>

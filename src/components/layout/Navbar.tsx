@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, LayoutGroup, MotionConfig } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { MagneticPull } from '@/components/animations/MotionPrimitives';
+import { triggerBunnyHello } from '@/components/common/BunnyPageFlip';
 
 interface NavItem {
   name: string;
@@ -139,7 +140,11 @@ export default function Navbar() {
             <Link
               href="/contact/"
               prefetch={true}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-canvas bg-accent-primary hover:bg-accent-primaryDark rounded-full shadow-soft-sm transition-colors duration-200"
+              onClick={(e) => {
+                e.preventDefault();
+                triggerBunnyHello();
+              }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-canvas bg-accent-primary hover:bg-accent-primaryDark rounded-full shadow-soft-sm transition-colors duration-200 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Say Hello</span>
@@ -193,14 +198,15 @@ export default function Navbar() {
                 <Link
                   href="/contact/"
                   prefetch={true}
-                  onClick={() => {
-                    setOptimisticHref('/contact/');
+                  onClick={(e) => {
+                    e.preventDefault();
                     setMobileMenuOpen(false);
+                    triggerBunnyHello();
                   }}
-                  className="flex w-full items-center justify-center gap-2 py-2.5 text-sm font-medium text-canvas bg-accent-primary rounded-xl shadow-soft-sm"
+                  className="flex w-full items-center justify-center gap-2 py-2.5 text-sm font-medium text-canvas bg-accent-primary rounded-xl shadow-soft-sm cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4" />
-                  <span>Get in Touch</span>
+                  <span>Say Hello</span>
                 </Link>
               </div>
             </div>
