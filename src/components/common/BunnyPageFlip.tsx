@@ -17,8 +17,13 @@ export default function BunnyPageFlip() {
   const pathname = usePathname();
 
   const [isActive, setIsActive] = useState(false);
-  const [phase, setPhase] = useState<'idle' | 'peek' | 'flip' | 'retreat'>('idle');
+  const [phase, setPhase] = useState<'idle' | 'peek' | 'flip' | 'reveal' | 'retreat'>('idle');
   const [isAlreadyOnContact, setIsAlreadyOnContact] = useState(false);
+
+  // Eagerly prefetch /contact/ on mount so route swapping takes 0ms latency
+  useEffect(() => {
+    router.prefetch('/contact/');
+  }, [router]);
 
   const startAnimation = useCallback(() => {
     if (isActive) return;
@@ -41,23 +46,33 @@ export default function BunnyPageFlip() {
       return;
     }
 
-    // Sequence for page flip to Contact Hub:
-    // 0ms - 850ms: Peek in from right + lively wave + speech bubble
-    // 850ms - 1700ms: ONE fluid unbroken right-to-left page sweep (100% -> -100%)
-    // 1250ms: router.push('/contact/') while screen is fully covered mid-sweep
-    // 1750ms: Carrier is completely off-screen on the left -> silent instant unmount (NO reverse back flip!)
+    // BUTTERY SMOOTH SEQUENCE:
+    // 0ms - 800ms: Peek in from right + energetic wave + speech bubble
+    // 800ms - 1350ms: Bunny pulls page sheet to 100% COVER the screen (100% -> 0%)
+    // 1350ms - 1500ms: While screen is 100% covered, swap route cleanly behind the cover
+    // 1500ms - 2050ms: Sheet peels away to the left (0% -> -100%), smoothly revealing Contact Hub
+    // 2100ms: Clean instant unmount without any reverse motion
     setTimeout(() => {
       setPhase('flip');
-    }, 850);
+    }, 800);
 
     setTimeout(() => {
+      // Swaps route while screen is 100% covered by the sheet
       router.push('/contact/');
-    }, 1250);
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    }, 1350);
+
+    setTimeout(() => {
+      // Peels sheet away to reveal the already-rendered Contact Hub
+      setPhase('reveal');
+    }, 1500);
 
     setTimeout(() => {
       setIsActive(false);
       setPhase('idle');
-    }, 1750);
+    }, 2100);
   }, [isActive, pathname, router]);
 
   useEffect(() => {
@@ -71,6 +86,8 @@ export default function BunnyPageFlip() {
     };
   }, [startAnimation]);
 
+  const isPulling = phase === 'flip' || phase === 'reveal';
+
   return (
     <div className="fixed inset-0 pointer-events-none z-[99999] overflow-hidden select-none">
       <AnimatePresence mode="wait">
@@ -83,16 +100,20 @@ export default function BunnyPageFlip() {
                 phase === 'peek'
                   ? '100%'
                   : phase === 'flip'
+                  ? '0%'
+                  : phase === 'reveal'
                   ? '-100%'
                   : 'calc(100% + 220px)',
             }}
-            // CRITICAL FIX: Instant fade exit with 0 duration so there is NEVER a reverse "back-flip" wipe!
+            // Instant silent unmount with zero backwards motion
             exit={{ opacity: 0, transition: { duration: 0 } }}
             transition={
               phase === 'peek'
                 ? { type: 'spring', stiffness: 360, damping: 26 }
                 : phase === 'flip'
-                ? { duration: 0.85, ease: [0.32, 0.72, 0, 1] }
+                ? { duration: 0.52, ease: [0.32, 0.72, 0, 1] }
+                : phase === 'reveal'
+                ? { duration: 0.55, ease: [0.32, 0.72, 0, 1] }
                 : { duration: 0.45, ease: 'easeInOut' }
             }
             className="absolute inset-y-0 right-0 w-full flex items-center justify-start overflow-visible"
@@ -125,12 +146,12 @@ export default function BunnyPageFlip() {
               {/* Multi-joint Animated Vector Bunny */}
               <motion.div
                 animate={
-                  phase === 'flip'
+                  isPulling
                     ? { rotate: -14, y: [0, -4, 0] }
                     : { rotate: [0, 2, 0], y: [0, -6, 0] }
                 }
                 transition={
-                  phase === 'flip'
+                  isPulling
                     ? { y: { repeat: Infinity, duration: 0.24, ease: 'easeInOut' }, rotate: { duration: 0.18 } }
                     : {
                         y: { repeat: Infinity, duration: 0.55, ease: 'easeInOut' },
@@ -164,12 +185,12 @@ export default function BunnyPageFlip() {
                   {/* Left Ear (Tall, wobbly, floppy ear) */}
                   <motion.g
                     animate={
-                      phase === 'flip'
+                      isPulling
                         ? { rotate: -24 }
                         : { rotate: [-10, 10, -10] }
                     }
                     transition={
-                      phase === 'flip'
+                      isPulling
                         ? { duration: 0.2 }
                         : { repeat: Infinity, duration: 0.75, ease: 'easeInOut' }
                     }
@@ -191,12 +212,12 @@ export default function BunnyPageFlip() {
                   {/* Right Ear (Playfully tilted cute ear) */}
                   <motion.g
                     animate={
-                      phase === 'flip'
+                      isPulling
                         ? { rotate: -18 }
                         : { rotate: [12, -8, 12] }
                     }
                     transition={
-                      phase === 'flip'
+                      isPulling
                         ? { duration: 0.2 }
                         : { repeat: Infinity, duration: 0.95, ease: 'easeInOut' }
                     }
@@ -249,7 +270,7 @@ export default function BunnyPageFlip() {
                   </motion.g>
 
                   {/* Eyebrows (Determined angle when pulling!) */}
-                  {phase === 'flip' ? (
+                  {isPulling ? (
                     <g stroke="#AA5E7A" strokeWidth="2" strokeLinecap="round">
                       <path d="M52 83 Q58 87 64 85" />
                       <path d="M80 85 Q86 87 92 83" />
@@ -271,7 +292,7 @@ export default function BunnyPageFlip() {
 
                   {/* Mouth */}
                   <path
-                    d={phase === 'flip' ? 'M68 109 Q72 113 76 109' : 'M66 107 Q72 112 78 107'}
+                    d={isPulling ? 'M68 109 Q72 113 76 109' : 'M66 107 Q72 112 78 107'}
                     stroke="#AA5E7A"
                     strokeWidth="2"
                     strokeLinecap="round"
@@ -287,7 +308,7 @@ export default function BunnyPageFlip() {
                   <line x1="98" y1="108" x2="118" y2="111" stroke="#AA5E7A" strokeWidth="1.5" strokeLinecap="round" opacity="0.75" />
 
                   {/* Effort Sweat-Drop (Only during pulling flip) */}
-                  {phase === 'flip' && (
+                  {isPulling && (
                     <motion.path
                       initial={{ scale: 0 }}
                       animate={{ scale: [0.8, 1.2, 1] }}
@@ -297,7 +318,7 @@ export default function BunnyPageFlip() {
                   )}
 
                   {/* PAWS & HANDS INTERACTION */}
-                  {phase !== 'flip' ? (
+                  {!isPulling ? (
                     /* PEEK MODE: Rest right paw, actively wave left paw with pink toe beans! */
                     <g>
                       {/* Resting Back Paw */}
@@ -339,7 +360,7 @@ export default function BunnyPageFlip() {
                       </motion.g>
                     </g>
                   ) : (
-                    /* FLIP MODE: Both hands reach out and visibly CLUTCH the curled page edge! */
+                    /* FLIP & REVEAL MODE: Both hands reach out and visibly CLUTCH the curled page edge! */
                     <g>
                       {/* Top Arm Reaching to Edge */}
                       <path
@@ -384,11 +405,15 @@ export default function BunnyPageFlip() {
               </motion.div>
             </div>
 
-            {/* 2. The Turning Page Surface (Sweeps continuously across the screen from right to left) */}
+            {/* 2. The Turning Page Surface (Sweeps to 100% cover, then peels to unveil Contact Hub) */}
             <div className="relative w-full h-full bg-gradient-to-r from-[#7C0E44] via-[#AA5E7A] to-[#D49A9A] shadow-[-25px_0_45px_rgba(0,0,0,0.5)] flex items-center justify-center">
               {/* Curled Paper Fold Glow on the leading left edge */}
               <div className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-white/35 via-white/10 to-transparent blur-sm pointer-events-none" />
               <div className="absolute top-0 bottom-0 left-0 w-2 bg-white/95 shadow-[0_0_14px_rgba(255,255,255,0.9)] pointer-events-none" />
+
+              {/* Curled Paper Trailing Edge Glow on the right edge as Contact Hub is unveiled */}
+              <div className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-white/30 via-white/10 to-transparent blur-sm pointer-events-none" />
+              <div className="absolute top-0 bottom-0 right-0 w-2 bg-white/90 shadow-[-5px_0_15px_rgba(255,255,255,0.8)] pointer-events-none" />
 
               {/* Playful Floating Bunny Mascot / Carrot in Center */}
               <div className="flex flex-col items-center gap-2.5 text-white/95 select-none px-4 text-center">
