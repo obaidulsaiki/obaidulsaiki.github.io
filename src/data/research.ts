@@ -187,7 +187,7 @@ export const researchPublications: ResearchPublication[] = [
     "publisher": "Elsevier",
     "level": "Q1",
     "qIf": "Q1-3",
-    "status": "working",
+    "status": "submitted",
     "year": 2026,
     "authorPosition": "Co-Author",
     "authors": "Farhan Shahriar, Raufu Umme Rhidi, Ferdaus Anam Jibon, Obaidul Haque",
@@ -2379,6 +2379,6 @@ export const publicationOverviewStats = {
   firstAuthorCount: '24',
   publishedCount: '11',
   presentedCount: '14',
-  underReviewCount: '17',
+  underReviewCount: '18',
   venues: 'ACM, IEEE, Springer Nature, Elsevier',
 };
