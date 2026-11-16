@@ -98,6 +98,50 @@ The portfolio's interactive skills showcase is implemented via:
 
 ---
 
+## Interactive Travel Map Engine ("I Travelled")
+
+The portfolio features a custom-built, high-performance vector cartography engine on the `/hobby` route ([`src/components/hobby/TravelMapSection.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/hobby/TravelMapSection.tsx)), engineered with direct DOM manipulation to maintain continuous 60fps gesture response without React state churn.
+
+### 1. Architectural Principles & Specifications
+
+| Feature | Technical Implementation | Metric / Value |
+| :--- | :--- | :--- |
+| **Performance Pipeline** | Direct SVG `viewBox` mutation via DOM refs, bypassing React re-renders | Continuous 60.0000 fps during pan/zoom |
+| **Canvas Aspect Ratio** | Responsive locked 16:9 projection canvas | `aspect-[16/9] max-h-[460px]` |
+| **Explored Districts** | Bangladesh travel tracker with GoZayaan visual parity | 34.0000 / 64.0000 districts (53.1250% explored) |
+| **Interactive Countries** | Natural Earth vector geometries covering the globe | 240.0000 sovereign nations & territories |
+| **Palestine Geopolitics** | Unified historic Palestine without partition lines or internal boundaries | 100.0000% historic recognition (`id: 275`) |
+| **Maldives Architecture** | High-definition 10m Natural Earth archipelago chain with distinct strokes | 34.0000 natural atolls from Haa Alif to Addu |
+| **Gesture Navigation** | Native non-passive `{ passive: false }` listener with cursor-anchored zoom | 0.0000% Chrome browser page zoom conflict |
+| **Live Geolocation** | Browser WGS84 GPS to Equirectangular coordinate projection | 1200.0000 ms camera fly-to with radar beacon |
+
+### 2. Coordinate Projection & Mathematical Formulas
+
+The map utilizes an Equirectangular projection mapping WGS84 geographical coordinates (longitude $\lambda$, latitude $\phi$) into a normalized $1000.0000 \times 500.0000$ world space:
+
+$$x = 500.0000 + \frac{\lambda \times 1000.0000}{360.0000}, \quad y = 250.0000 - \frac{\phi \times 1000.0000}{360.0000}$$
+
+#### Camera ViewBox Coordinates:
+- **World Canvas ViewBox**: `[0.0000, -31.2500, 1000.0000, 562.5000]` (Full $16:9$ viewport).
+- **Bangladesh Focused ViewBox**: `[733.9450, 174.6480, 34.0000, 19.1250]` (Takes up $\approx 85.5000\%$ of canvas height).
+- **Dhaka Epicenter Anchor**: `x: 750.5710, y: 183.9250` (Latitude $23.8103^\circ \text{N}$, Longitude $90.4125^\circ \text{E}$).
+
+### 3. Gesture Controls & Interaction Features
+
+1. **Cursor-Anchored Direct Wheel Zoom**:
+   - Scroll wheel over the canvas zooms directly toward the cursor location without requiring `Ctrl` or modifier keys.
+   - Non-passive `{ passive: false }` wheel interception stops Chrome's default browser window zoom (`110.0000%`, `125.0000%`) while preserving native page scrolling when outside the map.
+2. **Move to Location (Live GPS)**:
+   - Queries `navigator.geolocation.getCurrentPosition`.
+   - Projects live GPS coordinates into canvas coordinates, executes smooth 1200ms camera fly-to, and renders a live pulsing blue radar marker (`#user-location-marker`).
+   - Automatically falls back to central Dhaka if browser permissions are denied.
+3. **Multi-Tier Hover Card**:
+   - Hovering Bangladesh displays individual district cards (visited status, division, coordinates, explored badge).
+   - Hovering outside Bangladesh displays international country cards (country name, territory status, subtle accent fill `#D5C8B4`).
+   - Hovering open ocean water dismisses the tooltip.
+
+---
+
 ## Technical Details: Setting Up the Project Locally
 
 ### 1. Prerequisites
@@ -387,6 +431,8 @@ obaidulsaiki.github.io/
 │   │   ├── animations/
 │   │   │   ├── MotionPrimitives.tsx # MagneticPull, SlidingFilterTabs, Spring presets
 │   │   │   └── PageTransition.tsx   # Smooth route change transition
+│   │   ├── hobby/
+│   │   │   └── TravelMapSection.tsx # 60fps pan/zoom engine, 64 districts & 240 countries
 │   │   ├── home/
 │   │   │   ├── AboutMe.tsx          # 1-row layout (Bio paragraph + 2x2 focus grid)
 │   │   │   ├── FeaturedProjects.tsx # Engineering systems (EduMaster, Tracker)
@@ -405,13 +451,16 @@ obaidulsaiki.github.io/
 │   │       ├── EducationTimeline.tsx # IUBAT degree milestones & coursework tabs
 │   │       └── ExperienceTimeline.tsx # Industry work milestones
 │   └── data/
+│       ├── bangladeshWorldDistricts.ts # 64 district geometries in world projection
 │       ├── education.ts         # Degree specs, semesters, grades, and courses
 │       ├── experience.ts        # Saask Task & AKS Global roles, featured apps
 │       ├── extracurricular.ts   # Codeforces/LeetCode metrics, leadership roles
 │       ├── hobbies.ts           # Acoustic tracks, street photography galleries
 │       ├── profile.ts           # Core profile data, bio, stats, and socials
 │       ├── research.ts          # 40+ publications, DOI links, publication stats
-│       └── skills.ts            # Detailed skill taxonomy, brand colors, icons
+│       ├── skills.ts            # Detailed skill taxonomy, brand colors, icons
+│       ├── travelData.ts        # Travel scorecard, division summaries, borders
+│       └── worldCountries.ts    # 240 countries vector geometries, 10m Maldives
 ├── next.config.mjs              # Next.js static export config (output: 'export')
 ├── tailwind.config.ts           # Color tokens, shadows, font configurations
 ├── tsconfig.json                # TypeScript compiler configuration
