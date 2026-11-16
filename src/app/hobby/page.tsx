@@ -29,13 +29,19 @@ const iconMap: Record<string, LucideIcon> = {
 function PosterCard({
   poster,
   itemType,
-  isPriority,
 }: {
   poster: MediaTopItem;
   itemType: 'watch' | 'read';
   isPriority?: boolean;
 }) {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const imgRef = React.useRef<HTMLImageElement>(null);
+
+  React.useEffect(() => {
+    if (imgRef.current?.complete) {
+      setIsLoaded(true);
+    }
+  }, []);
 
   return (
     <div
@@ -50,22 +56,19 @@ function PosterCard({
             <img
               src="/images/anime-loading.gif"
               alt="Loading animation"
-              className="w-10 h-10 object-contain drop-shadow-sm"
+              className="w-8 h-8 object-contain drop-shadow-sm"
             />
-            <span className="text-[9px] font-mono font-bold text-[#AA5E7A] dark:text-[#D49A9A] mt-1 tracking-wider animate-pulse">
-              LOADING...
-            </span>
           </div>
         )}
 
         <img
+          ref={imgRef}
           src={poster.imageUrl}
           alt={poster.title}
-          loading={isPriority ? 'eager' : 'lazy'}
-          fetchPriority={isPriority ? 'high' : 'auto'}
+          loading="eager"
           decoding="async"
           onLoad={() => setIsLoaded(true)}
-          className={`relative z-[1] w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+          className={`relative z-[1] w-full h-full object-cover transition-opacity duration-300 group-hover:scale-105 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onError={(e) => {
@@ -115,13 +118,19 @@ function PosterCard({
 function ConsumingCardThumbnail({
   imageUrl,
   title,
-  isPriority,
 }: {
   imageUrl?: string;
   title: string;
   isPriority?: boolean;
 }) {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const imgRef = React.useRef<HTMLImageElement>(null);
+
+  React.useEffect(() => {
+    if (imgRef.current?.complete) {
+      setIsLoaded(true);
+    }
+  }, []);
 
   if (!imageUrl) return null;
 
@@ -132,18 +141,18 @@ function ConsumingCardThumbnail({
           <img
             src="/images/anime-loading.gif"
             alt="Loading animation"
-            className="w-8 h-8 object-contain"
+            className="w-7 h-7 object-contain"
           />
         </div>
       )}
       <img
+        ref={imgRef}
         src={imageUrl}
         alt={title}
-        loading={isPriority ? 'eager' : 'lazy'}
-        fetchPriority={isPriority ? 'high' : 'auto'}
+        loading="eager"
         decoding="async"
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
+        className={`w-full h-full object-cover transition-opacity duration-300 group-hover:scale-105 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       />
