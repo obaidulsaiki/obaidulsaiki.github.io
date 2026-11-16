@@ -26,6 +26,131 @@ const iconMap: Record<string, LucideIcon> = {
   Globe,
 };
 
+function PosterCard({
+  poster,
+  itemType,
+  isPriority,
+}: {
+  poster: MediaTopItem;
+  itemType: 'watch' | 'read';
+  isPriority?: boolean;
+}) {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  return (
+    <div
+      key={poster.rank}
+      className="group relative rounded-xl overflow-hidden bg-canvas border border-[#D49A9A]/30 hover:border-[#7C0E44] dark:hover:border-[#F2DACE] transition-all shadow-soft-sm hover:shadow-[0_6px_20px_rgba(124,14,68,0.15)] flex flex-col justify-between"
+    >
+      {/* Aspect 2/3 Poster Container */}
+      <div className="relative aspect-[2/3] w-full bg-surface-muted overflow-hidden">
+        {/* Animated Anime Cartoon Loading GIF Placeholder */}
+        {!isLoaded && (
+          <div className="absolute inset-0 z-0 flex flex-col items-center justify-center p-2 text-center bg-gradient-to-br from-[#7C0E44]/10 to-[#D49A9A]/15 select-none pointer-events-none">
+            <img
+              src="/images/anime-loading.gif"
+              alt="Loading animation"
+              className="w-10 h-10 object-contain drop-shadow-sm"
+            />
+            <span className="text-[9px] font-mono font-bold text-[#AA5E7A] dark:text-[#D49A9A] mt-1 tracking-wider animate-pulse">
+              LOADING...
+            </span>
+          </div>
+        )}
+
+        <img
+          src={poster.imageUrl}
+          alt={poster.title}
+          loading={isPriority ? 'eager' : 'lazy'}
+          fetchPriority={isPriority ? 'high' : 'auto'}
+          decoding="async"
+          onLoad={() => setIsLoaded(true)}
+          className={`relative z-[1] w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+          }}
+        />
+
+        {/* Rank Number Badge pinned on top-left of photo */}
+        <div className="absolute top-1.5 left-1.5 z-10">
+          <span className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-[#7C0E44] text-white text-[10px] font-mono font-extrabold shadow-sm">
+            #{poster.rank}
+          </span>
+        </div>
+
+        {/* Status Badge pinned on top-right of photo */}
+        <div className="absolute top-1.5 right-1.5 z-10">
+          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-black/85 backdrop-blur-sm text-[#F2DACE] border border-[#AA5E7A]/50 text-[9px] font-mono font-bold shadow-sm">
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                poster.status === 'Reading' || poster.status === 'Watching'
+                  ? 'bg-amber-400 animate-pulse'
+                  : 'bg-emerald-400'
+              }`}
+            />
+            {poster.status || (itemType === 'watch' ? 'Watched' : 'Completed')}
+          </span>
+        </div>
+
+        {/* Subtle dark gradient overlay on hover */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+      </div>
+
+      {/* Name / Title */}
+      <div className="p-2 sm:p-2.5 bg-canvas/95 flex-1 flex items-center">
+        <p
+          className="text-[11px] sm:text-xs font-bold text-ink-primary leading-tight line-clamp-2 group-hover:text-[#7C0E44] dark:group-hover:text-[#F2DACE] transition-colors"
+          title={poster.title}
+        >
+          {poster.title}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ConsumingCardThumbnail({
+  imageUrl,
+  title,
+  isPriority,
+}: {
+  imageUrl?: string;
+  title: string;
+  isPriority?: boolean;
+}) {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  if (!imageUrl) return null;
+
+  return (
+    <div className="relative w-20 sm:w-24 aspect-[2/3] rounded-xl overflow-hidden shadow-md shrink-0 border border-[#D49A9A]/40 bg-surface-muted">
+      {!isLoaded && (
+        <div className="absolute inset-0 z-0 flex flex-col items-center justify-center p-1 bg-gradient-to-br from-[#7C0E44]/10 to-[#D49A9A]/15 select-none pointer-events-none">
+          <img
+            src="/images/anime-loading.gif"
+            alt="Loading animation"
+            className="w-8 h-8 object-contain"
+          />
+        </div>
+      )}
+      <img
+        src={imageUrl}
+        alt={title}
+        loading={isPriority ? 'eager' : 'lazy'}
+        fetchPriority={isPriority ? 'high' : 'auto'}
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+    </div>
+  );
+}
+
 export default function HobbyPage() {
   return (
     <div className="space-y-10 py-2 max-w-6xl mx-auto">
@@ -43,10 +168,11 @@ export default function HobbyPage() {
         </p>
       </div>
 
-      {/* 5 Media Categories: 1 Row, 2 Columns per Category */}
+      {/* 5 Media Categories: 1 Row, 2 Columns per Category or Full-Width Grid */}
       <div className="space-y-8">
         {mediaHobbies.map((item: MediaCategory, idx: number) => {
           const Icon = iconMap[item.iconName] || Tv;
+          const isFirstCategory = idx === 0;
 
           return (
             <section key={item.id} className="space-y-3">
@@ -79,75 +205,20 @@ export default function HobbyPage() {
                         <span className="text-[10px] font-mono text-ink-muted">10 Favorites</span>
                       </div>
 
-                      {/* 5-Column Poster Grid (Photo / Number / Name) */}
+                      {/* 5-Column Poster Grid */}
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
                         {item.topTen.map((poster: MediaTopItem) => (
-                          <div
+                          <PosterCard
                             key={poster.rank}
-                            className="group relative rounded-xl overflow-hidden bg-canvas border border-[#D49A9A]/30 hover:border-[#7C0E44] dark:hover:border-[#F2DACE] transition-all shadow-soft-sm hover:shadow-[0_6px_20px_rgba(124,14,68,0.15)] flex flex-col justify-between"
-                          >
-                            {/* Aspect 2/3 Poster Container */}
-                            <div className="relative aspect-[2/3] w-full bg-surface-muted overflow-hidden">
-                              {/* Fallback placeholder visible if image fails or before load */}
-                              <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center bg-gradient-to-br from-[#7C0E44]/15 to-[#D49A9A]/20">
-                                <span className="text-xl mb-1 opacity-70">🎬</span>
-                                <span className="text-[10px] font-mono font-bold text-ink-muted line-clamp-3">
-                                  {poster.title}
-                                </span>
-                              </div>
-
-                              <img
-                                src={poster.imageUrl}
-                                alt={poster.title}
-                                loading="lazy"
-                                referrerPolicy="no-referrer"
-                                className="relative z-[1] w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                }}
-                              />
-
-                              {/* Rank Number Badge pinned on top-left of photo */}
-                              <div className="absolute top-1.5 left-1.5 z-10">
-                                <span className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-[#7C0E44] text-white text-[10px] font-mono font-extrabold shadow-sm">
-                                  #{poster.rank}
-                                </span>
-                              </div>
-
-                              {/* Status Badge pinned on top-right of photo */}
-                              <div className="absolute top-1.5 right-1.5 z-10">
-                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-black/85 backdrop-blur-sm text-[#F2DACE] border border-[#AA5E7A]/50 text-[9px] font-mono font-bold shadow-sm">
-                                  <span
-                                    className={`w-1.5 h-1.5 rounded-full ${
-                                      poster.status === 'Reading' || poster.status === 'Watching'
-                                        ? 'bg-amber-400 animate-pulse'
-                                        : 'bg-emerald-400'
-                                    }`}
-                                  />
-                                  {poster.status || (item.type === 'watch' ? 'Watched' : 'Completed')}
-                                </span>
-                              </div>
-
-                              {/* Subtle dark gradient overlay on hover */}
-                              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                            </div>
-
-                            {/* Name / Title */}
-                            <div className="p-2 bg-canvas/95 flex-1 flex items-center">
-                              <p
-                                className="text-[11px] font-bold text-ink-primary leading-tight line-clamp-2 group-hover:text-[#7C0E44] dark:group-hover:text-[#F2DACE] transition-colors"
-                                title={poster.title}
-                              >
-                                {poster.title}
-                              </p>
-                            </div>
-                          </div>
+                            poster={poster}
+                            itemType={item.type}
+                            isPriority={isFirstCategory}
+                          />
                         ))}
                       </div>
                     </div>
 
-                    {/* Right Column: Currently Watching / Reading (No large photo, clean status card) */}
+                    {/* Right Column: Currently Watching / Reading */}
                     <div className="lg:col-span-4 flex flex-col">
                       <div className="p-4 sm:p-5 rounded-2xl bg-canvas/95 border border-[#D49A9A]/50 flex flex-col justify-between space-y-4 h-full shadow-soft-sm relative overflow-hidden group">
                         {/* Top Accent Gradient Bar */}
@@ -164,17 +235,11 @@ export default function HobbyPage() {
 
                           {/* Media Thumbnail + Title Info */}
                           <div className="flex items-start gap-3.5">
-                            {item.currentlyConsuming.imageUrl && (
-                              <div className="relative w-20 sm:w-24 aspect-[2/3] rounded-xl overflow-hidden shadow-md shrink-0 border border-[#D49A9A]/40 bg-surface-muted">
-                                <img
-                                  src={item.currentlyConsuming.imageUrl}
-                                  alt={item.currentlyConsuming.title}
-                                  loading="lazy"
-                                  referrerPolicy="no-referrer"
-                                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
-                              </div>
-                            )}
+                            <ConsumingCardThumbnail
+                              imageUrl={item.currentlyConsuming.imageUrl}
+                              title={item.currentlyConsuming.title}
+                              isPriority={isFirstCategory}
+                            />
 
                             <div className="space-y-1 min-w-0 flex-1">
                               <span className="text-[10px] uppercase font-mono font-semibold text-ink-subtle">
@@ -255,7 +320,6 @@ export default function HobbyPage() {
 
                               {/* 2-Column Stats Breakdown with exact links */}
                               <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] font-mono pt-1">
-                                {/* Left Column: Status with color dots and MAL links */}
                                 <div className="space-y-1">
                                   <div className="flex items-center justify-between">
                                     <a
@@ -323,7 +387,6 @@ export default function HobbyPage() {
                                   </div>
                                 </div>
 
-                                {/* Right Column: Aggregates */}
                                 <div className="space-y-1">
                                   <div className="flex items-center justify-between">
                                     <span className="text-ink-subtle">Total Entries</span>
@@ -403,7 +466,6 @@ export default function HobbyPage() {
 
                               {/* 2-Column Stats Breakdown with exact links */}
                               <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] font-mono pt-1">
-                                {/* Left Column: Status with color dots and MAL links */}
                                 <div className="space-y-1">
                                   <div className="flex items-center justify-between">
                                     <a
@@ -471,7 +533,6 @@ export default function HobbyPage() {
                                   </div>
                                 </div>
 
-                                {/* Right Column: Aggregates */}
                                 <div className="space-y-1">
                                   <div className="flex items-center justify-between">
                                     <span className="text-ink-subtle">Total Entries</span>
@@ -505,7 +566,7 @@ export default function HobbyPage() {
                     </div>
                   </div>
                 ) : (
-                  /* Full-Width Grid (Option B for Hollywood Movies with no Currently Watching) */
+                  /* Full-Width Grid (Option B for Hollywood Movies and Non-English Movies) */
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
@@ -518,67 +579,12 @@ export default function HobbyPage() {
                     {/* 5-Column Grid across full container width (2 rows of 5) */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5">
                       {item.topTen.map((poster: MediaTopItem) => (
-                        <div
+                        <PosterCard
                           key={poster.rank}
-                          className="group relative rounded-xl overflow-hidden bg-canvas border border-[#D49A9A]/30 hover:border-[#7C0E44] dark:hover:border-[#F2DACE] transition-all shadow-soft-sm hover:shadow-[0_6px_20px_rgba(124,14,68,0.15)] flex flex-col justify-between"
-                        >
-                          {/* Aspect 2/3 Poster Container */}
-                          <div className="relative aspect-[2/3] w-full bg-surface-muted overflow-hidden">
-                            {/* Fallback placeholder visible if image fails or before load */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center bg-gradient-to-br from-[#7C0E44]/15 to-[#D49A9A]/20">
-                              <span className="text-xl mb-1 opacity-70">🎬</span>
-                              <span className="text-[10px] font-mono font-bold text-ink-muted line-clamp-3">
-                                {poster.title}
-                              </span>
-                            </div>
-
-                            <img
-                              src={poster.imageUrl}
-                              alt={poster.title}
-                              loading="lazy"
-                              referrerPolicy="no-referrer"
-                              className="relative z-[1] w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.style.display = 'none';
-                              }}
-                            />
-
-                            {/* Rank Number Badge pinned on top-left of photo */}
-                            <div className="absolute top-1.5 left-1.5 z-10">
-                              <span className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-[#7C0E44] text-white text-[10px] font-mono font-extrabold shadow-sm">
-                                #{poster.rank}
-                              </span>
-                            </div>
-
-                            {/* Status Badge pinned on top-right of photo */}
-                            <div className="absolute top-1.5 right-1.5 z-10">
-                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-black/85 backdrop-blur-sm text-[#F2DACE] border border-[#AA5E7A]/50 text-[9px] font-mono font-bold shadow-sm">
-                                <span
-                                  className={`w-1.5 h-1.5 rounded-full ${
-                                    poster.status === 'Reading' || poster.status === 'Watching'
-                                      ? 'bg-amber-400 animate-pulse'
-                                      : 'bg-emerald-400'
-                                  }`}
-                                />
-                                {poster.status || (item.type === 'watch' ? 'Watched' : 'Completed')}
-                              </span>
-                            </div>
-
-                            {/* Subtle dark gradient overlay on hover */}
-                            <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                          </div>
-
-                          {/* Name / Title */}
-                          <div className="p-2 sm:p-2.5 bg-canvas/95 flex-1 flex items-center">
-                            <p
-                              className="text-[11px] sm:text-xs font-bold text-ink-primary leading-tight line-clamp-2 group-hover:text-[#7C0E44] dark:group-hover:text-[#F2DACE] transition-colors"
-                              title={poster.title}
-                            >
-                              {poster.title}
-                            </p>
-                          </div>
-                        </div>
+                          poster={poster}
+                          itemType={item.type}
+                          isPriority={isFirstCategory}
+                        />
                       ))}
                     </div>
                   </div>
