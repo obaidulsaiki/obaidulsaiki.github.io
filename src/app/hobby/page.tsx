@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { mediaHobbies, MediaCategory, MediaTopItem, animeMalStats, mangaMalStats } from '@/data/hobbies';
+import TravelMapSection from '@/components/hobby/TravelMapSection';
 
 const iconMap: Record<string, LucideIcon> = {
   Tv,
@@ -173,9 +174,12 @@ export default function HobbyPage() {
           My Hobbie.. not important at all
         </h1>
         <p className="text-xs sm:text-sm text-ink-muted max-w-2xl leading-relaxed">
-          Anime, manga, manhwa, Hollywood movies, and non-English cinema — personal favorites, ranked top 10s, and what I&apos;m currently watching or reading.
+          Traveling across Bangladesh (34 districts explored), anime, manga, manhwa, Hollywood movies, and non-English cinema — personal favorites, ranked top 10s, and what I&apos;m currently watching or reading.
         </p>
       </div>
+
+      {/* Traveling Showcase: Interactive World-to-Bangladesh Zoom Map */}
+      <TravelMapSection />
 
       {/* 5 Media Categories: 1 Row, 2 Columns per Category or Full-Width Grid */}
       <div className="space-y-8">
