@@ -43,7 +43,7 @@ export default function ResearchFilterToolbar({
   ];
 
   const publishers = ['all', 'IEEE', 'ACM', 'Springer Nature', 'Elsevier'];
-  const levels = ['all', 'Q1', 'Q2', 'A', 'B', 'C'];
+  const levels = ['all', 'Q1', 'Q2', 'Q3', 'A', 'B', 'C'];
 
   const isFiltered =
     filters.searchQuery.trim() !== '' ||

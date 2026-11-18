@@ -14,69 +14,70 @@ The portfolio documents 35 specialized skills, models, languages, and frameworks
 
 ### 1. AI, Models & Deep Learning Frameworks
 
-| Skill / Tool | Domain Focus | Experience | Proficiency | Technical Description & Practical Application |
-| :--- | :--- | :--- | :--- | :--- |
-| **PyTorch** | Deep Learning | 2+ years | Advanced | Custom neural architectures, autograd computation graphs, and GPU-accelerated training pipelines. |
-| **Mamba** | Selective State Space | Specialized | Specialist | Kernel-invariant continuous state-space modeling for dose-robust low-dose CT reconstruction. |
-| **State Space Models (SSM)** | Sequence Modeling | Specialized | Specialist | Continuous-time discretization, structured state-space representations, and linear-time sequence learning. |
-| **Hugging Face** | Transformers Hub | 2+ years | Advanced | Pretrained transformer fine-tuning, tokenization, sequence classification, and model hub deployment. |
-| **BanglaBERT** | Bengali Linguistic AI | Specialized | Specialist | Bengali language representations, subword tokenizers, aspect-based sentiment, and semantic pairs. |
-| **OpenCV** | Computer Vision | 2+ years | Advanced | Medical scan preprocessing, morphological filtering, spatial augmentations, and visual feature extraction. |
-| **Torchvision** | Vision Datasets | 2+ years | Advanced | Deep learning image datasets, model backbones, transforms, and bounding-box augmentations. |
-| **SciPy** | Digital Signal DSP | Specialized | Specialist | ECG and EEG digital signal filtering, continuous wavelet transforms, and spectral density extraction. |
-| **Grad-CAM** | Model Explainability | Specialized | Specialist | Gradient-weighted class activation mapping, clinical feature attribution, and beat-level saliency heatmaps. |
-| **LangChain4j** | LLM Orchestration | Production | Advanced | Java LLM integration, prompt engineering, RAG pipelines, and conversational learning assistants. |
-| **Ollama** | Local LLM Serving | Production | Advanced | Self-hosted local model execution, GGUF quantization, and lightweight edge inference. |
-| **TensorFlow** | Deep Learning | 2+ years | Proficient | Convolutional neural networks, transfer learning, data pipelines, and evaluation metrics. |
-| **Keras** | Neural Networks API | 2+ years | Proficient | High-level neural network prototyping, sequential models, and custom callbacks. |
-| **Scikit-Learn** | Machine Learning | 2+ years | Advanced | Stacking ensembles, gradient boosting, statistical feature selection, and cross-validation pipelines. |
-| **NumPy** | Vectorized Math | 3+ years | Advanced | Vectorized tensor operations, multidimensional arrays, and numerical linear algebra. |
-| **Pandas** | Data Analysis | 3+ years | Advanced | Tabular dataset processing, feature engineering, missing-value imputation, and aggregation. |
+| Skill / Tool                 | Domain Focus          | Experience  | Proficiency | Technical Description & Practical Application                                                               |
+| :--------------------------- | :-------------------- | :---------- | :---------- | :---------------------------------------------------------------------------------------------------------- |
+| **PyTorch**                  | Deep Learning         | 2+ years    | Advanced    | Custom neural architectures, autograd computation graphs, and GPU-accelerated training pipelines.           |
+| **Mamba**                    | Selective State Space | Specialized | Specialist  | Kernel-invariant continuous state-space modeling for dose-robust low-dose CT reconstruction.                |
+| **State Space Models (SSM)** | Sequence Modeling     | Specialized | Specialist  | Continuous-time discretization, structured state-space representations, and linear-time sequence learning.  |
+| **Hugging Face**             | Transformers Hub      | 2+ years    | Advanced    | Pretrained transformer fine-tuning, tokenization, sequence classification, and model hub deployment.        |
+| **BanglaBERT**               | Bengali Linguistic AI | Specialized | Specialist  | Bengali language representations, subword tokenizers, aspect-based sentiment, and semantic pairs.           |
+| **OpenCV**                   | Computer Vision       | 2+ years    | Advanced    | Medical scan preprocessing, morphological filtering, spatial augmentations, and visual feature extraction.  |
+| **Torchvision**              | Vision Datasets       | 2+ years    | Advanced    | Deep learning image datasets, model backbones, transforms, and bounding-box augmentations.                  |
+| **SciPy**                    | Digital Signal DSP    | Specialized | Specialist  | ECG and EEG digital signal filtering, continuous wavelet transforms, and spectral density extraction.       |
+| **Grad-CAM**                 | Model Explainability  | Specialized | Specialist  | Gradient-weighted class activation mapping, clinical feature attribution, and beat-level saliency heatmaps. |
+| **LangChain4j**              | LLM Orchestration     | Production  | Advanced    | Java LLM integration, prompt engineering, RAG pipelines, and conversational learning assistants.            |
+| **Ollama**                   | Local LLM Serving     | Production  | Advanced    | Self-hosted local model execution, GGUF quantization, and lightweight edge inference.                       |
+| **TensorFlow**               | Deep Learning         | 2+ years    | Proficient  | Convolutional neural networks, transfer learning, data pipelines, and evaluation metrics.                   |
+| **Keras**                    | Neural Networks API   | 2+ years    | Proficient  | High-level neural network prototyping, sequential models, and custom callbacks.                             |
+| **Scikit-Learn**             | Machine Learning      | 2+ years    | Advanced    | Stacking ensembles, gradient boosting, statistical feature selection, and cross-validation pipelines.       |
+| **NumPy**                    | Vectorized Math       | 3+ years    | Advanced    | Vectorized tensor operations, multidimensional arrays, and numerical linear algebra.                        |
+| **Pandas**                   | Data Analysis         | 3+ years    | Advanced    | Tabular dataset processing, feature engineering, missing-value imputation, and aggregation.                 |
 
 ### 2. Programming Languages
 
-| Language | Category | Experience | Proficiency | Technical Description & Application |
-| :--- | :--- | :--- | :--- | :--- |
-| **Python** | Language | 3+ years | Advanced | Primary language for deep learning research, numerical processing, and automated experimentation. |
-| **C++** | Language | 3+ years | Advanced | High-performance computing, STL algorithms, memory allocation, and algorithmic problem solving. |
-| **Java** | Language | 3+ years | Advanced | Enterprise backend development, multi-threaded systems, OOP patterns, and Spring Boot services. |
-| **TypeScript** | Language | 2+ years | Advanced | Type-safe contracts, compile-time validation, and scalable full-stack web application development. |
-| **JavaScript (ES6+)** | Language | 3+ years | Advanced | Asynchronous event loops, DOM manipulation, promises, and modern client-side architectures. |
-| **C Programming** | Language | 3+ years | Advanced | Low-level procedural programming, manual memory management (pointers/malloc), and systems fundamentals. |
-| **SQL** | Language | 3+ years | Advanced | Relational data modeling, query optimization, indexing strategies, normalization, and ACID safety. |
+| Language              | Category | Experience | Proficiency | Technical Description & Application                                                                     |
+| :-------------------- | :------- | :--------- | :---------- | :------------------------------------------------------------------------------------------------------ |
+| **Python**            | Language | 3+ years   | Advanced    | Primary language for deep learning research, numerical processing, and automated experimentation.       |
+| **C++**               | Language | 3+ years   | Advanced    | High-performance computing, STL algorithms, memory allocation, and algorithmic problem solving.         |
+| **Java**              | Language | 3+ years   | Advanced    | Enterprise backend development, multi-threaded systems, OOP patterns, and Spring Boot services.         |
+| **TypeScript**        | Language | 2+ years   | Advanced    | Type-safe contracts, compile-time validation, and scalable full-stack web application development.      |
+| **JavaScript (ES6+)** | Language | 3+ years   | Advanced    | Asynchronous event loops, DOM manipulation, promises, and modern client-side architectures.             |
+| **C Programming**     | Language | 3+ years   | Advanced    | Low-level procedural programming, manual memory management (pointers/malloc), and systems fundamentals. |
+| **SQL**               | Language | 3+ years   | Advanced    | Relational data modeling, query optimization, indexing strategies, normalization, and ACID safety.      |
 
 ### 3. Backend & Enterprise Engineering
 
-| Technology | Category | Experience | Proficiency | Technical Description & Application |
-| :--- | :--- | :--- | :--- | :--- |
-| **Spring Boot** | Enterprise Framework | 3+ years | Advanced | Production backend architecture, Spring Security, JPA/Hibernate, stateless JWT, and REST microservices. |
-| **PostgreSQL** | Relational Database | 2+ years | Proficient | ACID-compliant relational database management, schema normalization, and complex querying. |
-| **MySQL** | Relational Database | 2+ years | Proficient | Relational data persistence, foreign key modeling, stored procedures, and service integration. |
-| **REST APIs** | Architecture | 3+ years | Advanced | Stateless HTTP endpoint design, JWT authorization filters, structured DTOs, and error handling. |
+| Technology      | Category             | Experience | Proficiency | Technical Description & Application                                                                     |
+| :-------------- | :------------------- | :--------- | :---------- | :------------------------------------------------------------------------------------------------------ |
+| **Spring Boot** | Enterprise Framework | 3+ years   | Advanced    | Production backend architecture, Spring Security, JPA/Hibernate, stateless JWT, and REST microservices. |
+| **PostgreSQL**  | Relational Database  | 2+ years   | Proficient  | ACID-compliant relational database management, schema normalization, and complex querying.              |
+| **MySQL**       | Relational Database  | 2+ years   | Proficient  | Relational data persistence, foreign key modeling, stored procedures, and service integration.          |
+| **REST APIs**   | Architecture         | 3+ years   | Advanced    | Stateless HTTP endpoint design, JWT authorization filters, structured DTOs, and error handling.         |
 
 ### 4. Frontend & Web Technologies
 
-| Technology | Category | Experience | Proficiency | Technical Description & Application |
-| :--- | :--- | :--- | :--- | :--- |
-| **React.js** | Frontend Library | 3+ years | Advanced | Component-driven user interfaces, custom React hooks, state management, and performance tuning. |
-| **Next.js** | React Framework | 2+ years | Advanced | App Router, Static Site Generation (SSG) for GitHub Pages, and client/server boundary segregation. |
-| **Tailwind CSS** | CSS Framework | 2+ years | Advanced | Artisanal color token systems, mobile-first responsive layouts, and modern utility typography. |
-| **Framer Motion** | Animation Library | 2+ years | Proficient | Spring physics micro-interactions, layout morphing, staggered reveals, and route transitions. |
+| Technology        | Category          | Experience | Proficiency | Technical Description & Application                                                                |
+| :---------------- | :---------------- | :--------- | :---------- | :------------------------------------------------------------------------------------------------- |
+| **React.js**      | Frontend Library  | 3+ years   | Advanced    | Component-driven user interfaces, custom React hooks, state management, and performance tuning.    |
+| **Next.js**       | React Framework   | 2+ years   | Advanced    | App Router, Static Site Generation (SSG) for GitHub Pages, and client/server boundary segregation. |
+| **Tailwind CSS**  | CSS Framework     | 2+ years   | Advanced    | Artisanal color token systems, mobile-first responsive layouts, and modern utility typography.     |
+| **Framer Motion** | Animation Library | 2+ years   | Proficient  | Spring physics micro-interactions, layout morphing, staggered reveals, and route transitions.      |
 
 ### 5. DevOps, Infrastructure & Tools
 
-| Tool / OS | Category | Experience | Proficiency | Technical Description & Application |
-| :--- | :--- | :--- | :--- | :--- |
-| **Git** | Version Control | 4+ years | Advanced | Version control, atomic commits, branch management, pull requests, and collaborative workflows. |
-| **GitHub** | Code Hosting & CI/CD | 4+ years | Advanced | Repository hosting, GitHub Actions CI/CD automation, pull request code review, and project management. |
-| **Linux** | Operating System | 3+ years | Advanced | Unix environment, bash scripting, process management, and GPU driver setup for ML workflows. |
-| **Docker** | Containerization | 1+ years | Proficient | Containerized deployment for reproducible model inference and backend microservices. |
+| Tool / OS  | Category             | Experience | Proficiency | Technical Description & Application                                                                    |
+| :--------- | :------------------- | :--------- | :---------- | :----------------------------------------------------------------------------------------------------- |
+| **Git**    | Version Control      | 4+ years   | Advanced    | Version control, atomic commits, branch management, pull requests, and collaborative workflows.        |
+| **GitHub** | Code Hosting & CI/CD | 4+ years   | Advanced    | Repository hosting, GitHub Actions CI/CD automation, pull request code review, and project management. |
+| **Linux**  | Operating System     | 3+ years   | Advanced    | Unix environment, bash scripting, process management, and GPU driver setup for ML workflows.           |
+| **Docker** | Containerization     | 1+ years   | Proficient  | Containerized deployment for reproducible model inference and backend microservices.                   |
 
 ---
 
 ### Skills Component Architecture
 
 The portfolio's interactive skills showcase is implemented via:
+
 - **Data Source** ([`src/data/skills.ts`](file:///d:/Projects/obaidulsaiki.github.io/src/data/skills.ts)): Defines the `SkillItem` interface, color palettes, and full skill registry.
 - **Brand SVG Icons** ([`src/components/icons/TechIcons.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/icons/TechIcons.tsx)): Custom branded vector icons for each technology (PyTorch, Mamba, BanglaBERT, Spring, Docker, etc.).
 - **Interactive Filtering** ([`src/components/animations/MotionPrimitives.tsx`](file:///d:/Projects/obaidulsaiki.github.io/src/components/animations/MotionPrimitives.tsx)): `SlidingFilterTabs` with magnetic hover pills and animated active pills.
@@ -86,15 +87,15 @@ The portfolio's interactive skills showcase is implemented via:
 
 ## Portfolio Website Tech Stack
 
-| Layer | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Framework** | Next.js | `^14.2.15` | App Router, static site generation (`output: 'export'`) |
-| **UI Library** | React | `^18.3.1` | Component-driven architecture |
-| **Language** | TypeScript | `^5.6.3` | End-to-end type safety |
-| **Styling** | Tailwind CSS | `^3.4.14` | Warm aesthetic design tokens (`canvas`, `surface`, `accent`, `ink`) |
-| **Animations** | Framer Motion | `^11.11.9` | Magnetic springs, route transitions, sliding filter pills |
-| **Icons** | Lucide React | `^0.453.0` | Vector icon system |
-| **CI / CD** | GitHub Actions | `deploy.yml` | Automated build, static export, and GitHub Pages deployment |
+| Layer          | Technology     | Version      | Purpose                                                             |
+| :------------- | :------------- | :----------- | :------------------------------------------------------------------ |
+| **Framework**  | Next.js        | `^14.2.15`   | App Router, static site generation (`output: 'export'`)             |
+| **UI Library** | React          | `^18.3.1`    | Component-driven architecture                                       |
+| **Language**   | TypeScript     | `^5.6.3`     | End-to-end type safety                                              |
+| **Styling**    | Tailwind CSS   | `^3.4.14`    | Warm aesthetic design tokens (`canvas`, `surface`, `accent`, `ink`) |
+| **Animations** | Framer Motion  | `^11.11.9`   | Magnetic springs, route transitions, sliding filter pills           |
+| **Icons**      | Lucide React   | `^0.453.0`   | Vector icon system                                                  |
+| **CI / CD**    | GitHub Actions | `deploy.yml` | Automated build, static export, and GitHub Pages deployment         |
 
 ---
 
@@ -104,16 +105,16 @@ The portfolio features a custom-built, high-performance vector cartography engin
 
 ### 1. Architectural Principles & Specifications
 
-| Feature | Technical Implementation | Metric / Value |
-| :--- | :--- | :--- |
-| **Performance Pipeline** | Direct SVG `viewBox` mutation via DOM refs, bypassing React re-renders | Continuous 60.0000 fps during pan/zoom |
-| **Canvas Aspect Ratio** | Responsive locked 16:9 projection canvas | `aspect-[16/9] max-h-[460px]` |
-| **Explored Districts** | Bangladesh travel tracker with GoZayaan visual parity | 34.0000 / 64.0000 districts (53.1250% explored) |
-| **Interactive Countries** | Natural Earth vector geometries covering the globe | 240.0000 sovereign nations & territories |
-| **Palestine Geopolitics** | Unified historic Palestine without partition lines or internal boundaries | 100.0000% historic recognition (`id: 275`) |
-| **Maldives Architecture** | High-definition 10m Natural Earth archipelago chain with distinct strokes | 34.0000 natural atolls from Haa Alif to Addu |
-| **Gesture Navigation** | Native non-passive `{ passive: false }` listener with cursor-anchored zoom | 0.0000% Chrome browser page zoom conflict |
-| **Live Geolocation** | Browser WGS84 GPS to Equirectangular coordinate projection | 1200.0000 ms camera fly-to with radar beacon |
+| Feature                   | Technical Implementation                                                   | Metric / Value                                  |
+| :------------------------ | :------------------------------------------------------------------------- | :---------------------------------------------- |
+| **Performance Pipeline**  | Direct SVG `viewBox` mutation via DOM refs, bypassing React re-renders     | Continuous 60.0000 fps during pan/zoom          |
+| **Canvas Aspect Ratio**   | Responsive locked 16:9 projection canvas                                   | `aspect-[16/9] max-h-[460px]`                   |
+| **Explored Districts**    | Bangladesh travel tracker with GoZayaan visual parity                      | 34.0000 / 64.0000 districts (53.1250% explored) |
+| **Interactive Countries** | Natural Earth vector geometries covering the globe                         | 240.0000 sovereign nations & territories        |
+| **Palestine Geopolitics** | Unified historic Palestine without partition lines or internal boundaries  | 100.0000% historic recognition (`id: 275`)      |
+| **Maldives Architecture** | High-definition 10m Natural Earth archipelago chain with distinct strokes  | 34.0000 natural atolls from Haa Alif to Addu    |
+| **Gesture Navigation**    | Native non-passive `{ passive: false }` listener with cursor-anchored zoom | 0.0000% Chrome browser page zoom conflict       |
+| **Live Geolocation**      | Browser WGS84 GPS to Equirectangular coordinate projection                 | 1200.0000 ms camera fly-to with radar beacon    |
 
 ### 2. Coordinate Projection & Mathematical Formulas
 
@@ -122,6 +123,7 @@ The map utilizes an Equirectangular projection mapping WGS84 geographical coordi
 $$x = 500.0000 + \frac{\lambda \times 1000.0000}{360.0000}, \quad y = 250.0000 - \frac{\phi \times 1000.0000}{360.0000}$$
 
 #### Camera ViewBox Coordinates:
+
 - **World Canvas ViewBox**: `[0.0000, -31.2500, 1000.0000, 562.5000]` (Full $16:9$ viewport).
 - **Bangladesh Focused ViewBox**: `[733.9450, 174.6480, 34.0000, 19.1250]` (Takes up $\approx 85.5000\%$ of canvas height).
 - **Dhaka Epicenter Anchor**: `x: 750.5710, y: 183.9250` (Latitude $23.8103^\circ \text{N}$, Longitude $90.4125^\circ \text{E}$).
@@ -147,6 +149,7 @@ $$x = 500.0000 + \frac{\lambda \times 1000.0000}{360.0000}, \quad y = 250.0000 -
 ### 1. Prerequisites
 
 Ensure the following tools are installed on your machine:
+
 - **Node.js**: `v20.x` or later (tested on `v20` and `v22.14.0`)
 - **npm**: `v10.x` or later (or `pnpm` / `yarn`)
 - **Git**: Installed and configured
@@ -210,13 +213,13 @@ This compiles all routes (`/`, `/education/`, `/experience/`, `/research/`, `/ex
 
 ## Available NPM Scripts
 
-| Script | Command | Purpose |
-| :--- | :--- | :--- |
-| `npm run dev` | `next dev` | Starts local Next.js development server on port 3000 |
-| `npm run build` | `next build` | Runs type checks, linter, and static HTML export to `./out` |
-| `npm run start` | `next start` | Starts Next.js production server (used for Node SSR, not static export) |
-| `npm run clean` | `node -e "..."` | Deletes `.next` and `out` build directories |
-| `npm run lint` | `next lint` | Executes ESLint validation across project files |
+| Script          | Command         | Purpose                                                                 |
+| :-------------- | :-------------- | :---------------------------------------------------------------------- |
+| `npm run dev`   | `next dev`      | Starts local Next.js development server on port 3000                    |
+| `npm run build` | `next build`    | Runs type checks, linter, and static HTML export to `./out`             |
+| `npm run start` | `next start`    | Starts Next.js production server (used for Node SSR, not static export) |
+| `npm run clean` | `node -e "..."` | Deletes `.next` and `out` build directories                             |
+| `npm run lint`  | `next lint`     | Executes ESLint validation across project files                         |
 
 ---
 
@@ -237,19 +240,20 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
 
 ### Agent Skills & Frameworks Matrix
 
-| Tool / Skill | Location / Integration | Source / Type | Primary Capability in This Project |
-| :--- | :--- | :--- | :--- |
-| **`gravitas`** | `.agents/skills/gravitas/`<br>`.zoo/skills/gravitas/` | [`udaysharmadev/Gravitas`](https://github.com/udaysharmadev/Gravitas)<br>(via `skills-lock.json`) | Enforces the 6 reliability invariants: ground before mutating, stay in scope, evidence-backed completion, block exact retries, satisfy contract, declare uncertainties. |
-| **`GSD (Get Shit Done)`** | `.planning/`<br>Antigravity CLI / skills | Spec-Driven Dev (SDD) | Phase-based autonomous project orchestration: roadmap planning (`ROADMAP.md`), requirements (`REQUIREMENTS.md`), state tracking (`STATE.md`), and atomic phase execution. |
-| **`CodeRabbit`** | CodeRabbit CLI / plugin<br>`skills/code-review`, `autofix` | CodeRabbit AI | Autonomous code quality reviews, security auditing, GitHub PR thread reviews, and verified autofix proposals before commits. |
-| **`Zoo Code`** | `.zoo/skills/`<br>Zoo Code / Roo Code | Multi-Agent Mode System | Orchestrates role-based agent personas (Architect, Code, Ask, Debug), custom mode configurations, and local skill resolution from `.zoo/skills` and `.agents/skills`. |
-| **`graphify`** | `.agents/skills/graphify/`<br>`.zoo/skills/graphify/` | AST Knowledge Graph | Code property graph generation with community detection, interactive `graph.html`, GraphRAG `graph.json`, and instant incremental updates on code changes. |
+| Tool / Skill              | Location / Integration                                     | Source / Type                                                                                     | Primary Capability in This Project                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------- | :------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`gravitas`**            | `.agents/skills/gravitas/`<br>`.zoo/skills/gravitas/`      | [`udaysharmadev/Gravitas`](https://github.com/udaysharmadev/Gravitas)<br>(via `skills-lock.json`) | Enforces the 6 reliability invariants: ground before mutating, stay in scope, evidence-backed completion, block exact retries, satisfy contract, declare uncertainties.   |
+| **`GSD (Get Shit Done)`** | `.planning/`<br>Antigravity CLI / skills                   | Spec-Driven Dev (SDD)                                                                             | Phase-based autonomous project orchestration: roadmap planning (`ROADMAP.md`), requirements (`REQUIREMENTS.md`), state tracking (`STATE.md`), and atomic phase execution. |
+| **`CodeRabbit`**          | CodeRabbit CLI / plugin<br>`skills/code-review`, `autofix` | CodeRabbit AI                                                                                     | Autonomous code quality reviews, security auditing, GitHub PR thread reviews, and verified autofix proposals before commits.                                              |
+| **`Zoo Code`**            | `.zoo/skills/`<br>Zoo Code / Roo Code                      | Multi-Agent Mode System                                                                           | Orchestrates role-based agent personas (Architect, Code, Ask, Debug), custom mode configurations, and local skill resolution from `.zoo/skills` and `.agents/skills`.     |
+| **`graphify`**            | `.agents/skills/graphify/`<br>`.zoo/skills/graphify/`      | AST Knowledge Graph                                                                               | Code property graph generation with community detection, interactive `graph.html`, GraphRAG `graph.json`, and instant incremental updates on code changes.                |
 
 ---
 
 ### Detailed Breakdown of the 5 Agent Tools
 
 #### 1. `gravitas` — Engineering Reliability Runtime
+
 - **Role**: Model-agnostic engineering reliability runtime that prevents regressions, hallucinations, and unverified assumptions.
 - **Locked Reference** ([`skills-lock.json`](file:///d:/Projects/obaidulsaiki.github.io/skills-lock.json)):
   - Source: `udaysharmadev/Gravitas` (GitHub)
@@ -268,6 +272,7 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
   - `agents/`: Specialist subagent templates (`coordinator`, `explore`, `plan`, `verify`).
 
 #### 2. `GSD (Get Shit Done)` — Spec-Driven Planning & Execution
+
 - **Role**: Structured planning and execution framework that breaks features into milestone-driven phases with goal-backward verification.
 - **Planning Directory Structure** (`.planning/`):
   - `.planning/PROJECT.md`: Project vision, core value propositions, and tech stack boundaries.
@@ -280,6 +285,7 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
   - Enforces dependency-aware wave execution, Nyquist test generation, and rollback checkpoints.
 
 #### 3. `CodeRabbit` — AI Code Review & Autofix
+
 - **Role**: Automated high-signal code quality review, security auditing, and intelligent PR remediation.
 - **Capabilities in This Project**:
   - **Pre-commit Reviews**: Scans uncommitted or staged changes for security vulnerabilities, memory leaks, performance bottlenecks, and style deviations.
@@ -291,6 +297,7 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
     ```
 
 #### 4. `Zoo Code` — Multi-Agent Role Alignment
+
 - **Role**: Autonomous coding agent platform enabling specialized persona delegation and shared skills discovery.
 - **Skills Mirroring**:
   - Mirrors skills between `.agents/skills/` and `.zoo/skills/` so both Antigravity and Zoo/Roo Code modes have immediate access to `graphify` and `gravitas`.
@@ -301,6 +308,7 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
   - **Debug Mode**: Scientific bug investigation, hypothesis testing, and regression analysis.
 
 #### 5. `graphify` — Codebase Architecture & Knowledge Graph
+
 - **Role**: Analyzes the AST of all source files to build a navigable, persistent knowledge graph in `graphify-out/`.
 - **Outputs**:
   - `graphify-out/graph.json`: Machine-readable node and edge graph for GraphRAG queries.
@@ -325,11 +333,13 @@ During development, 5 core **AI Agent Skills & Frameworks** are used by coding a
 To restore all 5 agent skills and planning systems on a fresh machine or clone:
 
 #### Step 1: Create Scaffolding Folders
+
 ```bash
 mkdir -p .agents/skills .agents/rules .agents/workflows .zoo/skills .planning
 ```
 
 #### Step 2: Restore Gravitas from Source
+
 ```bash
 # Clone Gravitas into a temporary directory
 git clone https://github.com/udaysharmadev/Gravitas.git temp_gravitas
@@ -343,7 +353,9 @@ rm -rf temp_gravitas
 ```
 
 #### Step 3: Recreate `skills-lock.json`
+
 Create `skills-lock.json` in the project root:
+
 ```json
 {
   "version": 1,
@@ -359,7 +371,9 @@ Create `skills-lock.json` in the project root:
 ```
 
 #### Step 4: Configure Graphify Rule & Build Code Graph
+
 Create `.agents/rules/graphify.md`:
+
 ```markdown
 ---
 trigger: always_on
@@ -371,28 +385,35 @@ description: Consult the graphify knowledge graph at graphify-out/ for codebase 
 This project has a graphify knowledge graph at graphify-out/.
 
 Rules:
+
 - For codebase or architecture questions, when `graphify-out/graph.json` exists, first run `graphify query "<question>"` (CLI) or `query_graph` (MCP).
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review.
 - After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost).
 ```
 
 Then generate the initial codebase knowledge graph:
+
 ```bash
 graphify .
 ```
 
 #### Step 5: Configure Zoo Code & Roo Code Discovery
+
 Point your Zoo Code / Roo Code workspace settings to resolve custom skills from `.zoo/skills` and `.agents/skills`.
 
 #### Step 6: Verify CodeRabbit CLI
+
 Ensure the CodeRabbit CLI is authenticated and configured:
+
 ```bash
 coderabbit auth
 coderabbit review --diff
 ```
 
 #### Step 7: Verify Git Exclusions
+
 Confirm that [`.gitignore`](file:///d:/Projects/obaidulsaiki.github.io/.gitignore) keeps all agent tooling local so it is never pushed to GitHub Pages:
+
 ```gitignore
 # Graphify & AI tooling / non-portfolio workspace files
 graphify-out/
@@ -490,7 +511,7 @@ If you ever fork or re-create this repository on GitHub:
 
 1. Push the code to GitHub (`git push -u origin main`).
 2. Go to your repository on GitHub.
-3. Click **Settings** (top navigation tab) → **Pages** (left sidebar under *Code and automation*).
+3. Click **Settings** (top navigation tab) → **Pages** (left sidebar under _Code and automation_).
 4. Under **Build and deployment** → **Source**, select **GitHub Actions**.
 5. Under **Custom domain**, enter `obaidulhaque.me` (or your domain).
 6. Ensure **Enforce HTTPS** is checked.
@@ -507,6 +528,7 @@ If you ever fork or re-create this repository on GitHub:
 ## Author & Contact
 
 **Obaidul Haque**
+
 - AI Engineer and Researcher
 - B.Sc. in Computer Science & Engineering, IUBAT (CGPA 3.89 / 4.00)
 - **Website**: [https://obaidulhaque.me](https://obaidulhaque.me)
